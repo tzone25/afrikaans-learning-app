@@ -1,399 +1,667 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#167c80">
+<meta name="theme-color" content="#168f45">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Leer Afrikaans">
-<meta name="description" content="A complete interactive Afrikaans learning app.">
+
 <title>Leer Afrikaans 🇿🇦</title>
 
 <style>
 :root{
-  --bg:#f4f7f7;
-  --card:#ffffff;
-  --text:#172326;
-  --muted:#6c7b7e;
-  --primary:#167c80;
-  --primary2:#0f5e62;
-  --accent:#f1b84b;
-  --danger:#d9534f;
-  --success:#31966b;
-  --border:#dfe7e8;
-  --shadow:0 8px 24px rgba(20,50,55,.08);
-  --radius:18px;
+  --green:#168f45;
+  --green-dark:#0d6b32;
+  --gold:#e3a522;
+  --bg:#f3f6f4;
+  --card:#fff;
+  --text:#182027;
+  --muted:#68737d;
+  --border:#dfe5e1;
+  --danger:#d93636;
+  --shadow:0 5px 20px rgba(0,0,0,.07);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+
+body.dark{
+  --bg:#101513;
+  --card:#18201c;
+  --text:#f1f5f2;
+  --muted:#a8b4ad;
+  --border:#2b3831;
+  --shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
 .app{
-  max-width:900px;
-  margin:auto;
   min-height:100vh;
-  padding-bottom:90px;
+  padding-bottom:85px;
 }
+
 header{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:white;
-  padding:22px 18px 28px;
-  border-radius:0 0 28px 28px;
-}
-.header-row{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:13px 16px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:12px;
+  justify-content:space-between;
 }
+
 .logo{
-  font-size:25px;
-  font-weight:800;
-}
-.header-small{
-  opacity:.82;
-  font-size:13px;
-  margin-top:3px;
-}
-.icon-btn{
-  width:44px;
-  height:44px;
-  border:0;
-  border-radius:50%;
-  background:rgba(255,255,255,.16);
-  color:white;
   font-size:20px;
+  font-weight:900;
 }
-.container{padding:18px}
-.screen{display:none}
-.screen.active{display:block}
 
-.hero{
-  margin-top:18px;
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:20px;
-  box-shadow:var(--shadow);
+.header-right{
+  display:flex;
+  gap:7px;
+  align-items:center;
 }
-.hero h1{
-  margin:0 0 5px;
-  font-size:25px;
-}
-.hero p{margin:0;color:var(--muted)}
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin:16px 0;
+.icon-btn{
+  border:0;
+  background:transparent;
+  font-size:21px;
+  padding:8px;
+  border-radius:10px;
 }
-.stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px 8px;
-  text-align:center;
+
+main{
+  width:100%;
+  max-width:850px;
+  margin:auto;
+  padding:16px;
 }
-.stat strong{
+
+.screen{
+  display:none;
+}
+
+.screen.active{
   display:block;
+}
+
+h1{
+  margin:8px 0 5px;
+  font-size:29px;
+}
+
+h2{
+  margin:23px 0 12px;
   font-size:21px;
 }
-.stat span{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
+
+h3{
+  margin:15px 0 8px;
+}
+
+p{
+  line-height:1.55;
 }
 
 .card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:13px;
   box-shadow:var(--shadow);
-  margin-bottom:14px;
 }
-.card h2,.card h3{margin-top:0}
 
-.progress{
-  height:10px;
-  background:#e6eeee;
-  border-radius:20px;
-  overflow:hidden;
+.hero{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:white;
+  border-radius:23px;
+  padding:25px 20px;
+  margin-bottom:15px;
 }
-.progress > div{
-  height:100%;
-  background:var(--primary);
-  border-radius:20px;
-  transition:width .3s;
+
+.hero h1{
+  margin-top:0;
+  font-size:31px;
+}
+
+.hero p{
+  opacity:.92;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:27px;
+  font-weight:900;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
 }
 
 .btn{
   border:0;
   border-radius:13px;
-  padding:13px 17px;
-  font-weight:700;
-  background:var(--primary);
-  color:white;
-  min-height:46px;
+  padding:13px 16px;
+  font-weight:800;
 }
-.btn.secondary{
-  background:#e8f0f0;
-  color:var(--primary2);
-}
-.btn.warning{
-  background:var(--accent);
-  color:#382a08;
-}
-.btn.danger{
-  background:#fbe9e8;
-  color:var(--danger);
-}
-.btn.full{width:100%}
-.btn:active{transform:scale(.98)}
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.btn-primary{
+  background:var(--green);
+  color:#fff;
 }
-.menu-card{
-  border:1px solid var(--border);
+
+.btn-secondary{
   background:var(--card);
-  border-radius:17px;
-  padding:17px;
-  text-align:left;
-  box-shadow:var(--shadow);
+  color:var(--text);
+  border:1px solid var(--border);
 }
-.menu-card .emoji{font-size:28px}
-.menu-card strong{display:block;margin-top:8px}
-.menu-card small{color:var(--muted)}
 
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(900px,100%);
-  background:rgba(255,255,255,.96);
-  border-top:1px solid var(--border);
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
-  z-index:20;
-  backdrop-filter:blur(12px);
+.btn-danger{
+  background:var(--danger);
+  color:white;
 }
-.nav-btn{
-  border:0;
-  background:none;
+
+.full{
+  width:100%;
+}
+
+.row{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.row>*{
+  flex:1;
+}
+
+.muted{
   color:var(--muted);
-  padding:7px 2px;
-  font-size:11px;
 }
-.nav-btn span{
-  display:block;
-  font-size:21px;
-  margin-bottom:2px;
-}
-.nav-btn.active{color:var(--primary);font-weight:800}
 
-.list-item{
+.small{
+  font-size:13px;
+}
+
+.progress{
+  width:100%;
+  height:9px;
+  background:#e5ebe7;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress > div{
+  height:100%;
+  background:var(--green);
+  border-radius:99px;
+}
+
+.lesson{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+  margin-bottom:11px;
+}
+
+.lesson.locked{
+  opacity:.55;
+}
+
+.lesson-number{
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.lesson-title{
+  font-weight:900;
+  font-size:18px;
+  margin:4px 0;
+}
+
+.lesson-desc{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.vocab-card{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  padding:14px 0;
-  border-bottom:1px solid var(--border);
 }
-.list-item:last-child{border-bottom:0}
 
-.lesson{
-  padding:17px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  margin-bottom:12px;
-  background:var(--card);
+.afr{
+  font-weight:900;
+  font-size:18px;
 }
-.lesson-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.lesson-number{
-  min-width:43px;
-  height:43px;
-  border-radius:50%;
-  background:#e7f2f2;
-  color:var(--primary);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-}
-.lesson.locked{opacity:.55}
-.lesson.completed .lesson-number{
-  background:var(--success);
-  color:white;
+
+.eng{
+  color:var(--muted);
 }
 
 .tag{
   display:inline-block;
-  padding:5px 9px;
-  background:#e9f3f3;
-  color:var(--primary2);
-  border-radius:20px;
+  padding:5px 8px;
+  border-radius:99px;
+  background:rgba(22,143,69,.12);
+  color:var(--green);
   font-size:11px;
-  font-weight:700;
-}
-
-.flashcard{
-  min-height:290px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-.flash-word{
-  font-size:42px;
   font-weight:800;
-  margin:12px 0;
-}
-.flash-meaning{
-  font-size:21px;
-  color:var(--muted);
-}
-.example{
-  margin-top:20px;
-  padding:13px;
-  background:#f2f7f7;
-  border-radius:13px;
-  width:100%;
-}
-.example strong{color:var(--primary)}
-
-.answers{
-  display:grid;
-  gap:10px;
-  margin-top:18px;
-}
-.answer{
-  border:1px solid var(--border);
-  background:var(--card);
-  border-radius:14px;
-  padding:15px;
-  text-align:left;
-}
-.answer.correct{
-  border-color:var(--success);
-  background:#eaf7f0;
-}
-.answer.wrong{
-  border-color:var(--danger);
-  background:#fff0ef;
 }
 
 .search{
   width:100%;
+  padding:14px;
   border:1px solid var(--border);
   border-radius:13px;
-  padding:13px;
   background:var(--card);
-  margin-bottom:13px;
+  color:var(--text);
+  margin-bottom:12px;
 }
 
-textarea,input[type=text]{
-  width:100%;
+.filters{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  margin-bottom:12px;
+}
+
+.filter{
+  white-space:nowrap;
   border:1px solid var(--border);
-  border-radius:13px;
+  background:var(--card);
+  color:var(--text);
+  border-radius:99px;
+  padding:8px 12px;
+}
+
+.filter.active{
+  background:var(--green);
+  color:white;
+  border-color:var(--green);
+}
+
+.question{
+  font-size:31px;
+  font-weight:900;
+  text-align:center;
+  margin:25px 0;
+}
+
+.answers{
+  display:grid;
+  gap:10px;
+}
+
+.answer{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:15px;
+  border-radius:14px;
+  text-align:left;
+  font-weight:700;
+}
+
+.answer.correct{
+  background:rgba(22,143,69,.13);
+  border-color:var(--green);
+}
+
+.answer.wrong{
+  background:rgba(217,54,54,.13);
+  border-color:var(--danger);
+}
+
+.feedback{
   padding:13px;
+  border-radius:13px;
+  margin-top:12px;
+}
+
+.feedback.good{
+  background:rgba(22,143,69,.12);
+}
+
+.feedback.bad{
+  background:rgba(217,54,54,.12);
+}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.game{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:18px 12px;
+  text-align:center;
+}
+
+.game-icon{
+  font-size:35px;
+}
+
+.game-name{
+  font-weight:900;
+  margin-top:6px;
+}
+
+.game-desc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.quick{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:16px;
+  padding:15px;
+  text-align:left;
+}
+
+.quick-icon{
+  font-size:27px;
+}
+
+.quick-title{
+  font-weight:900;
+  margin-top:6px;
+}
+
+.quick-sub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.match-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.match-card{
+  min-height:80px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--card);
+  color:var(--text);
+  padding:12px;
+  font-weight:800;
+}
+
+.match-card.selected{
+  border:2px solid var(--green);
+}
+
+.match-card.matched{
+  opacity:.25;
+  pointer-events:none;
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.bubble{
+  max-width:85%;
+  padding:12px 14px;
+  border-radius:15px;
+}
+
+.bubble.bot{
+  background:#e9eeeb;
+  align-self:flex-start;
+  color:#182027;
+}
+
+body.dark .bubble.bot{
+  background:#26322c;
+  color:var(--text);
+}
+
+.bubble.user{
+  background:var(--green);
+  color:white;
+  align-self:flex-end;
+}
+
+.story{
+  font-size:17px;
+  line-height:1.9;
+}
+
+.story-word{
+  color:var(--green);
+  font-weight:800;
+  border-bottom:1px dotted var(--green);
+}
+
+.achievement{
+  display:flex;
+  gap:13px;
+  align-items:center;
+}
+
+.achievement-icon{
+  font-size:30px;
+}
+
+.achievement.locked{
+  opacity:.4;
+}
+
+.chart{
+  display:flex;
+  align-items:end;
+  height:130px;
+  gap:7px;
+}
+
+.bar-wrap{
+  flex:1;
+  height:100%;
+  display:flex;
+  align-items:end;
+  flex-direction:column;
+  justify-content:end;
+}
+
+.bar{
+  width:70%;
+  min-height:5px;
+  background:var(--green);
+  border-radius:7px 7px 2px 2px;
+}
+
+.bar-label{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.modal-bg{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.55);
+  align-items:end;
+  justify-content:center;
+}
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:650px;
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  color:var(--text);
+  border-radius:22px 22px 0 0;
+  padding:20px;
+}
+
+.modal-close{
+  float:right;
+  border:0;
+  background:transparent;
+  font-size:23px;
+}
+
+.bottom-nav{
+  position:fixed;
+  z-index:80;
+  bottom:0;
+  left:0;
+  right:0;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:7px 2px;
+  font-size:11px;
+}
+
+.nav-btn span{
+  display:block;
+  font-size:21px;
+}
+
+.nav-btn.active{
+  color:var(--green);
+  font-weight:900;
+}
+
+.empty{
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+}
+
+textarea.input,
+.input{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:12px;
   background:var(--card);
   color:var(--text);
 }
 
-.category-tabs{
+.setting{
   display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:8px;
-}
-.category-tabs button{
-  white-space:nowrap;
-  border:1px solid var(--border);
-  background:var(--card);
-  padding:9px 13px;
-  border-radius:20px;
-}
-.category-tabs button.active{
-  background:var(--primary);
-  color:white;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
 }
 
-.toast{
-  position:fixed;
-  top:18px;
-  left:50%;
-  transform:translateX(-50%) translateY(-120px);
-  background:#172326;
-  color:white;
-  padding:12px 18px;
-  border-radius:30px;
-  z-index:100;
-  transition:.3s;
-  box-shadow:var(--shadow);
-}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:50;
-}
-.modal.show{display:flex}
-.modal-box{
-  width:min(900px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:var(--card);
-  border-radius:25px 25px 0 0;
-  padding:22px;
+.switch{
+  width:48px;
+  height:27px;
+  border-radius:99px;
+  border:0;
+  background:#aeb7b2;
+  position:relative;
 }
 
-.dark{
-  --bg:#101719;
-  --card:#192326;
-  --text:#f2f7f7;
-  --muted:#aab9bb;
-  --border:#2b393c;
+.switch.on{
+  background:var(--green);
 }
-.dark .bottom-nav{
-  background:rgba(25,35,38,.96);
-}
-.dark .secondary{
-  background:#263638;
-}
-.dark .example{
-  background:#213033;
-}
-.dark .progress{background:#2c3b3e}
 
-@media(max-width:600px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .flash-word{font-size:35px}
+.switch:after{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  top:3px;
+  left:3px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch.on:after{
+  left:24px;
+}
+
+@media(min-width:700px){
+  .stats{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .game-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .quick-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
 }
 </style>
 </head>
@@ -403,1419 +671,5056 @@ textarea,input[type=text]{
 <div class="app">
 
 <header>
-  <div class="header-row">
-    <div>
-      <div class="logo">🇿🇦 Leer Afrikaans</div>
-      <div class="header-small">Learn • Practise • Speak • Master</div>
-    </div>
+  <div class="logo">🇿🇦 Leer Afrikaans</div>
+
+  <div class="header-right">
     <button class="icon-btn" onclick="toggleDark()">🌙</button>
+    <button class="icon-btn" onclick="openSettings()">⚙️</button>
   </div>
 </header>
 
-<main class="container">
+<main>
 
 <!-- HOME -->
 <section id="home" class="screen active">
 
   <div class="hero">
-    <h1 id="greeting">Goeie dag!</h1>
-    <p>Welcome back. Let's learn some Afrikaans.</p>
 
-    <div style="margin-top:18px">
-      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
-        <strong>Overall progress</strong>
-        <span id="overallPercent">0%</span>
-      </div>
-      <div class="progress"><div id="overallBar" style="width:0%"></div></div>
-    </div>
+    <h1>Leer Afrikaans 🇿🇦</h1>
+
+    <p>
+      Learn Afrikaans from zero to confident conversation —
+      with vocabulary, grammar, listening, games and
+      mechanical & hydraulic Afrikaans.
+    </p>
+
+    <button class="btn btn-secondary full"
+      onclick="showScreen('lessons')">
+      🚀 Continue Learning
+    </button>
+
   </div>
 
   <div class="stats">
-    <div class="stat"><strong id="xpStat">0</strong><span>XP</span></div>
-    <div class="stat"><strong id="levelStat">1</strong><span>Level</span></div>
-    <div class="stat"><strong id="streakStat">0</strong><span>Day streak</span></div>
-    <div class="stat"><strong id="wordsStat">0</strong><span>Words learned</span></div>
+
+    <div class="stat">
+      <div class="stat-number" id="homeXP">0</div>
+      <div class="stat-label">XP</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="homeLevel">1</div>
+      <div class="stat-label">Level</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="homeStreak">0</div>
+      <div class="stat-label">Day Streak 🔥</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="homeLearned">0</div>
+      <div class="stat-label">Words</div>
+    </div>
+
   </div>
 
   <div class="card">
-    <h2>🎯 Today's challenge</h2>
-    <p id="dailyChallengeText">Complete a vocabulary session.</p>
-    <button class="btn full" onclick="startDailyChallenge()">Start challenge</button>
-  </div>
 
-  <h2>Continue learning</h2>
+    <div class="row">
+      <div>
+        <strong>🎯 Daily Target</strong>
+        <div class="muted small">
+          <span id="dailyDone">0</span> / 20 XP today
+        </div>
+      </div>
+    </div>
+
+    <div class="progress" style="margin-top:10px">
+      <div id="dailyBar" style="width:0%"></div>
+    </div>
+
+  </div>
 
   <div class="card">
-    <span class="tag">NEXT LESSON</span>
-    <h2 id="nextLessonTitle">Greetings & Introductions</h2>
-    <p id="nextLessonDesc">Learn your first everyday Afrikaans phrases.</p>
-    <button class="btn full" onclick="openNextLesson()">Continue →</button>
+
+    <strong>🧠 Smart Review</strong>
+
+    <p class="muted small">
+      Review words that are due instead of wasting time
+      on words you already know.
+    </p>
+
+    <button class="btn btn-primary full"
+      onclick="startReview()">
+      Start Review
+    </button>
+
   </div>
 
-  <h2>Quick practice</h2>
+  <h2>⚡ Quick Learning</h2>
 
-  <div class="grid">
-    <button class="menu-card" onclick="showScreen('vocab')">
-      <div class="emoji">🧠</div>
-      <strong>Vocabulary</strong>
-      <small>Learn new words</small>
+  <div class="quick-grid">
+
+    <button class="quick" onclick="showScreen('lessons')">
+      <div class="quick-icon">📚</div>
+      <div class="quick-title">Lessons</div>
+      <div class="quick-sub">Follow the course</div>
     </button>
 
-    <button class="menu-card" onclick="startQuiz()">
-      <div class="emoji">🎯</div>
-      <strong>Quick Quiz</strong>
-      <small>Test yourself</small>
+    <button class="quick" onclick="startQuiz()">
+      <div class="quick-icon">📝</div>
+      <div class="quick-title">Quiz</div>
+      <div class="quick-sub">Test yourself</div>
     </button>
 
-    <button class="menu-card" onclick="showScreen('grammar')">
-      <div class="emoji">📖</div>
-      <strong>Grammar</strong>
-      <small>Understand the rules</small>
+    <button class="quick" onclick="showScreen('games')">
+      <div class="quick-icon">🎮</div>
+      <div class="quick-title">Games</div>
+      <div class="quick-sub">Learn by playing</div>
     </button>
 
-    <button class="menu-card" onclick="showScreen('conversation')">
-      <div class="emoji">🗣️</div>
-      <strong>Conversation</strong>
-      <small>Practise speaking</small>
+    <button class="quick" onclick="showScreen('trade')">
+      <div class="quick-icon">⚙️</div>
+      <div class="quick-title">Trade</div>
+      <div class="quick-sub">Workshop Afrikaans</div>
     </button>
+
+    <button class="quick" onclick="startListening()">
+      <div class="quick-icon">🎧</div>
+      <div class="quick-title">Listening</div>
+      <div class="quick-sub">Train your ear</div>
+    </button>
+
+    <button class="quick" onclick="startPronunciation()">
+      <div class="quick-icon">🗣️</div>
+      <div class="quick-title">Speaking</div>
+      <div class="quick-sub">Pronunciation</div>
+    </button>
+
+    <button class="quick" onclick="showScreen('personal')">
+      <div class="quick-icon">📖</div>
+      <div class="quick-title">My Words</div>
+      <div class="quick-sub">Personal vocabulary</div>
+    </button>
+
+    <button class="quick" onclick="showScreen('progress')">
+      <div class="quick-icon">📊</div>
+      <div class="quick-title">Progress</div>
+      <div class="quick-sub">Your statistics</div>
+    </button>
+
   </div>
 
 </section>
+
 
 <!-- LESSONS -->
 <section id="lessons" class="screen">
-  <h1>📚 Learning Path</h1>
-  <p style="color:var(--muted)">Work through Afrikaans from complete beginner to advanced.</p>
 
-  <div class="card">
-    <strong id="courseProgressText">0 of 30 lessons completed</strong>
-    <div class="progress" style="margin-top:10px">
-      <div id="courseProgressBar" style="width:0%"></div>
-    </div>
-  </div>
+  <h1>📚 Course</h1>
+
+  <p class="muted">
+    Work through Afrikaans from beginner to advanced.
+  </p>
 
   <div id="lessonList"></div>
+
 </section>
+
 
 <!-- VOCAB -->
 <section id="vocab" class="screen">
-  <h1>🧠 Vocabulary</h1>
-  <p style="color:var(--muted)">Build your Afrikaans vocabulary.</p>
 
-  <input class="search" id="vocabSearch" placeholder="Search Afrikaans or English..." oninput="renderVocab()">
+  <h1>📖 Vocabulary</h1>
 
-  <div class="category-tabs" id="vocabTabs"></div>
+  <input
+    id="vocabSearch"
+    class="search"
+    placeholder="🔎 Search Afrikaans or English..."
+    oninput="renderVocab()"
+  >
+
+  <div id="vocabFilters" class="filters"></div>
 
   <div id="vocabList"></div>
+
 </section>
+
 
 <!-- QUIZ -->
 <section id="quiz" class="screen">
-  <div id="quizContent"></div>
+
+  <h1>📝 Quiz</h1>
+
+  <div id="quizArea"></div>
+
 </section>
+
+
+<!-- REVIEW -->
+<section id="review" class="screen">
+
+  <h1>🧠 Smart Review</h1>
+
+  <div id="reviewArea"></div>
+
+</section>
+
 
 <!-- GRAMMAR -->
 <section id="grammar" class="screen">
-  <h1>📖 Grammar Academy</h1>
-  <p style="color:var(--muted)">Learn how Afrikaans sentences actually work.</p>
+
+  <h1>📐 Grammar Academy</h1>
+
+  <p class="muted">
+    Understand how Afrikaans sentences actually work.
+  </p>
+
   <div id="grammarList"></div>
+
 </section>
+
 
 <!-- CONVERSATION -->
 <section id="conversation" class="screen">
-  <h1>🗣️ Conversation</h1>
-  <p style="color:var(--muted)">Practise useful real-life situations.</p>
+
+  <h1>💬 Conversations</h1>
+
+  <p class="muted">
+    Practise realistic everyday situations.
+  </p>
+
   <div id="conversationList"></div>
+
 </section>
 
-<!-- GAMES -->
-<section id="games" class="screen">
-  <h1>🎮 Games</h1>
-  <p style="color:var(--muted)">Learn while having fun.</p>
-
-  <div class="grid">
-    <button class="menu-card" onclick="startMatchGame()">
-      <div class="emoji">🔗</div>
-      <strong>Word Match</strong>
-      <small>Match Afrikaans with English</small>
-    </button>
-
-    <button class="menu-card" onclick="startSpeedGame()">
-      <div class="emoji">⚡</div>
-      <strong>Speed Round</strong>
-      <small>60 seconds</small>
-    </button>
-
-    <button class="menu-card" onclick="startScramble()">
-      <div class="emoji">🧩</div>
-      <strong>Word Scramble</strong>
-      <small>Build the word</small>
-    </button>
-
-    <button class="menu-card" onclick="startMissingWord()">
-      <div class="emoji">✍️</div>
-      <strong>Missing Word</strong>
-      <small>Complete sentences</small>
-    </button>
-  </div>
-
-  <div id="gameArea"></div>
-</section>
 
 <!-- STORIES -->
 <section id="stories" class="screen">
-  <h1>📚 Afrikaans Stories</h1>
-  <p style="color:var(--muted)">Read short stories and learn vocabulary in context.</p>
+
+  <h1>📖 Stories</h1>
+
   <div id="storyList"></div>
+
 </section>
+
+
+<!-- GAMES -->
+<section id="games" class="screen">
+
+  <h1>🎮 Games</h1>
+
+  <div id="gamesList"></div>
+
+  <div id="gameArea"></div>
+
+</section>
+
+
+<!-- TRADE -->
+<section id="trade" class="screen">
+
+  <h1>⚙️ Trade Afrikaans</h1>
+
+  <p class="muted">
+    Mechanical, maintenance, workshop and hydraulic
+    vocabulary.
+  </p>
+
+  <button class="btn btn-primary full"
+    onclick="startTradeQuiz()">
+    ⚙️ Technical Quiz
+  </button>
+
+  <h2>🔧 Vocabulary</h2>
+
+  <div id="tradeVocabulary"></div>
+
+  <h2>🗣️ Useful Phrases</h2>
+
+  <div id="tradePhrases"></div>
+
+</section>
+
+
+<!-- PERSONAL -->
+<section id="personal" class="screen">
+
+  <h1>📚 My Vocabulary</h1>
+
+  <button class="btn btn-primary full"
+    onclick="addPersonalWord()">
+    ➕ Add Word
+  </button>
+
+  <h2>⭐ Favourites</h2>
+
+  <div id="favouritesList"></div>
+
+  <h2>📝 My Words</h2>
+
+  <div id="personalVocabulary"></div>
+
+</section>
+
 
 <!-- PROGRESS -->
 <section id="progress" class="screen">
-  <h1>📊 Your Progress</h1>
 
-  <div class="stats">
-    <div class="stat"><strong id="pXP">0</strong><span>Total XP</span></div>
-    <div class="stat"><strong id="pWords">0</strong><span>Words</span></div>
-    <div class="stat"><strong id="pLessons">0</strong><span>Lessons</span></div>
-    <div class="stat"><strong id="pQuiz">0%</strong><span>Quiz accuracy</span></div>
-  </div>
+  <h1>📊 Progress</h1>
 
-  <div class="card">
-    <h2>🏆 Level</h2>
-    <h1 id="levelName">Beginner</h1>
-    <div class="progress">
-      <div id="levelBar" style="width:0%"></div>
-    </div>
-    <p id="levelProgress"></p>
-  </div>
+  <div id="progressArea"></div>
 
-  <div class="card">
-    <h2>🔥 Streak</h2>
-    <p id="streakMessage">Start learning today!</p>
-    <div id="streakCalendar"></div>
-  </div>
+  <h2>🎯 Daily Target</h2>
 
-  <h2>🏅 Achievements</h2>
-  <div id="achievements"></div>
+  <div id="dailyTarget"></div>
+
+  <h2>📈 Skills</h2>
+
+  <div id="skillBreakdown"></div>
+
+  <h2>📅 Weekly Activity</h2>
+
+  <div id="weeklyActivity"></div>
+
+  <h2>🏆 Achievements</h2>
+
+  <div id="achievementsList"></div>
+
 </section>
 
 </main>
 
+
+<!-- BOTTOM NAV -->
+
 <nav class="bottom-nav">
-  <button class="nav-btn active" data-screen="home" onclick="showScreen('home')"><span>🏠</span>Home</button>
-  <button class="nav-btn" data-screen="lessons" onclick="showScreen('lessons')"><span>📚</span>Learn</button>
-  <button class="nav-btn" data-screen="vocab" onclick="showScreen('vocab')"><span>🧠</span>Words</button>
-  <button class="nav-btn" data-screen="games" onclick="showScreen('games')"><span>🎮</span>Games</button>
-  <button class="nav-btn" data-screen="progress" onclick="showScreen('progress')"><span>📊</span>Progress</button>
+
+  <button class="nav-btn active"
+    data-screen="home"
+    onclick="showScreen('home')">
+    <span>🏠</span>
+    Home
+  </button>
+
+  <button class="nav-btn"
+    data-screen="lessons"
+    onclick="showScreen('lessons')">
+    <span>📚</span>
+    Learn
+  </button>
+
+  <button class="nav-btn"
+    data-screen="review"
+    onclick="startReview()">
+    <span>🧠</span>
+    Review
+  </button>
+
+  <button class="nav-btn"
+    data-screen="games"
+    onclick="showScreen('games')">
+    <span>🎮</span>
+    Games
+  </button>
+
+  <button class="nav-btn"
+    data-screen="progress"
+    onclick="showScreen('progress')">
+    <span>📊</span>
+    Progress
+  </button>
+
 </nav>
 
+
+<!-- MODAL -->
+
+<div id="modalBg" class="modal-bg"
+  onclick="closeModalOutside(event)">
+
+  <div class="modal" id="modal">
+    <button class="modal-close"
+      onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+
 </div>
 
-<div id="toast" class="toast"></div>
-
-<div id="modal" class="modal" onclick="closeModal(event)">
-  <div class="modal-box" id="modalContent"></div>
 </div>
+
 
 <script>
-/* ============================================================
-   LEER AFRIKAANS
-   Complete self-contained learning application
-   ============================================================ */
 
-const vocab = [
+/* =========================================================
+   DATA
+========================================================= */
 
-{a:"hallo",e:"hello",cat:"Basics",ex:"Hallo! Hoe gaan dit?"},
-{a:"goeie môre",e:"good morning",cat:"Basics",ex:"Goeie môre!"},
-{a:"goeie middag",e:"good afternoon",cat:"Basics",ex:"Goeie middag."},
-{a:"goeie aand",e:"good evening",cat:"Basics",ex:"Goeie aand."},
-{a:"totsiens",e:"goodbye",cat:"Basics",ex:"Totsiens, sien jou môre."},
-{a:"asseblief",e:"please",cat:"Basics",ex:"Gee my asseblief water."},
-{a:"dankie",e:"thank you",cat:"Basics",ex:"Baie dankie."},
-{a:"ja",e:"yes",cat:"Basics",ex:"Ja, ek verstaan."},
-{a:"nee",e:"no",cat:"Basics",ex:"Nee, dankie."},
-{a:"verskoon my",e:"excuse me",cat:"Basics",ex:"Verskoon my, waar is die toilet?"},
-{a:"jammer",e:"sorry",cat:"Basics",ex:"Jammer, ek is laat."},
-{a:"welkom",e:"welcome",cat:"Basics",ex:"Welkom by ons huis."},
-{a:"hoe gaan dit?",e:"how are you?",cat:"Conversation",ex:"Hallo! Hoe gaan dit?"},
-{a:"dit gaan goed",e:"I am well",cat:"Conversation",ex:"Dankie, dit gaan goed."},
-{a:"wat is jou naam?",e:"what is your name?",cat:"Conversation",ex:"Wat is jou naam?"},
-{a:"my naam is",e:"my name is",cat:"Conversation",ex:"My naam is Johan."},
-{a:"aangename kennis",e:"nice to meet you",cat:"Conversation",ex:"Aangename kennis!"},
-{a:"ek verstaan",e:"I understand",cat:"Conversation",ex:"Ja, ek verstaan."},
-{a:"ek verstaan nie",e:"I don't understand",cat:"Conversation",ex:"Jammer, ek verstaan nie."},
-{a:"praat stadiger",e:"speak slower",cat:"Conversation",ex:"Kan jy asseblief stadiger praat?"},
-{a:"kan jy my help?",e:"can you help me?",cat:"Conversation",ex:"Kan jy my help?"},
-{a:"wat beteken dit?",e:"what does that mean?",cat:"Conversation",ex:"Wat beteken dit?"},
-{a:"familie",e:"family",cat:"Family",ex:"My familie woon naby."},
-{a:"ma",e:"mother",cat:"Family",ex:"My ma is by die huis."},
-{a:"pa",e:"father",cat:"Family",ex:"My pa werk vandag."},
-{a:"broer",e:"brother",cat:"Family",ex:"My broer is jonger."},
-{a:"suster",e:"sister",cat:"Family",ex:"My suster studeer."},
-{a:"kind",e:"child",cat:"Family",ex:"Die kind slaap."},
-{a:"baba",e:"baby",cat:"Family",ex:"Die baba slaap rustig."},
-{a:"huis",e:"house/home",cat:"Home",ex:"Ek gaan huis toe."},
-{a:"kamer",e:"room",cat:"Home",ex:"Die kamer is groot."},
-{a:"kombuis",e:"kitchen",cat:"Home",ex:"Ek is in die kombuis."},
-{a:"deur",e:"door",cat:"Home",ex:"Maak die deur toe."},
-{a:"venster",e:"window",cat:"Home",ex:"Maak die venster oop."},
-{a:"tafel",e:"table",cat:"Home",ex:"Die boek is op die tafel."},
-{a:"stoel",e:"chair",cat:"Home",ex:"Sit op die stoel."},
-{a:"bed",e:"bed",cat:"Home",ex:"Die baba is in die bed."},
-{a:"water",e:"water",cat:"Food",ex:"Ek wil graag water hê."},
-{a:"brood",e:"bread",cat:"Food",ex:"Ek koop brood."},
-{a:"melk",e:"milk",cat:"Food",ex:"Die baba drink melk."},
-{a:"vleis",e:"meat",cat:"Food",ex:"Die vleis is gaar."},
-{a:"hoender",e:"chicken",cat:"Food",ex:"Ek eet hoender."},
-{a:"koffie",e:"coffee",cat:"Food",ex:"Ek drink koffie."},
-{a:"tee",e:"tea",cat:"Food",ex:"Wil jy tee hê?"},
-{a:"ontbyt",e:"breakfast",cat:"Food",ex:"Ek eet ontbyt."},
-{a:"middagete",e:"lunch",cat:"Food",ex:"Middagete is om eenuur."},
-{a:"aandete",e:"dinner",cat:"Food",ex:"Aandete is gereed."},
-{a:"winkel",e:"shop/store",cat:"Shopping",ex:"Ek gaan winkel toe."},
-{a:"geld",e:"money",cat:"Shopping",ex:"Ek het nie genoeg geld nie."},
-{a:"duur",e:"expensive",cat:"Shopping",ex:"Dit is te duur."},
-{a:"goedkoop",e:"cheap",cat:"Shopping",ex:"Hierdie een is goedkoop."},
-{a:"hoeveel kos dit?",e:"how much does it cost?",cat:"Shopping",ex:"Hoeveel kos dit?"},
-{a:"ek wil hê",e:"I want",cat:"Shopping",ex:"Ek wil hierdie een hê."},
-{a:"rekening",e:"bill/account",cat:"Shopping",ex:"Kan ek asseblief die rekening kry?"},
-{a:"werk",e:"work",cat:"Work",ex:"Ek gaan werk toe."},
-{a:"kollega",e:"colleague",cat:"Work",ex:"My kollega help my."},
-{a:"baas",e:"boss",cat:"Work",ex:"Die baas is in 'n vergadering."},
-{a:"vergadering",e:"meeting",cat:"Work",ex:"Die vergadering begin om nege."},
-{a:"gereed",e:"ready",cat:"Work",ex:"Die masjien is gereed."},
-{a:"veiligheid",e:"safety",cat:"Work",ex:"Veiligheid is belangrik."},
-{a:"onderhoud",e:"maintenance",cat:"Engineering",ex:"Die masjien benodig onderhoud."},
-{a:"masjien",e:"machine",cat:"Engineering",ex:"Die masjien werk nie."},
-{a:"pomp",e:"pump",cat:"Engineering",ex:"Die pomp verloor druk."},
-{a:"klep",e:"valve",cat:"Engineering",ex:"Die klep is toe."},
-{a:"druk",e:"pressure",cat:"Engineering",ex:"Die druk is te laag."},
-{a:"vloei",e:"flow",cat:"Engineering",ex:"Die vloei is laag."},
-{a:"hidroulies",e:"hydraulic",cat:"Engineering",ex:"Dit is 'n hidrouliese stelsel."},
-{a:"laer",e:"bearing",cat:"Engineering",ex:"Die laer word warm."},
-{a:"as",e:"shaft",cat:"Engineering",ex:"Die as draai."},
-{a:"gereedskap",e:"tools",cat:"Engineering",ex:"Ek benodig my gereedskap."},
-{a:"herstel",e:"repair",cat:"Engineering",ex:"Die masjien benodig 'n herstel."},
-{a:"fout",e:"fault",cat:"Engineering",ex:"Daar is 'n fout in die stelsel."},
-{a:"motor",e:"motor/engine",cat:"Engineering",ex:"Die motor loop glad."},
-{a:"pyp",e:"pipe",cat:"Engineering",ex:"Die pyp lek."},
-{a:"lek",e:"leak",cat:"Engineering",ex:"Daar is 'n lek."},
-{a:"skroef",e:"screw",cat:"Engineering",ex:"Draai die skroef vas."},
-{a:"moer",e:"nut",cat:"Engineering",ex:"Die moer is los."},
-{a:"vas",e:"tight",cat:"Engineering",ex:"Maak dit vas."},
-{a:"los",e:"loose",cat:"Engineering",ex:"Die moer is los."},
-{a:"rooi",e:"red",cat:"Colours",ex:"Die motor is rooi."},
-{a:"blou",e:"blue",cat:"Colours",ex:"Die lug is blou."},
-{a:"groen",e:"green",cat:"Colours",ex:"Die lig is groen."},
-{a:"wit",e:"white",cat:"Colours",ex:"Die muur is wit."},
-{a:"swart",e:"black",cat:"Colours",ex:"Die motor is swart."},
-{a:"een",e:"one",cat:"Numbers",ex:"Een, twee, drie."},
-{a:"twee",e:"two",cat:"Numbers",ex:"Ek het twee broers."},
-{a:"drie",e:"three",cat:"Numbers",ex:"Drie mense."},
-{a:"vier",e:"four",cat:"Numbers",ex:"Vier dae."},
-{a:"vyf",e:"five",cat:"Numbers",ex:"Vyf minute."},
-{a:"tien",e:"ten",cat:"Numbers",ex:"Tien rand."},
-{a:"honderd",e:"one hundred",cat:"Numbers",ex:"Honderd rand."},
-{a:"vandag",e:"today",cat:"Time",ex:"Ek werk vandag."},
-{a:"môre",e:"tomorrow",cat:"Time",ex:"Ek werk môre."},
-{a:"gister",e:"yesterday",cat:"Time",ex:"Ek was gister by die huis."},
-{a:"nou",e:"now",cat:"Time",ex:"Ek is nou besig."},
-{a:"later",e:"later",cat:"Time",ex:"Ek sien jou later."},
-{a:"vroeg",e:"early",cat:"Time",ex:"Ek staan vroeg op."},
-{a:"laat",e:"late",cat:"Time",ex:"Ek is laat."},
-{a:"oggend",e:"morning",cat:"Time",ex:"Ek werk in die oggend."},
-{a:"aand",e:"evening/night",cat:"Time",ex:"Goeie aand."},
-{a:"dag",e:"day",cat:"Time",ex:"Dit is 'n mooi dag."},
-{a:"week",e:"week",cat:"Time",ex:"Volgende week."},
-{a:"maandag",e:"Monday",cat:"Time",ex:"Ek werk Maandag."},
-{a:"Saterdag",e:"Saturday",cat:"Time",ex:"Ons rus Saterdag."},
-{a:"Sondag",e:"Sunday",cat:"Time",ex:"Ons kuier Sondag."},
-{a:"motor",e:"car",cat:"Travel",ex:"Waar is my motor?"},
-{a:"pad",e:"road",cat:"Travel",ex:"Die pad is lank."},
-{a:"links",e:"left",cat:"Travel",ex:"Draai links."},
-{a:"regs",e:"right",cat:"Travel",ex:"Draai regs."},
-{a:"reguit",e:"straight",cat:"Travel",ex:"Ry reguit."},
-{a:"hier",e:"here",cat:"Travel",ex:"Kom hier."},
-{a:"daar",e:"there",cat:"Travel",ex:"Dit is daar."},
-{a:"hospitaal",e:"hospital",cat:"Emergency",ex:"Waar is die hospitaal?"},
-{a:"dokter",e:"doctor",cat:"Emergency",ex:"Ek benodig 'n dokter."},
-{a:"polisie",e:"police",cat:"Emergency",ex:"Bel die polisie."},
-{a:"ambulans",e:"ambulance",cat:"Emergency",ex:"Bel 'n ambulans."},
-{a:"help",e:"help",cat:"Emergency",ex:"Help my asseblief."},
-{a:"gevaar",e:"danger",cat:"Emergency",ex:"Daar is gevaar."},
-{a:"noodgeval",e:"emergency",cat:"Emergency",ex:"Dit is 'n noodgeval."},
-{a:"liefde",e:"love",cat:"Relationships",ex:"Liefde is belangrik."},
-{a:"lief",e:"dear/loved",cat:"Relationships",ex:"My lief."},
-{a:"gelukkig",e:"happy",cat:"Relationships",ex:"Ek is gelukkig."},
-{a:"lief vir jou",e:"love you",cat:"Relationships",ex:"Ek is lief vir jou."},
-{a:"mis jou",e:"miss you",cat:"Relationships",ex:"Ek mis jou."},
-{a:"mooi",e:"beautiful/nice",cat:"Relationships",ex:"Jy lyk mooi."},
-{a:"geluk",e:"luck/congratulations",cat:"Relationships",ex:"Baie geluk!"},
-{a:"ek",e:"I/me",cat:"Grammar",ex:"Ek is hier."},
-{a:"jy",e:"you",cat:"Grammar",ex:"Jy is vriendelik."},
-{a:"hy",e:"he",cat:"Grammar",ex:"Hy werk vandag."},
-{a:"sy",e:"she",cat:"Grammar",ex:"Sy is by die huis."},
-{a:"ons",e:"we/us",cat:"Grammar",ex:"Ons gaan winkel toe."},
-{a:"hulle",e:"they/them",cat:"Grammar",ex:"Hulle werk saam."},
-{a:"is",e:"is/am/are",cat:"Grammar",ex:"Ek is gereed."},
-{a:"het",e:"have/has",cat:"Grammar",ex:"Ek het tyd."},
-{a:"wil",e:"want",cat:"Grammar",ex:"Ek wil koffie hê."},
-{a:"kan",e:"can",cat:"Grammar",ex:"Ek kan help."},
-{a:"moet",e:"must/have to",cat:"Grammar",ex:"Ek moet werk."},
-{a:"gaan",e:"go",cat:"Grammar",ex:"Ek gaan huis toe."},
-{a:"doen",e:"do",cat:"Grammar",ex:"Wat doen jy?"},
-{a:"weet",e:"know",cat:"Grammar",ex:"Ek weet nie."},
-{a:"sien",e:"see",cat:"Grammar",ex:"Ek sien jou."},
-{a:"praat",e:"speak/talk",cat:"Grammar",ex:"Ek praat Afrikaans."},
-{a:"eet",e:"eat",cat:"Grammar",ex:"Ek eet nou."},
-{a:"drink",e:"drink",cat:"Grammar",ex:"Ek drink water."},
-{a:"slaap",e:"sleep",cat:"Grammar",ex:"Die baba slaap."}
+const VOCAB=[
+
+["hallo","hello","Basics"],
+["goeie môre","good morning","Basics"],
+["goeie middag","good afternoon","Basics"],
+["goeie naand","good evening","Basics"],
+["totsiens","goodbye","Basics"],
+["asseblief","please","Basics"],
+["dankie","thank you","Basics"],
+["baie dankie","thank you very much","Basics"],
+["ja","yes","Basics"],
+["nee","no","Basics"],
+["miskien","maybe","Basics"],
+["reg","right / okay","Basics"],
+["goed","good","Basics"],
+["sleg","bad","Basics"],
+["ek","I","Basics"],
+["jy","you","Basics"],
+["hy","he","Basics"],
+["sy","she","Basics"],
+["ons","we","Basics"],
+["hulle","they","Basics"],
+["wat","what","Questions"],
+["wie","who","Questions"],
+["waar","where","Questions"],
+["wanneer","when","Questions"],
+["hoekom","why","Questions"],
+["hoe","how","Questions"],
+["watter","which","Questions"],
+["is","is","Basics"],
+["het","has / have","Basics"],
+["kan","can","Basics"],
+["wil","want","Basics"],
+["moet","must","Basics"],
+["weet","know","Basics"],
+["verstaan","understand","Basics"],
+["praat","speak","Basics"],
+["leer","learn","Basics"],
+["werk","work","Work"],
+["help","help","Work"],
+["maak","make","Work"],
+["doen","do","Work"],
+["kyk","look","Work"],
+["kom","come","Basics"],
+["gaan","go","Basics"],
+["eet","eat","Food"],
+["drink","drink","Food"],
+["slaap","sleep","Basics"],
+["huis","house","Home"],
+["kamer","room","Home"],
+["kombuis","kitchen","Home"],
+["deur","door","Home"],
+["venster","window","Home"],
+["tafel","table","Home"],
+["stoel","chair","Home"],
+["bed","bed","Home"],
+["winkel","shop","Shopping"],
+["geld","money","Shopping"],
+["prys","price","Shopping"],
+["koop","buy","Shopping"],
+["verkoop","sell","Shopping"],
+["duur","expensive","Shopping"],
+["goedkoop","cheap","Shopping"],
+["kos","food","Food"],
+["water","water","Food"],
+["koffie","coffee","Food"],
+["tee","tea","Food"],
+["melk","milk","Food"],
+["brood","bread","Food"],
+["vleis","meat","Food"],
+["hoender","chicken","Food"],
+["beesvleis","beef","Food"],
+["vis","fish","Food"],
+["ontbyt","breakfast","Food"],
+["middagete","lunch","Food"],
+["aandete","dinner","Food"],
+["familie","family","Family"],
+["ma","mum","Family"],
+["pa","dad","Family"],
+["broer","brother","Family"],
+["suster","sister","Family"],
+["seun","son / boy","Family"],
+["dogter","daughter / girl","Family"],
+["kind","child","Family"],
+["vriend","friend / male friend","Family"],
+["vriendin","friend / girlfriend","Family"],
+["vandag","today","Time"],
+["môre","tomorrow","Time"],
+["gister","yesterday","Time"],
+["nou","now","Time"],
+["later","later","Time"],
+["vroeg","early","Time"],
+["laat","late","Time"],
+["dag","day","Time"],
+["week","week","Time"],
+["maand","month","Time"],
+["jaar","year","Time"],
+["een","one","Numbers"],
+["twee","two","Numbers"],
+["drie","three","Numbers"],
+["vier","four","Numbers"],
+["vyf","five","Numbers"],
+["ses","six","Numbers"],
+["sewe","seven","Numbers"],
+["agt","eight","Numbers"],
+["nege","nine","Numbers"],
+["tien","ten","Numbers"],
+["rooi","red","Colours"],
+["blou","blue","Colours"],
+["groen","green","Colours"],
+["geel","yellow","Colours"],
+["swart","black","Colours"],
+["wit","white","Colours"],
+["oranje","orange","Colours"],
+["pers","purple","Colours"],
+["bruin","brown","Colours"],
+["grys","grey","Colours"],
+
+["masjien","machine","Engineering"],
+["gereedskap","tools","Engineering"],
+["werkswinkel","workshop","Engineering"],
+["onderhoud","maintenance","Engineering"],
+["fout","fault","Engineering"],
+["probleem","problem","Engineering"],
+["onderdeel","component / part","Engineering"],
+["as","shaft","Engineering"],
+["laer","bearing","Engineering"],
+["rat","gear","Engineering"],
+["ketting","chain","Engineering"],
+["bout","bolt","Engineering"],
+["moer","nut","Engineering"],
+["skroef","screw","Engineering"],
+["pyp","pipe","Engineering"],
+["slang","hose","Engineering"],
+["klep","valve","Engineering"],
+["pomp","pump","Engineering"],
+["druk","pressure","Engineering"],
+["vloei","flow","Engineering"],
+["olie","oil","Engineering"],
+["vet","grease","Engineering"],
+["seël","seal","Engineering"],
+["silinder","cylinder","Engineering"],
+["suier","piston","Engineering"],
+["hidroulies","hydraulic","Engineering"],
+["drukverlies","pressure loss","Engineering"],
+["lek","leak","Engineering"],
+["temperatuur","temperature","Engineering"],
+["spoed","speed","Engineering"],
+["draai","turn / rotate","Engineering"],
+["veiligheid","safety","Safety"],
+["gevaar","danger","Safety"],
+["stop","stop","Safety"],
+["isoleer","isolate","Safety"],
+["uitskakel","switch off / shut down","Safety"],
+["toets","test","Safety"],
+
+["roete","route","Travel"],
+["pad","road","Travel"],
+["motor","engine","Engineering"],
+["motorvoertuig","motor vehicle","Travel"],
+["links","left","Travel"],
+["regs","right","Travel"],
+["reguit","straight","Travel"],
+["hier","here","Travel"],
+["daar","there","Travel"],
+["hospitaal","hospital","Emergency"],
+["dokter","doctor","Emergency"],
+["ambulans","ambulance","Emergency"],
+["brand","fire","Emergency"],
+["polisie","police","Emergency"],
+["noodgeval","emergency","Emergency"],
+
+["liefde","love","Relationships"],
+["gelukkig","happy","Relationships"],
+["hartseer","sad","Relationships"],
+["moeg","tired","Relationships"],
+["kwaad","angry","Relationships"],
+["lief","dear / lovely","Relationships"],
+["mooi","beautiful","Relationships"],
+["sterk","strong","Relationships"],
+["groot","big","Basics"],
+["klein","small","Basics"],
+["nuut","new","Basics"],
+["oud","old","Basics"]
+
 ];
 
-const lessons = [
-["Greetings & Introductions","Learn your first everyday Afrikaans phrases.","Basics"],
-["People & Family","Talk about yourself and your family.","Family"],
-["Numbers & Time","Numbers, days and useful time expressions.","Numbers"],
-["Food & Drinks","Order food and talk about what you like.","Food"],
-["Around the Home","Learn everyday household vocabulary.","Home"],
-["Shopping","Ask prices, buy things and handle money.","Shopping"],
-["Getting Around","Directions, cars and travel vocabulary.","Travel"],
-["At Work","Useful workplace conversations.","Work"],
-["Mechanical Workshop","Practical engineering and trade vocabulary.","Engineering"],
-["Hydraulics","Pressure, flow, pumps, valves and faults.","Engineering"],
-["Safety","Important safety language.","Work"],
-["Feelings & Relationships","Talk naturally about feelings and people.","Relationships"],
-["Questions","Build useful questions.","Grammar"],
-["Negation","Learn how Afrikaans uses 'nie'.","Grammar"],
-["Present Tense","Talk about what is happening now.","Grammar"],
-["Past Tense","Talk about what happened.","Grammar"],
-["Future Tense","Talk about future plans.","Grammar"],
-["Word Order","Build natural Afrikaans sentences.","Grammar"],
-["Adjectives","Describe people and things.","Grammar"],
-["Everyday Verbs","Master common action words.","Grammar"],
-["Conversation Basics","Hold a simple conversation.","Conversation"],
-["Restaurant Roleplay","Practise ordering food.","Conversation"],
-["Shopping Roleplay","Practise a real shop conversation.","Conversation"],
-["Work Roleplay","Talk to a colleague.","Conversation"],
-["South African Expressions","Learn common everyday expressions.","Conversation"],
-["Emergency Situations","Know what to say when you need help.","Emergency"],
-["Story Time","Read and understand short Afrikaans stories.","Stories"],
-["Intermediate Conversation","Move beyond basic sentences.","Conversation"],
-["Advanced Vocabulary","Expand your vocabulary.","Advanced"],
-["Afrikaans Mastery","Final review and mastery challenge.","Advanced"]
+
+const LESSONS=[
+
+["Groete & Bekendstelling","Greetings & Introductions","Learn the basic phrases for meeting people."],
+["Mense & Familie","People & Family","Talk about your family and friends."],
+["Getalle & Tyd","Numbers & Time","Numbers, days and everyday time."],
+["Kos & Drank","Food & Drinks","Order food and talk about meals."],
+["Rondom die Huis","Around the Home","Learn useful household vocabulary."],
+["Inkopies","Shopping","Prices, buying and selling."],
+["Reis","Getting Around","Directions and travel."],
+["By die Werk","At Work","Useful workplace Afrikaans."],
+["Meganiese Werkswinkel","Mechanical Workshop","Mechanical workshop vocabulary."],
+["Hidroulika","Hydraulics","Hydraulic system vocabulary."],
+["Veiligheid","Safety","Important safety language."],
+["Gevoelens","Feelings","Describe how you feel."],
+["Vrae","Questions","Ask useful questions."],
+["Ontkenning","Negation","Learn how nie works."],
+["Teenwoordige Tyd","Present Tense","Talk about what is happening."],
+["Verlede Tyd","Past Tense","Talk about what happened."],
+["Toekomende Tyd","Future Tense","Talk about what will happen."],
+["Woordorde","Word Order","Build natural sentences."],
+["Byvoeglike Naamwoorde","Adjectives","Describe people and things."],
+["Werkwoorde","Everyday Verbs","High-frequency verbs."],
+["Gesprekke","Conversation","Build everyday conversations."],
+["Restaurant","Restaurant Roleplay","Practise ordering."],
+["Winkels","Shopping Roleplay","Practise shopping."],
+["Werkswinkel","Workshop Roleplay","Talk at work."],
+["Suid-Afrikaanse Uitdrukkings","South African Expressions","Natural informal Afrikaans."],
+["Noodsituasies","Emergency Situations","Useful emergency language."],
+["Stories","Story Time","Read simple Afrikaans."],
+["Intermediêre Gesprek","Intermediate Conversation","Longer conversations."],
+["Gevorderde Woordeskat","Advanced Vocabulary","Expand your vocabulary."],
+["Afrikaans Bemeester","Afrikaans Mastery","Put everything together."]
+
 ];
 
-const grammar = [
-["Basic Word Order",
-"Simple Afrikaans sentences commonly follow subject + verb + other information.",
-"Ek werk vandag.\nI work today.\n\nJy drink koffie.\nYou drink coffee."],
+
+const GRAMMAR=[
+
+["Personal Pronouns",
+"Ek = I, jy = you, hy = he, sy = she, ons = we, julle = you plural, hulle = they.",
+["Ek werk.","Jy leer.","Ons praat Afrikaans."]],
+
+["Word Order",
+"A simple Afrikaans sentence often follows subject + verb + object.",
+["Ek leer Afrikaans.","Ek werk vandag.","Ons drink koffie."]],
+
 ["Negation",
-"Afrikaans commonly uses 'nie' twice when negating a complete sentence.",
-"Ek verstaan nie.\nI don't understand.\n\nEk werk nie vandag nie.\nI am not working today."],
-["Present Tense",
-"The present tense is generally straightforward. The verb form often stays the same.",
-"Ek werk.\nJy werk.\nHy werk.\nOns werk.\nHulle werk."],
-["Past Tense",
-"A common past construction uses 'het' with 'ge-' on the main verb.",
-"Ek het gewerk.\nI worked.\n\nSy het geëet.\nShe ate."],
-["Future Tense",
-"'Sal' is commonly used for future actions.",
-"Ek sal môre werk.\nI will work tomorrow."],
+"Normal negation commonly uses nie twice.",
+["Ek weet nie.","Ek verstaan nie.","Ek werk nie vandag nie."]],
+
 ["Questions",
-"Question words include wat (what), waar (where), wanneer (when), wie (who), hoekom (why), hoe (how).",
-"Waar woon jy?\nWhere do you live?\n\nWat doen jy?\nWhat are you doing?"],
-["Wanting",
-"'Wil' expresses wanting or intention.",
-"Ek wil koffie hê.\nI want coffee.\n\nOns wil huis toe gaan.\nWe want to go home."],
-["Ability",
-"'Kan' expresses ability or possibility.",
-"Ek kan Afrikaans praat.\nI can speak Afrikaans."],
-["Must / Have To",
-"'Moet' expresses obligation.",
-"Ek moet werk.\nI have to work."],
-["To Be",
-"'Is' is used for am/is/are.",
-"Ek is gereed.\nI am ready.\n\nOns is gelukkig.\nWe are happy."]
+"Question words include wat, wie, waar, wanneer, hoekom and hoe.",
+["Wat is dit?","Waar is die masjien?","Hoe gaan dit?"]],
+
+["Present Tense",
+"Use the normal verb form for many present-tense sentences.",
+["Ek werk.","Hy eet.","Ons leer."]],
+
+["Past Tense",
+"Het + ge- is commonly used for completed actions.",
+["Ek het gewerk.","Sy het geëet.","Ons het geleer."]],
+
+["Future Tense",
+"Sal is used to express future actions.",
+["Ek sal werk.","Ons sal leer.","Hy sal kom."]],
+
+["Adjectives",
+"Adjectives describe nouns and can change position depending on usage.",
+["'n Groot masjien.","Die masjien is groot.","'n Nuwe pomp."]],
+
+["Possession",
+"Use my, jou, sy, haar, ons, julle and hulle.",
+["my motor","jou gereedskap","ons werkswinkel"]],
+
+["Useful Connectors",
+"Words such as en, maar, want and omdat connect ideas.",
+["Ek werk en ek leer.","Ek kom want ek moet werk."]]
+
 ];
 
-const conversations = [
-["👋 Meeting Someone",
-[
-["Person A","Hallo! Hoe gaan dit?"],
-["Person B","Dit gaan goed, dankie. Hoe gaan dit met jou?"],
-["Person A","Baie goed. Wat is jou naam?"],
-["Person B","My naam is Johan. Wat is jou naam?"],
-["Person A","My naam is Sarah. Aangename kennis!"],
-["Person B","Aangename kennis!"]
-]],
-["🍔 Restaurant",
-[
-["Waiter","Goeie aand. Wat wil jy hê?"],
-["You","Ek wil asseblief hoender hê."],
-["Waiter","Wil jy iets drink?"],
-["You","Ja, ek wil graag water hê."],
-["Waiter","Enigiets anders?"],
-["You","Nee, dankie."]
-]],
-["🛒 Shopping",
-[
-["Worker","Goeie middag. Kan ek help?"],
-["You","Ja, hoeveel kos dit?"],
-["Worker","Dit kos honderd rand."],
-["You","Dit is te duur."],
-["Worker","Hierdie een is goedkoper."],
-["You","Goed, ek sal hierdie een neem."]
-]],
-["🧑‍🔧 Workshop",
-[
-["Colleague","Wat is fout met die masjien?"],
-["You","Die pomp verloor druk."],
-["Colleague","Het jy die klep nagegaan?"],
-["You","Ja, die klep is toe."],
-["Colleague","En die hidrouliese olie?"],
-["You","Ek gaan dit nou nagaan."]
-]],
-["🆘 Emergency",
-[
-["Person","Kan ek jou help?"],
-["You","Ja, dit is 'n noodgeval."],
-["Person","Wat het gebeur?"],
-["You","Ek benodig 'n dokter."],
-["Person","Ek sal 'n ambulans bel."],
-["You","Baie dankie."]
-]]
+
+const CONVERSATIONS=[
+
+{
+title:"Meeting Someone",
+icon:"👋",
+lines:[
+["bot","Hallo! Hoe gaan dit?"],
+["user","Dit gaan goed, dankie. En met jou?"],
+["bot","Dit gaan baie goed. Wat is jou naam?"],
+["user","My naam is Trav."],
+["bot","Lekker om jou te ontmoet!"]
+]
+},
+
+{
+title:"Restaurant",
+icon:"🍽️",
+lines:[
+["bot","Goeienaand. Wat wil jy bestel?"],
+["user","Ek wil graag 'n koffie hê."],
+["bot","Wil jy iets eet?"],
+["user","Ja, asseblief. Ek wil vleis hê."],
+["bot","Reg. En iets om te drink?"]
+]
+},
+
+{
+title:"Shopping",
+icon:"🛒",
+lines:[
+["bot","Kan ek jou help?"],
+["user","Ja, asseblief. Wat kos dit?"],
+["bot","Dit kos honderd rand."],
+["user","Dit is te duur."],
+["bot","Ek kan jou 'n beter prys gee."]
+]
+},
+
+{
+title:"Workshop",
+icon:"🔧",
+lines:[
+["bot","Wat is fout met die masjien?"],
+["user","Daar is 'n probleem met die pomp."],
+["bot","Is daar genoeg druk?"],
+["user","Nee, die druk is laag."],
+["bot","Kom ons kyk na die hidrouliese stelsel."]
+]
+},
+
+{
+title:"Emergency",
+icon:"🚨",
+lines:[
+["bot","Wat het gebeur?"],
+["user","Daar is 'n noodgeval."],
+["bot","Is almal veilig?"],
+["user","Ja, maar die masjien het 'n fout."],
+["bot","Ons moet die area veilig maak."]
+]
+}
+
 ];
 
-const stories = [
-["🌱 Beginner","My Dag",
-"Ek staan vroeg op. Ek drink koffie en eet ontbyt. Daarna gaan ek werk toe. Ek werk saam met my kollegas. In die aand gaan ek huis toe."],
-["🌿 Beginner","By Die Winkel",
-"Ek gaan winkel toe. Ek benodig brood, melk en vleis. Ek vra: Hoeveel kos dit? Die brood is goedkoop, maar die vleis is duur. Ek betaal en gaan huis toe."],
-["🌳 Intermediate","Die Masjien",
-"Die masjien werk nie reg nie. Die pomp verloor druk en daar is 'n klein lek by die pyp. Ek stop die masjien en begin die probleem ondersoek. Veiligheid is belangrik."],
-["🔥 Intermediate","Die Naweek",
-"Saterdagoggend staan ons laat op. Ons drink koffie en maak ontbyt. Daarna gaan ons winkel toe. In die middag kuier ons by familie. Sondag rus ons by die huis."]
+
+const STORIES=[
+
+{
+title:"Die Werkswinkel",
+text:"Jan werk in 'n groot werkswinkel. Hy kyk na 'n masjien. Die pomp het 'n probleem. Jan kyk na die druk en vloei. Hy vind 'n lek. Hy herstel die fout en toets die masjien.",
+words:["werkswinkel","masjien","pomp","druk","vloei","lek","herstel","fout","toets"]
+},
+
+{
+title:"'n Gewone Dag",
+text:"Ek staan vroeg op. Ek drink koffie en eet ontbyt. Daarna gaan ek werk toe. Ek werk saam met my vriende. In die aand gaan ek huis toe.",
+words:["vroeg","koffie","ontbyt","werk","vriende","aand","huis"]
+},
+
+{
+title:"Die Winkel",
+text:"Maria gaan winkel toe. Sy soek brood, melk en vleis. Sy kyk na die pryse. Die vleis is duur, maar die brood is goedkoop.",
+words:["winkel","brood","melk","vleis","pryse","duur","goedkoop"]
+}
+
 ];
 
-const achievements = [
-["🌱 Eerste Stap","Complete your first lesson",()=>state.lessons.length>=1],
-["📚 Student","Complete 5 lessons",()=>state.lessons.length>=5],
-["🎓 Learner","Complete 10 lessons",()=>state.lessons.length>=10],
-["🏆 Scholar","Complete 20 lessons",()=>state.lessons.length>=20],
-["🧠 25 Woorde","Learn 25 words",()=>state.learned.length>=25],
-["📖 100 Woorde","Learn 100 words",()=>state.learned.length>=100],
-["🔥 7 Dae","Reach a 7-day streak",()=>state.streak>=7],
-["🔥 30 Dae","Reach a 30-day streak",()=>state.streak>=30],
-["🎯 Quiz Master","Get 90%+ in a quiz",()=>state.bestQuiz>=90],
-["🧑‍🔧 Workshop","Learn 10 engineering words",()=>state.learned.filter(i=>vocab[i]?.cat==="Engineering").length>=10],
-["🇿🇦 Afrikaans","Learn 200 words",()=>state.learned.length>=200]
+
+const TRADE_VOCAB=[
+
+["masjien","machine"],
+["werkswinkel","workshop"],
+["onderhoud","maintenance"],
+["fout","fault"],
+["probleem","problem"],
+["gereedskap","tools"],
+["onderdeel","component / part"],
+["as","shaft"],
+["laer","bearing"],
+["rat","gear"],
+["ketting","chain"],
+["bout","bolt"],
+["moer","nut"],
+["pyp","pipe"],
+["slang","hose"],
+["klep","valve"],
+["pomp","pump"],
+["druk","pressure"],
+["vloei","flow"],
+["olie","oil"],
+["vet","grease"],
+["seël","seal"],
+["silinder","cylinder"],
+["suier","piston"],
+["hidroulies","hydraulic"],
+["drukverlies","pressure loss"],
+["lek","leak"],
+["temperatuur","temperature"],
+["veiligheid","safety"],
+["gevaar","danger"],
+["uitskakel","shut down"],
+["isoleer","isolate"],
+["toets","test"]
+
 ];
 
-let state = JSON.parse(localStorage.getItem("afrikaansState") || "null") || {
-  xp:0,
-  learned:[],
-  lessons:[],
-  streak:0,
-  lastStudy:"",
-  quizCorrect:0,
-  quizTotal:0,
-  bestQuiz:0,
-  dailyDone:"",
-  favourites:[],
-  customWords:[],
-  mistakes:[],
-  dark:false
-};
 
-let currentCategory="All";
-let quizIndex=0;
-let quizScore=0;
-let quizQuestions=[];
-let speedTimer=null;
-let speedEnd=0;
-let speedScore=0;
+const TRADE_PHRASES=[
+
+["Die masjien werk nie.","The machine isn't working."],
+["Daar is 'n fout.","There is a fault."],
+["Die druk is laag.","The pressure is low."],
+["Daar is 'n lek.","There is a leak."],
+["Die pomp maak geraas.","The pump is making noise."],
+["Kontroleer die olie.","Check the oil."],
+["Kontroleer die slang.","Check the hose."],
+["Die klep is oop.","The valve is open."],
+["Die klep is toe.","The valve is closed."],
+["Die laer is warm.","The bearing is hot."],
+["Ons moet die masjien stop.","We need to stop the machine."],
+["Maak die area veilig.","Make the area safe."],
+["Ek moet die fout vind.","I need to find the fault."],
+["Die druk val.","The pressure is dropping."],
+["Die temperatuur is te hoog.","The temperature is too high."]
+
+];
+
+
+const ACHIEVEMENTS=[
+
+["first","🌱","First Step","Complete your first lesson.",s=>s.lessons.length>=1],
+["words10","📚","Vocabulary Builder","Learn 10 words.",s=>s.learned.length>=10],
+["words50","📖","Word Collector","Learn 50 words.",s=>s.learned.length>=50],
+["words100","🧠","Word Machine","Learn 100 words.",s=>s.learned.length>=100],
+["quiz10","🎯","Quiz Starter","Answer 10 quiz questions.",s=>s.stats.quizTotal>=10],
+["quiz50","🏆","Quiz Master","Answer 50 quiz questions.",s=>s.stats.quizTotal>=50],
+["streak3","🔥","Three Days","Reach a 3-day streak.",s=>s.streak>=3],
+["streak7","🔥","One Week","Reach a 7-day streak.",s=>s.streak>=7],
+["xp500","⭐","Rising Star","Earn 500 XP.",s=>s.xp>=500],
+["xp1000","🌟","Afrikaans Learner","Earn 1,000 XP.",s=>s.xp>=1000],
+["trade","⚙️","Workshop Ready","Complete a trade quiz.",s=>s.stats.tradeTotal>=1],
+["review","🧠","Memory Builder","Complete 10 reviews.",s=>s.stats.reviewed>=10],
+["grammar","📐","Grammar Student","Answer 10 grammar questions.",s=>s.stats.grammarTotal>=10]
+
+];
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const KEY="leerAfrikaansCompleteV1";
+
+let state;
+
+function defaultState(){
+
+  return {
+
+    xp:0,
+
+    learned:[],
+
+    lessons:[],
+
+    favourites:[],
+
+    customWords:[],
+
+    mistakes:[],
+
+    streak:0,
+
+    lastStudy:"",
+
+    dark:false,
+
+    immersion:false,
+
+    review:{},
+
+    stats:{
+      quizCorrect:0,
+      quizTotal:0,
+      reviewed:0,
+      reviewCorrect:0,
+      reviewWrong:0,
+      grammarTotal:0,
+      grammarCorrect:0,
+      listeningTotal:0,
+      listeningCorrect:0,
+      tradeTotal:0,
+      tradeCorrect:0,
+      conversation:0,
+      games:0
+    },
+
+    activity:{},
+
+    achievements:[],
+
+    dailyTarget:20
+
+  };
+
+}
+
+function load(){
+
+  try{
+
+    const saved=
+      localStorage.getItem(KEY);
+
+    state=
+      saved
+        ? Object.assign(
+            defaultState(),
+            JSON.parse(saved)
+          )
+        : defaultState();
+
+  }catch(e){
+
+    state=defaultState();
+
+  }
+
+  if(!state.stats)
+    state.stats=defaultState().stats;
+
+  if(!state.review)
+    state.review={};
+
+  if(!state.activity)
+    state.activity={};
+
+  if(!Array.isArray(state.learned))
+    state.learned=[];
+
+  if(!Array.isArray(state.lessons))
+    state.lessons=[];
+
+  if(!Array.isArray(state.favourites))
+    state.favourites=[];
+
+  if(!Array.isArray(state.customWords))
+    state.customWords=[];
+
+  if(!Array.isArray(state.mistakes))
+    state.mistakes=[];
+
+  if(!Array.isArray(state.achievements))
+    state.achievements=[];
+
+}
 
 function save(){
-  localStorage.setItem("afrikaansState",JSON.stringify(state));
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(state)
+  );
+
 }
 
-function toast(msg){
-  const el=document.getElementById("toast");
-  el.textContent=msg;
-  el.classList.add("show");
-  setTimeout(()=>el.classList.remove("show"),2200);
-}
+
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function today(){
-  return new Date().toISOString().slice(0,10);
+
+  return new Date()
+    .toISOString()
+    .slice(0,10);
+
 }
 
-function updateStreak(){
-  const t=today();
-  if(state.lastStudy===t) return;
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-  if(state.lastStudy){
-    const last=new Date(state.lastStudy);
-    const now=new Date(t);
-    const diff=Math.round((now-last)/86400000);
-    if(diff===1) state.streak++;
-    else if(diff>1) state.streak=1;
-  }else{
-    state.streak=1;
-  }
-
-  state.lastStudy=t;
-  save();
-}
-
-function addXP(amount){
-  state.xp+=amount;
-  updateStreak();
-  save();
-  updateAll();
-  toast("+"+amount+" XP ⭐");
-}
-
-function levelInfo(){
-  const levels=[
-    ["Beginner",0],
-    ["Explorer",100],
-    ["Starter",250],
-    ["Learner",500],
-    ["Speaker",900],
-    ["Intermediate",1400],
-    ["Conversational",2200],
-    ["Advanced",3500],
-    ["Fluent",5000],
-    ["Afrikaans Master",7500]
-  ];
-
-  let current=levels[0];
-  let next=levels[1];
-
-  for(let i=0;i<levels.length;i++){
-    if(state.xp>=levels[i][1]) current=levels[i];
-    if(state.xp<levels[i][1]){
-      next=levels[i];
-      break;
-    }
-    next=null;
-  }
-
-  return {current,next};
-}
-
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll(".nav-btn").forEach(b=>{
-    b.classList.toggle("active",b.dataset.screen===id);
-  });
-
-  if(id==="lessons") renderLessons();
-  if(id==="vocab") renderVocab();
-  if(id==="grammar") renderGrammar();
-  if(id==="conversation") renderConversations();
-  if(id==="stories") renderStories();
-  if(id==="progress") renderProgress();
-  if(id==="home") updateHome();
-
-  window.scrollTo(0,0);
-}
-
-function updateAll(){
-  updateHome();
-  renderLessons();
-  renderProgress();
-}
-
-function updateHome(){
-  const info=levelInfo();
-  const percent=Math.min(100,Math.round(state.xp/75));
-
-  document.getElementById("xpStat").textContent=state.xp;
-  document.getElementById("levelStat").textContent=
-    Math.max(1,Math.floor(state.xp/100)+1);
-  document.getElementById("streakStat").textContent=state.streak;
-  document.getElementById("wordsStat").textContent=state.learned.length;
-
-  document.getElementById("overallPercent").textContent=percent+"%";
-  document.getElementById("overallBar").style.width=percent+"%";
-
-  document.getElementById("greeting").textContent=
-    new Date().getHours()<12 ? "Goeie môre!" :
-    new Date().getHours()<18 ? "Goeie middag!" : "Goeie aand!";
-
-  const nextIndex=state.lessons.length;
-  if(nextIndex<lessons.length){
-    document.getElementById("nextLessonTitle").textContent=lessons[nextIndex][0];
-    document.getElementById("nextLessonDesc").textContent=lessons[nextIndex][1];
-  }else{
-    document.getElementById("nextLessonTitle").textContent="Afrikaans Mastery";
-    document.getElementById("nextLessonDesc").textContent="You completed the full learning path!";
-  }
-
-  const challenges=[
-    "Learn 5 new vocabulary words.",
-    "Complete a quiz.",
-    "Complete your next lesson.",
-    "Practise a conversation.",
-    "Learn 5 engineering words.",
-    "Read an Afrikaans story."
-  ];
-
-  document.getElementById("dailyChallengeText").textContent=
-    state.dailyDone===today()
-    ? "Today's challenge is complete! 🎉"
-    : challenges[new Date().getDate()%challenges.length];
-}
-
-function renderLessons(){
-  const list=document.getElementById("lessonList");
-  if(!list)return;
-
-  list.innerHTML=lessons.map((l,i)=>{
-    const completed=state.lessons.includes(i);
-    const unlocked=i<=state.lessons.length;
-
-    return `
-      <div class="lesson ${completed?"completed":""} ${!unlocked?"locked":""}">
-        <div class="lesson-row">
-          <div class="lesson-number">${completed?"✓":i+1}</div>
-          <div style="flex:1">
-            <strong>${l[0]}</strong>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px">${l[1]}</div>
-            <span class="tag" style="margin-top:8px">${l[2]}</span>
-          </div>
-          <button class="btn ${!unlocked?"secondary":""}" onclick="openLesson(${i})">
-            ${completed?"Review":"Start"}
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-
-  const done=state.lessons.length;
-  document.getElementById("courseProgressText").textContent=
-    `${done} of ${lessons.length} lessons completed`;
-  document.getElementById("courseProgressBar").style.width=
-    (done/lessons.length*100)+"%";
-}
-
-function openNextLesson(){
-  openLesson(Math.min(state.lessons.length,lessons.length-1));
-}
-
-function openLesson(index){
-  if(index>state.lessons.length){
-    toast("Complete the previous lesson first.");
-    return;
-  }
-
-  const l=lessons[index];
-  const related=vocab.filter(v=>v.cat===l[2]).slice(0,10);
-
-  let html=`
-    <span class="tag">LESSON ${index+1}</span>
-    <h1>${l[0]}</h1>
-    <p>${l[1]}</p>
-    <hr style="border:0;border-top:1px solid var(--border);margin:20px 0">
-    <h3>Key vocabulary</h3>
-  `;
-
-  if(related.length){
-    html+=related.map(v=>`
-      <div class="list-item">
-        <div>
-          <strong>${v.a}</strong>
-          <div style="color:var(--muted)">${v.e}</div>
-        </div>
-        <button class="btn secondary" onclick='speak(${JSON.stringify(v.a)})'>🔊</button>
-      </div>
-    `).join("");
-  }else{
-    html+=`<p>Focus on sentence construction and understanding the lesson topic.</p>`;
-  }
-
-  html+=`
-    <div class="card" style="margin-top:18px;background:#f0f7f7">
-      <h3>💡 Practice</h3>
-      <p>Say the following aloud:</p>
-      <strong>${lessonSentence(l[2])}</strong>
-      <button class="btn secondary" style="margin-top:12px" onclick='speak(${JSON.stringify(lessonSentence(l[2]))})'>🔊 Listen</button>
-    </div>
-    <button class="btn full" onclick="completeLesson(${index})">
-      ${state.lessons.includes(index)?"Lesson already completed":"Complete lesson +50 XP"}
-    </button>
-  `;
-
-  openModal(html);
-}
-
-function lessonSentence(cat){
-  const examples={
-    Basics:"Hallo! Hoe gaan dit?",
-    Family:"My familie is by die huis.",
-    Numbers:"Ek het twee broers.",
-    Food:"Ek wil asseblief water hê.",
-    Home:"Ek gaan huis toe.",
-    Shopping:"Hoeveel kos dit?",
-    Travel:"Draai regs en ry reguit.",
-    Work:"Ek gaan werk toe.",
-    Engineering:"Die pomp verloor druk.",
-    Grammar:"Ek praat Afrikaans.",
-    Conversation:"Kan jy my help?",
-    Emergency:"Ek benodig 'n dokter.",
-    Stories:"Ek gaan huis toe.",
-    Advanced:"Ek verstaan Afrikaans."
-  };
-  return examples[cat]||"Ek leer Afrikaans.";
-}
-
-function completeLesson(index){
-  if(!state.lessons.includes(index)){
-    state.lessons.push(index);
-    addXP(50);
-    save();
-    closeModal();
-    toast("Les voltooi! +50 XP 🎉");
-    updateAll();
-  }else{
-    closeModal();
-  }
-}
-
-function renderVocab(){
-  const search=(document.getElementById("vocabSearch")?.value||"").toLowerCase();
-  const cats=["All",...new Set(vocab.map(v=>v.cat))];
-
-  document.getElementById("vocabTabs").innerHTML=cats.map(c=>`
-    <button class="${currentCategory===c?"active":""}" onclick="setVocabCategory('${c}')">${c}</button>
-  `).join("");
-
-  let items=vocab.filter(v=>{
-    const matchCat=currentCategory==="All"||v.cat===currentCategory;
-    const matchSearch=!search||v.a.toLowerCase().includes(search)||v.e.toLowerCase().includes(search);
-    return matchCat&&matchSearch;
-  });
-
-  items=items.slice(0,100);
-
-  document.getElementById("vocabList").innerHTML=items.length
-    ?items.map((v)=>{
-      const index=vocab.indexOf(v);
-      const learned=state.learned.includes(index);
-      const fav=state.favourites.includes(index);
-
-      return `
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;gap:10px">
-            <div>
-              <span class="tag">${v.cat}</span>
-              <h2 style="margin:9px 0 2px">${v.a}</h2>
-              <div style="color:var(--muted)">${v.e}</div>
-            </div>
-            <div>
-              <button class="btn secondary" onclick='speak(${JSON.stringify(v.a)})'>🔊</button>
-              <button class="btn secondary" onclick="toggleFavourite(${index})">${fav?"⭐":"☆"}</button>
-            </div>
-          </div>
-          <div class="example"><strong>Example:</strong> ${v.ex}</div>
-          <button class="btn ${learned?"secondary":""} full" style="margin-top:10px" onclick="markLearned(${index})">
-            ${learned?"✓ Learned":"Mark as learned +5 XP"}
-          </button>
-        </div>
-      `;
-    }).join("")
-    :`<div class="card"><p>No vocabulary found.</p></div>`;
-}
-
-function setVocabCategory(cat){
-  currentCategory=cat;
-  renderVocab();
-}
-
-function markLearned(index){
-  if(!state.learned.includes(index)){
-    state.learned.push(index);
-    addXP(5);
-    save();
-  }else{
-    toast("Already learned ✓");
-  }
-  renderVocab();
-}
-
-function toggleFavourite(index){
-  if(state.favourites.includes(index)){
-    state.favourites=state.favourites.filter(i=>i!==index);
-  }else{
-    state.favourites.push(index);
-  }
-  save();
-  renderVocab();
-}
-
-function speak(text){
-  if("speechSynthesis" in window){
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang="af-ZA";
-    u.rate=.82;
-    speechSynthesis.speak(u);
-  }else{
-    toast("Speech is not supported on this device.");
-  }
-}
-
-function startQuiz(){
-  quizQuestions=shuffle([...vocab]).slice(0,10);
-  quizIndex=0;
-  quizScore=0;
-  showScreen("quiz");
-  renderQuizQuestion();
-}
-
-function renderQuizQuestion(){
-  if(quizIndex>=quizQuestions.length){
-    finishQuiz();
-    return;
-  }
-
-  const q=quizQuestions[quizIndex];
-  const choices=shuffle([
-    q.e,
-    ...shuffle(vocab.filter(v=>v!==q)).slice(0,3).map(v=>v.e)
-  ]);
-
-  document.getElementById("quizContent").innerHTML=`
-    <div class="card">
-      <div style="display:flex;justify-content:space-between">
-        <span class="tag">QUESTION ${quizIndex+1}/10</span>
-        <strong>${quizScore} correct</strong>
-      </div>
-
-      <div class="flashcard" style="min-height:250px">
-        <div style="color:var(--muted)">What does this mean?</div>
-        <div class="flash-word">${q.a}</div>
-        <button class="btn secondary" onclick='speak(${JSON.stringify(q.a)})'>🔊 Hear it</button>
-      </div>
-
-      <div class="answers">
-        ${choices.map(c=>`
-          <button class="answer" onclick='answerQuiz(${JSON.stringify(c)},${JSON.stringify(q.e)})'>${c}</button>
-        `).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function answerQuiz(answer,correct){
-  document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
-
-  if(answer===correct){
-    quizScore++;
-    state.quizCorrect++;
-    addXP(10);
-    toast("Correct! ✓");
-  }else{
-    state.mistakes.push(correct);
-    toast("Correct answer: "+correct);
-  }
-
-  state.quizTotal++;
-  save();
-
-  setTimeout(()=>{
-    quizIndex++;
-    renderQuizQuestion();
-  },700);
-}
-
-function finishQuiz(){
-  const percent=Math.round(quizScore/quizQuestions.length*100);
-  state.bestQuiz=Math.max(state.bestQuiz,percent);
-  save();
-
-  document.getElementById("quizContent").innerHTML=`
-    <div class="card" style="text-align:center">
-      <div style="font-size:55px">${percent>=80?"🏆":"🎯"}</div>
-      <h1>Quiz complete!</h1>
-      <h2>${quizScore}/10</h2>
-      <p>${percent}% correct</p>
-      <div class="progress">
-        <div style="width:${percent}%"></div>
-      </div>
-      <div style="margin-top:20px">
-        <button class="btn" onclick="startQuiz()">Try again</button>
-        <button class="btn secondary" onclick="showScreen('home')">Home</button>
-      </div>
-    </div>
-  `;
-}
-
-function renderGrammar(){
-  document.getElementById("grammarList").innerHTML=grammar.map((g,i)=>`
-    <div class="card">
-      <div style="display:flex;gap:12px">
-        <div class="lesson-number">${i+1}</div>
-        <div style="flex:1">
-          <h2>${g[0]}</h2>
-          <p>${g[1]}</p>
-          <div class="example">
-            ${g[2].replace(/\n/g,"<br>")}
-          </div>
-          <button class="btn secondary" style="margin-top:10px" onclick='speak(${JSON.stringify(g[2].split("\n")[0])})'>🔊 Hear example</button>
-        </div>
-      </div>
-    </div>
-  `).join("");
-}
-
-function renderConversations(){
-  document.getElementById("conversationList").innerHTML=conversations.map((c,i)=>`
-    <div class="card">
-      <h2>${c[0]}</h2>
-      <button class="btn full" onclick="openConversation(${i})">Practise conversation</button>
-    </div>
-  `).join("");
-}
-
-function openConversation(index){
-  const c=conversations[index];
-
-  let html=`<h1>${c[0]}</h1><p>Read the conversation aloud and practise both sides.</p>`;
-
-  html+=c[1].map(line=>`
-    <div class="list-item">
-      <div style="flex:1">
-        <strong>${line[0]}</strong>
-        <div style="margin-top:5px">${line[1]}</div>
-      </div>
-      <button class="btn secondary" onclick='speak(${JSON.stringify(line[1])})'>🔊</button>
-    </div>
-  `).join("");
-
-  html+=`
-    <button class="btn full" style="margin-top:18px" onclick="addXP(25);closeModal();toast('Conversation practised! +25 XP')">
-      Complete practice +25 XP
-    </button>
-  `;
-
-  openModal(html);
-}
-
-function renderStories(){
-  document.getElementById("storyList").innerHTML=stories.map((s,i)=>`
-    <div class="card">
-      <span class="tag">${s[0]}</span>
-      <h2>${s[1]}</h2>
-      <p>${s[2]}</p>
-      <button class="btn secondary" onclick='speak(${JSON.stringify(s[2])})'>🔊 Listen</button>
-      <button class="btn" onclick="openStory(${i})">Study story</button>
-    </div>
-  `).join("");
-}
-
-function openStory(index){
-  const s=stories[index];
-
-  openModal(`
-    <span class="tag">${s[0]}</span>
-    <h1>${s[1]}</h1>
-    <div class="card">
-      <p style="line-height:1.8">${s[2]}</p>
-    </div>
-    <button class="btn secondary" onclick='speak(${JSON.stringify(s[2])})'>🔊 Listen</button>
-    <button class="btn full" style="margin-top:12px" onclick="addXP(30);closeModal();toast('Story completed! +30 XP')">
-      Complete story +30 XP
-    </button>
-  `);
-}
-
-function startDailyChallenge(){
-  if(state.dailyDone===today()){
-    toast("Today's challenge is already complete 🎉");
-    return;
-  }
-
-  const type=new Date().getDate()%4;
-
-  if(type===0){
-    startQuiz();
-  }else if(type===1){
-    currentCategory="Basics";
-    showScreen("vocab");
-  }else if(type===2){
-    showScreen("conversation");
-  }else{
-    openNextLesson();
-  }
-
-  state.dailyDone=today();
-  save();
-}
-
-function startMatchGame(){
-  const set=shuffle(vocab).slice(0,5);
-  let html=`
-    <div class="card">
-      <h2>🔗 Word Match</h2>
-      <p>Match each Afrikaans word with the correct English meaning.</p>
-      <div id="matchArea"></div>
-    </div>
-  `;
-
-  document.getElementById("gameArea").innerHTML=html;
-
-  let remaining=set.map((v,i)=>({v,i}));
-  let selected=null;
-
-  function render(){
-    const area=document.getElementById("matchArea");
-
-    if(!remaining.length){
-      area.innerHTML=`
-        <div style="text-align:center;padding:25px">
-          <div style="font-size:50px">🎉</div>
-          <h2>Excellent!</h2>
-          <button class="btn" onclick="startMatchGame()">Play again</button>
-        </div>
-      `;
-      addXP(50);
-      return;
-    }
-
-    area.innerHTML=remaining.map((x,i)=>`
-      <button class="answer" onclick="matchSelect(${i})">
-        <strong>${x.v.a}</strong> — ${x.v.e}
-      </button>
-    `).join("");
-  }
-
-  window.matchSelect=function(i){
-    const x=remaining[i];
-
-    if(!selected){
-      selected=i;
-      toast("Now choose the meaning.");
-      return;
-    }
-
-    if(selected===i){
-      toast("You need to choose another card.");
-      return;
-    }
-
-    const y=remaining[selected];
-
-    if(y.v.e===x.v.e || y.v.a===x.v.a){
-      remaining.splice(Math.max(selected,i),1);
-      remaining.splice(Math.min(selected,i),1);
-      selected=null;
-      addXP(10);
-      render();
-    }else{
-      selected=null;
-      toast("Not a match — try again.");
-    }
-  };
-
-  render();
-}
-
-function startSpeedGame(){
-  speedScore=0;
-  speedEnd=Date.now()+60000;
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="card">
-      <h2>⚡ Speed Round</h2>
-      <div style="font-size:35px;text-align:center;margin:20px" id="speedTime">60</div>
-      <div id="speedQuestion"></div>
-    </div>
-  `;
-
-  speedNext();
-
-  clearInterval(speedTimer);
-  speedTimer=setInterval(()=>{
-    const left=Math.max(0,Math.ceil((speedEnd-Date.now())/1000));
-    document.getElementById("speedTime").textContent=left;
-
-    if(left<=0){
-      clearInterval(speedTimer);
-      document.getElementById("speedQuestion").innerHTML=`
-        <div style="text-align:center">
-          <h2>Time!</h2>
-          <h1>${speedScore} correct</h1>
-          <button class="btn" onclick="startSpeedGame()">Again</button>
-        </div>
-      `;
-      addXP(speedScore*5);
-    }
-  },250);
-}
-
-function speedNext(){
-  if(Date.now()>=speedEnd)return;
-
-  const q=vocab[Math.floor(Math.random()*vocab.length)];
-  const choices=shuffle([
-    q.e,
-    ...shuffle(vocab.filter(v=>v!==q)).slice(0,2).map(v=>v.e)
-  ]);
-
-  document.getElementById("speedQuestion").innerHTML=`
-    <h2 style="text-align:center">${q.a}</h2>
-    <div class="answers">
-      ${choices.map(c=>`
-        <button class="answer" onclick="speedAnswer(this,${JSON.stringify(c)},${JSON.stringify(q.e)})">${c}</button>
-      `).join("")}
-    </div>
-  `;
-}
-
-function speedAnswer(btn,answer,correct){
-  if(answer===correct){
-    speedScore++;
-    btn.classList.add("correct");
-  }else{
-    btn.classList.add("wrong");
-  }
-  setTimeout(speedNext,150);
-}
-
-function startScramble(){
-  const q=shuffle(vocab).find(v=>v.a.length>=4);
-  const letters=shuffle(q.a.replace(/\s/g,"").split(""));
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="card">
-      <h2>🧩 Word Scramble</h2>
-      <p>Meaning: <strong>${q.e}</strong></p>
-      <h1 style="text-align:center;letter-spacing:5px">${letters.join(" ")}</h1>
-      <input id="scrambleInput" placeholder="Type the Afrikaans word">
-      <button class="btn full" style="margin-top:10px" onclick="checkScramble(${JSON.stringify(q.a)})">Check</button>
-    </div>
-  `;
-}
-
-function checkScramble(correct){
-  const input=document.getElementById("scrambleInput").value.trim().toLowerCase();
-
-  if(input===correct.toLowerCase()){
-    addXP(20);
-    toast("Correct! 🎉");
-    setTimeout(startScramble,500);
-  }else{
-    toast("Not quite. Correct: "+correct);
-  }
-}
-
-function startMissingWord(){
-  const examples=[
-    ["Ek ___ Afrikaans.","praat",["praat","eet","drink"]],
-    ["Die pomp verloor ___.","druk",["druk","water","werk"]],
-    ["Ek gaan ___ toe.","huis",["huis","rooi","gister"]],
-    ["Kan jy my ___?","help",["help","eet","sien"]],
-    ["Ek ___ koffie hê.","wil",["wil","is","het"]]
-  ];
-
-  const q=examples[Math.floor(Math.random()*examples.length)];
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="card">
-      <h2>✍️ Missing Word</h2>
-      <h1 style="text-align:center">${q[0]}</h1>
-      <div class="answers">
-        ${q[2].map(c=>`
-          <button class="answer" onclick="missingAnswer(${JSON.stringify(c)},${JSON.stringify(q[1])})">${c}</button>
-        `).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function missingAnswer(answer,correct){
-  if(answer===correct){
-    addXP(15);
-    toast("Correct! ✓");
-    setTimeout(startMissingWord,600);
-  }else{
-    toast("Try again.");
-  }
-}
-
-function renderProgress(){
-  const info=levelInfo();
-
-  document.getElementById("pXP").textContent=state.xp;
-  document.getElementById("pWords").textContent=state.learned.length;
-  document.getElementById("pLessons").textContent=state.lessons.length;
-
-  const accuracy=state.quizTotal
-    ?Math.round(state.quizCorrect/state.quizTotal*100)
-    :0;
-
-  document.getElementById("pQuiz").textContent=accuracy+"%";
-
-  document.getElementById("levelName").textContent=info.current[0];
-
-  if(info.next){
-    const currentXP=info.current[1];
-    const nextXP=info.next[1];
-    const p=Math.min(100,((state.xp-currentXP)/(nextXP-currentXP))*100);
-
-    document.getElementById("levelBar").style.width=p+"%";
-    document.getElementById("levelProgress").textContent=
-      `${state.xp-currentXP} / ${nextXP-currentXP} XP to ${info.next[0]}`;
-  }else{
-    document.getElementById("levelBar").style.width="100%";
-    document.getElementById("levelProgress").textContent="Maximum level reached!";
-  }
-
-  document.getElementById("streakMessage").textContent=
-    state.streak
-    ?`You're on a ${state.streak}-day learning streak! 🔥`
-    :"Complete a lesson today to start your streak.";
-
-  document.getElementById("achievements").innerHTML=achievements.map(a=>{
-    const unlocked=a[2]();
-    return `
-      <div class="card" style="opacity:${unlocked?1:.45}">
-        <div style="display:flex;gap:13px;align-items:center">
-          <div style="font-size:30px">${a[0].split(" ")[0]}</div>
-          <div>
-            <strong>${a[0].substring(a[0].indexOf(" ")+1)}</strong>
-            <div style="color:var(--muted);font-size:13px">${a[1]}</div>
-          </div>
-          <div style="margin-left:auto">${unlocked?"🏆":"🔒"}</div>
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function openModal(html){
-  document.getElementById("modalContent").innerHTML=html;
-  document.getElementById("modal").classList.add("show");
-}
-
-function closeModal(event){
-  if(!event || event.target===document.getElementById("modal")){
-    document.getElementById("modal").classList.remove("show");
-  }
-}
-
-function toggleDark(){
-  state.dark=!state.dark;
-  document.body.classList.toggle("dark",state.dark);
-  save();
 }
 
 function shuffle(arr){
-  return [...arr].sort(()=>Math.random()-.5);
+
+  return [...arr]
+    .sort(()=>Math.random()-.5);
+
 }
 
-/* ============================================================
-   SETTINGS / EXPORT / IMPORT
-   ============================================================ */
+function speak(text,rate=.82){
+
+  if(!("speechSynthesis" in window)){
+
+    toast("Speech is not supported on this device.");
+
+    return;
+
+  }
+
+  speechSynthesis.cancel();
+
+  const u=
+    new SpeechSynthesisUtterance(text);
+
+  u.lang="af-ZA";
+
+  u.rate=rate;
+
+  speechSynthesis.speak(u);
+
+}
+
+function haptic(){
+
+  if(navigator.vibrate)
+    navigator.vibrate(10);
+
+}
+
+function toast(message){
+
+  const old=
+    document.getElementById("toast");
+
+  if(old) old.remove();
+
+  const t=
+    document.createElement("div");
+
+  t.id="toast";
+
+  t.textContent=message;
+
+  t.style.cssText=`
+    position:fixed;
+    z-index:200;
+    bottom:90px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#182027;
+    color:white;
+    padding:12px 17px;
+    border-radius:13px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    font-weight:700;
+    max-width:90%;
+    text-align:center;
+  `;
+
+  document.body.appendChild(t);
+
+  setTimeout(()=>t.remove(),2200);
+
+}
+
+function openModal(html){
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML=html;
+
+  document.getElementById(
+    "modalBg"
+  ).classList.add("show");
+
+}
+
+function closeModal(){
+
+  document.getElementById(
+    "modalBg"
+  ).classList.remove("show");
+
+}
+
+function closeModalOutside(e){
+
+  if(e.target.id==="modalBg")
+    closeModal();
+
+}
+
+
+/* =========================================================
+   LEVEL / XP
+========================================================= */
+
+function levelInfo(){
+
+  let level=1;
+
+  let needed=100;
+
+  let xp=state.xp;
+
+  while(xp>=needed){
+
+    xp-=needed;
+
+    level++;
+
+    needed=
+      Math.floor(
+        100+
+        (level-1)*40
+      );
+
+  }
+
+  return {
+    level,
+    current:xp,
+    needed
+  };
+
+}
+
+function addXP(amount,reason=""){
+
+  amount=Number(amount)||0;
+
+  state.xp+=amount;
+
+  const d=today();
+
+  state.activity[d]=
+    (state.activity[d]||0)+amount;
+
+  updateStreak();
+
+  checkAchievements();
+
+  save();
+
+  updateAll();
+
+  if(amount>0)
+    toast(`+${amount} XP ${reason}`);
+
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+function updateStreak(){
+
+  const d=today();
+
+  if(state.lastStudy===d)
+    return;
+
+  const yesterday=
+    new Date();
+
+  yesterday.setDate(
+    yesterday.getDate()-1
+  );
+
+  const y=
+    yesterday.toISOString().slice(0,10);
+
+  if(state.lastStudy===y){
+
+    state.streak++;
+
+  }else{
+
+    state.streak=1;
+
+  }
+
+  state.lastStudy=d;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showScreen(id){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(s=>
+      s.classList.remove("active")
+    );
+
+  const screen=
+    document.getElementById(id);
+
+  if(screen)
+    screen.classList.add("active");
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.screen===id
+      );
+    });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  if(id==="lessons")
+    renderLessons();
+
+  if(id==="vocab")
+    renderVocab();
+
+  if(id==="grammar")
+    renderGrammar();
+
+  if(id==="conversation")
+    renderConversations();
+
+  if(id==="stories")
+    renderStories();
+
+  if(id==="games")
+    renderGames();
+
+  if(id==="trade"){
+    renderTradeVocabulary();
+    renderTradePhrases();
+  }
+
+  if(id==="personal"){
+    renderPersonalVocabulary();
+    renderFavourites();
+  }
+
+  if(id==="progress"){
+    renderProgress();
+    renderDailyTarget();
+    renderSkills();
+    renderWeekly();
+    renderAchievements();
+  }
+
+  updateAll();
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function updateHome(){
+
+  const level=
+    levelInfo();
+
+  document.getElementById(
+    "homeXP"
+  ).textContent=state.xp;
+
+  document.getElementById(
+    "homeLevel"
+  ).textContent=level.level;
+
+  document.getElementById(
+    "homeStreak"
+  ).textContent=state.streak;
+
+  document.getElementById(
+    "homeLearned"
+  ).textContent=state.learned.length;
+
+  const xpToday=
+    state.activity[today()]||0;
+
+  document.getElementById(
+    "dailyDone"
+  ).textContent=xpToday;
+
+  document.getElementById(
+    "dailyBar"
+  ).style.width=
+    Math.min(
+      100,
+      xpToday/
+      state.dailyTarget*
+      100
+    )+"%";
+
+}
+
+
+/* =========================================================
+   LESSONS
+========================================================= */
+
+function renderLessons(){
+
+  const box=
+    document.getElementById(
+      "lessonList"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    LESSONS.map((l,i)=>{
+
+      const unlocked=
+        i===0 ||
+        state.lessons.length>=i;
+
+      const done=
+        state.lessons.includes(i);
+
+      return `
+
+        <div class="lesson ${!unlocked?"locked":""}">
+
+          <div class="lesson-number">
+            Lesson ${i+1}
+          </div>
+
+          <div class="lesson-title">
+            ${done?"✅ ":""}${escapeHTML(l[0])}
+          </div>
+
+          <div class="lesson-desc">
+            ${escapeHTML(l[1])}
+          </div>
+
+          <p class="muted small">
+            ${escapeHTML(l[2])}
+          </p>
+
+          <button
+            class="btn ${unlocked?"btn-primary":"btn-secondary"}"
+            ${unlocked?"":"disabled"}
+            onclick="openLesson(${i})"
+          >
+            ${done?"Review":"Start"}
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+function openLesson(index){
+
+  const lesson=
+    LESSONS[index];
+
+  const relevant=
+    VOCAB.filter(
+      x=>{
+
+        const cat=x[2];
+
+        if(index<2)
+          return ["Basics","Family"].includes(cat);
+
+        if(index===3)
+          return cat==="Food";
+
+        if(index===5)
+          return cat==="Shopping";
+
+        if(index>=8 && index<=10)
+          return ["Engineering","Safety"].includes(cat);
+
+        return true;
+
+      }
+    ).slice(0,8);
+
+  openModal(`
+
+    <h2>${index+1}. ${escapeHTML(lesson[0])}</h2>
+
+    <p class="muted">
+      ${escapeHTML(lesson[2])}
+    </p>
+
+    <div class="card">
+      <strong>${escapeHTML(lesson[1])}</strong>
+    </div>
+
+    <h3>Words</h3>
+
+    ${
+      relevant.map(
+        x=>`
+
+        <div class="card vocab-card">
+
+          <div>
+            <div class="afr">${escapeHTML(x[0])}</div>
+            <div class="eng">${escapeHTML(x[1])}</div>
+          </div>
+
+          <button
+            class="icon-btn"
+            onclick="speak(${JSON.stringify(x[0])})"
+          >
+            🔊
+          </button>
+
+        </div>
+
+      `
+      ).join("")
+    }
+
+    <button
+      class="btn btn-primary full"
+      onclick="completeLesson(${index})"
+    >
+      ✅ Complete Lesson
+    </button>
+
+  `);
+
+}
+
+function completeLesson(index){
+
+  if(!state.lessons.includes(index)){
+
+    state.lessons.push(index);
+
+    addXP(
+      30,
+      "Lesson complete!"
+    );
+
+  }else{
+
+    toast("Lesson already completed.");
+
+  }
+
+  closeModal();
+
+  renderLessons();
+
+}
+
+
+/* =========================================================
+   VOCABULARY
+========================================================= */
+
+let vocabCategory="All";
+
+function renderVocab(){
+
+  const filterBox=
+    document.getElementById(
+      "vocabFilters"
+    );
+
+  const list=
+    document.getElementById(
+      "vocabList"
+    );
+
+  if(!filterBox||!list) return;
+
+  const categories=[
+    "All",
+    ...new Set(
+      VOCAB.map(x=>x[2])
+    )
+  ];
+
+  filterBox.innerHTML=
+    categories.map(c=>`
+
+      <button
+        class="filter ${vocabCategory===c?"active":""}"
+        onclick="setVocabCategory(${JSON.stringify(c)})"
+      >
+        ${escapeHTML(c)}
+      </button>
+
+    `).join("");
+
+  const search=
+    (
+      document.getElementById(
+        "vocabSearch"
+      )?.value||""
+    ).toLowerCase();
+
+  const words=
+    VOCAB.filter(x=>{
+
+      const matchCategory=
+        vocabCategory==="All" ||
+        x[2]===vocabCategory;
+
+      const matchSearch=
+        !search ||
+        x[0].toLowerCase().includes(search) ||
+        x[1].toLowerCase().includes(search);
+
+      return matchCategory&&matchSearch;
+
+    });
+
+  list.innerHTML=
+    words.map((x)=>{
+
+      const fav=
+        state.favourites.includes(x[0]);
+
+      const learned=
+        state.learned.includes(x[0]);
+
+      return `
+
+      <div class="card vocab-card">
+
+        <div>
+
+          <div class="afr">
+            ${escapeHTML(x[0])}
+          </div>
+
+          <div class="eng">
+            ${escapeHTML(x[1])}
+          </div>
+
+          <span class="tag">
+            ${escapeHTML(x[2])}
+          </span>
+
+        </div>
+
+        <div class="row" style="flex:0 0 auto">
+
+          <button
+            class="icon-btn"
+            onclick="speak(${JSON.stringify(x[0])})"
+          >
+            🔊
+          </button>
+
+          <button
+            class="icon-btn"
+            onclick="toggleFavourite(${JSON.stringify(x[0])})"
+          >
+            ${fav?"⭐":"☆"}
+          </button>
+
+          <button
+            class="icon-btn"
+            onclick="markLearned(${JSON.stringify(x[0])})"
+          >
+            ${learned?"✅":"➕"}
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }).join("") ||
+    `<div class="empty">No words found.</div>`;
+
+}
+
+function setVocabCategory(category){
+
+  vocabCategory=category;
+
+  renderVocab();
+
+}
+
+function markLearned(word){
+
+  if(!state.learned.includes(word)){
+
+    state.learned.push(word);
+
+    reviewWord(word,true);
+
+    addXP(
+      5,
+      "Word learned!"
+    );
+
+  }else{
+
+    toast("Already learned.");
+
+  }
+
+  renderVocab();
+
+}
+
+function toggleFavourite(word){
+
+  const i=
+    state.favourites.indexOf(word);
+
+  if(i>=0){
+
+    state.favourites.splice(i,1);
+
+  }else{
+
+    state.favourites.push(word);
+
+    toast("⭐ Added to favourites");
+
+  }
+
+  save();
+
+  renderVocab();
+
+}
+
+
+/* =========================================================
+   SPACED REPETITION
+========================================================= */
+
+const REVIEW_INTERVALS=[
+  1,
+  2,
+  4,
+  7,
+  14,
+  30
+];
+
+function reviewWord(word,correct){
+
+  const old=
+    state.review[word]||{
+      level:0,
+      next:today(),
+      correct:0,
+      wrong:0
+    };
+
+  if(correct){
+
+    old.level=
+      Math.min(
+        old.level+1,
+        REVIEW_INTERVALS.length-1
+      );
+
+    old.correct++;
+
+  }else{
+
+    old.level=0;
+
+    old.wrong++;
+
+  }
+
+  const date=
+    new Date();
+
+  date.setDate(
+    date.getDate()+
+    REVIEW_INTERVALS[old.level]
+  );
+
+  old.next=
+    date.toISOString().slice(0,10);
+
+  state.review[word]=old;
+
+}
+
+function getDueWords(){
+
+  const d=today();
+
+  return Object.keys(
+    state.review
+  ).filter(
+    w=>
+      state.review[w].next<=d
+  );
+
+}
+
+let reviewQueue=[];
+let reviewIndex=0;
+let reviewScore=0;
+
+function startReview(){
+
+  showScreen("review");
+
+  const due=
+    getDueWords();
+
+  if(due.length){
+
+    reviewQueue=
+      shuffle(due).slice(0,15);
+
+  }else{
+
+    reviewQueue=
+      shuffle(
+        state.learned.length
+          ? state.learned
+          : VOCAB.map(x=>x[0])
+      ).slice(0,10);
+
+  }
+
+  reviewIndex=0;
+
+  reviewScore=0;
+
+  renderReview();
+
+}
+
+function renderReview(){
+
+  const area=
+    document.getElementById(
+      "reviewArea"
+    );
+
+  if(!area) return;
+
+  if(reviewIndex>=reviewQueue.length){
+
+    area.innerHTML=`
+
+      <div class="card" style="text-align:center">
+
+        <div style="font-size:55px">🎉</div>
+
+        <h2>Review Complete!</h2>
+
+        <p>
+          You got ${reviewScore}
+          out of ${reviewQueue.length}
+          correct.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          onclick="showScreen('home')"
+        >
+          Continue
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  const word=
+    reviewQueue[reviewIndex];
+
+  const item=
+    VOCAB.find(x=>x[0]===word);
+
+  if(!item){
+
+    reviewIndex++;
+
+    renderReview();
+
+    return;
+
+  }
+
+  const options=
+    shuffle([
+      item[1],
+      ...shuffle(
+        VOCAB
+          .filter(x=>x[0]!==word)
+          .map(x=>x[1])
+      ).slice(0,3)
+    ]);
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <div class="muted small">
+        ${reviewIndex+1} / ${reviewQueue.length}
+      </div>
+
+      <div class="question">
+        ${escapeHTML(item[0])}
+      </div>
+
+      <button
+        class="btn btn-secondary full"
+        onclick="speak(${JSON.stringify(item[0])})"
+      >
+        🔊 Hear Word
+      </button>
+
+      <div class="answers" style="margin-top:15px">
+
+        ${
+          options.map(
+            option=>`
+
+              <button
+                class="answer"
+                onclick="answerReview(this,${JSON.stringify(option)},${JSON.stringify(item[1])},${JSON.stringify(word)})"
+              >
+                ${escapeHTML(option)}
+              </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerReview(button,answer,correct,word){
+
+  const buttons=
+    document.querySelectorAll(
+      "#reviewArea .answer"
+    );
+
+  buttons.forEach(b=>
+    b.disabled=true
+  );
+
+  const isCorrect=
+    answer===correct;
+
+  button.classList.add(
+    isCorrect?"correct":"wrong"
+  );
+
+  reviewWord(
+    word,
+    isCorrect
+  );
+
+  state.stats.reviewed++;
+
+  if(isCorrect){
+
+    state.stats.reviewCorrect++;
+
+    reviewScore++;
+
+    addXP(8);
+
+  }else{
+
+    state.stats.reviewWrong++;
+
+    state.mistakes.push({
+      word,
+      date:today()
+    });
+
+    save();
+
+  }
+
+  setTimeout(()=>{
+
+    reviewIndex++;
+
+    save();
+
+    renderReview();
+
+  },650);
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+let quizQuestions=[];
+let quizIndex=0;
+let quizScore=0;
+
+function makeQuiz(){
+
+  const source=
+    shuffle(
+      state.learned.length>=5
+        ? VOCAB.filter(x=>
+            state.learned.includes(x[0])
+          )
+        : VOCAB
+    );
+
+  return source
+    .slice(0,10)
+    .map(item=>{
+
+      const options=
+        shuffle([
+          item[1],
+          ...shuffle(
+            VOCAB
+              .filter(x=>x[0]!==item[0])
+              .map(x=>x[1])
+          ).slice(0,3)
+        ]);
+
+      return {
+        word:item[0],
+        correct:item[1],
+        options
+      };
+
+    });
+
+}
+
+function startQuiz(){
+
+  showScreen("quiz");
+
+  quizQuestions=makeQuiz();
+
+  quizIndex=0;
+
+  quizScore=0;
+
+  renderQuiz();
+
+}
+
+function renderQuiz(){
+
+  const area=
+    document.getElementById(
+      "quizArea"
+    );
+
+  if(!area) return;
+
+  if(quizIndex>=quizQuestions.length){
+
+    area.innerHTML=`
+
+      <div class="card" style="text-align:center">
+
+        <div style="font-size:55px">
+          ${quizScore>=7?"🏆":"🎯"}
+        </div>
+
+        <h2>Quiz Complete</h2>
+
+        <p>
+          Score: <strong>
+          ${quizScore}/${quizQuestions.length}
+          </strong>
+        </p>
+
+        <p class="muted">
+          ${
+            quizScore>=9
+              ?"Excellent!"
+              :quizScore>=7
+                ?"Great work!"
+                :"Keep practising!"
+          }
+        </p>
+
+        <button
+          class="btn btn-primary"
+          onclick="startQuiz()"
+        >
+          Try Again
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  const q=
+    quizQuestions[quizIndex];
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <div class="muted small">
+        Question ${quizIndex+1}
+        / ${quizQuestions.length}
+      </div>
+
+      <div class="progress" style="margin-top:8px">
+        <div style="width:${
+          quizIndex/
+          quizQuestions.length*
+          100
+        }%"></div>
+      </div>
+
+      <div class="question">
+        ${escapeHTML(q.word)}
+      </div>
+
+      <button
+        class="btn btn-secondary full"
+        onclick="speak(${JSON.stringify(q.word)})"
+      >
+        🔊 Listen
+      </button>
+
+      <div class="answers" style="margin-top:14px">
+
+        ${
+          q.options.map(
+            option=>`
+
+            <button
+              class="answer"
+              onclick="answerQuiz(this,${JSON.stringify(option)})"
+            >
+              ${escapeHTML(option)}
+            </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerQuiz(button,answer){
+
+  const q=
+    quizQuestions[quizIndex];
+
+  const correct=
+    answer===q.correct;
+
+  document
+    .querySelectorAll(
+      "#quizArea .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  button.classList.add(
+    correct?"correct":"wrong"
+  );
+
+  state.stats.quizTotal++;
+
+  if(correct){
+
+    state.stats.quizCorrect++;
+
+    quizScore++;
+
+    addXP(10);
+
+  }else{
+
+    state.mistakes.push({
+      word:q.word,
+      date:today()
+    });
+
+    save();
+
+  }
+
+  setTimeout(()=>{
+
+    quizIndex++;
+
+    renderQuiz();
+
+  },650);
+
+}
+
+
+/* =========================================================
+   GRAMMAR
+========================================================= */
+
+function renderGrammar(){
+
+  const box=
+    document.getElementById(
+      "grammarList"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    GRAMMAR.map(
+      (g,i)=>`
+
+      <div class="card">
+
+        <h3>
+          ${i+1}. ${escapeHTML(g[0])}
+        </h3>
+
+        <p>
+          ${escapeHTML(g[1])}
+        </p>
+
+        <div class="card">
+
+          ${
+            g[2].map(
+              example=>`
+
+                <div class="row"
+                  style="margin-bottom:7px">
+
+                  <strong>
+                    ${escapeHTML(example)}
+                  </strong>
+
+                  <button
+                    class="icon-btn"
+                    onclick="speak(${JSON.stringify(example)})"
+                  >
+                    🔊
+                  </button>
+
+                </div>
+
+              `
+            ).join("")
+          }
+
+        </div>
+
+        <button
+          class="btn btn-primary"
+          onclick="grammarQuiz(${i})"
+        >
+          Practise
+        </button>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+function grammarQuiz(index){
+
+  const g=
+    GRAMMAR[index];
+
+  const examples=
+    g[2];
+
+  const correct=
+    examples[0];
+
+  const options=
+    shuffle([
+      correct,
+      ...shuffle(
+        GRAMMAR
+          .filter((_,i)=>i!==index)
+          .map(x=>x[2][0])
+      ).slice(0,3)
+    ]);
+
+  openModal(`
+
+    <h2>📐 ${escapeHTML(g[0])}</h2>
+
+    <p>
+      ${escapeHTML(g[1])}
+    </p>
+
+    <div class="question">
+      Which example fits?
+    </div>
+
+    <div class="answers">
+
+      ${
+        options.map(
+          option=>`
+
+            <button
+              class="answer"
+              onclick="answerGrammar(this,${JSON.stringify(option)},${JSON.stringify(correct)})"
+            >
+              ${escapeHTML(option)}
+            </button>
+
+          `
+        ).join("")
+      }
+
+    </div>
+
+  `);
+
+}
+
+function answerGrammar(button,answer,correct){
+
+  document
+    .querySelectorAll(
+      ".modal .answer"
+    )
+    .forEach(b=>b.disabled=true);
+
+  const ok=
+    answer===correct;
+
+  button.classList.add(
+    ok?"correct":"wrong"
+  );
+
+  state.stats.grammarTotal++;
+
+  if(ok){
+
+    state.stats.grammarCorrect++;
+
+    addXP(10);
+
+  }else{
+
+    save();
+
+  }
+
+  setTimeout(
+    closeModal,
+    700
+  );
+
+}
+
+
+/* =========================================================
+   CONVERSATIONS
+========================================================= */
+
+function renderConversations(){
+
+  const box=
+    document.getElementById(
+      "conversationList"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    CONVERSATIONS.map(
+      (c,i)=>`
+
+      <div class="card">
+
+        <div style="font-size:32px">
+          ${c.icon}
+        </div>
+
+        <h3>
+          ${escapeHTML(c.title)}
+        </h3>
+
+        <p class="muted small">
+          Practise this situation in Afrikaans.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          onclick="openConversation(${i})"
+        >
+          Start
+        </button>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+function openConversation(index){
+
+  const c=
+    CONVERSATIONS[index];
+
+  let html=`
+
+    <h2>${c.icon} ${escapeHTML(c.title)}</h2>
+
+    <div class="chat">
+
+  `;
+
+  c.lines.forEach(
+    ([type,text])=>{
+
+      html+=`
+
+        <div class="bubble ${type}">
+          ${escapeHTML(text)}
+
+          ${
+            type==="bot"
+              ?`
+                <button
+                  class="icon-btn"
+                  onclick="speak(${JSON.stringify(text)})"
+                >
+                  🔊
+                </button>
+              `
+              :""
+          }
+
+        </div>
+
+      `;
+
+    }
+  );
+
+  html+=`
+
+    </div>
+
+    <button
+      class="btn btn-primary full"
+      style="margin-top:15px"
+      onclick="completeConversation()"
+    >
+      ✅ Complete Conversation
+    </button>
+
+  `;
+
+  openModal(html);
+
+}
+
+function completeConversation(){
+
+  state.stats.conversation++;
+
+  addXP(
+    25,
+    "Conversation complete!"
+  );
+
+  closeModal();
+
+}
+
+
+/* =========================================================
+   STORIES
+========================================================= */
+
+function renderStories(){
+
+  const box=
+    document.getElementById(
+      "storyList"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    STORIES.map(
+      (s,i)=>`
+
+      <div class="card">
+
+        <h3>📖 ${escapeHTML(s.title)}</h3>
+
+        <p class="muted small">
+          Tap the story to read it.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          onclick="openStory(${i})"
+        >
+          Read
+        </button>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+function openStory(index){
+
+  const s=
+    STORIES[index];
+
+  const words=
+    s.words;
+
+  let text=
+    escapeHTML(s.text);
+
+  words.forEach(
+    word=>{
+
+      const escaped=
+        escapeHTML(word);
+
+      text=
+        text.replaceAll(
+          escaped,
+          `<span
+            class="story-word"
+            onclick="storyWord(${JSON.stringify(word)})"
+          >${escaped}</span>`
+        );
+
+    }
+  );
+
+  openModal(`
+
+    <h2>📖 ${escapeHTML(s.title)}</h2>
+
+    <div class="story">
+      ${text}
+    </div>
+
+    <button
+      class="btn btn-primary full"
+      style="margin-top:15px"
+      onclick="speak(${JSON.stringify(s.text)},.72)"
+    >
+      🔊 Read Aloud
+    </button>
+
+  `);
+
+}
+
+function storyWord(word){
+
+  const item=
+    VOCAB.find(x=>x[0]===word);
+
+  if(!item) return;
+
+  toast(
+    `${word} = ${item[1]}`
+  );
+
+  speak(word);
+
+}
+
+
+/* =========================================================
+   GAMES
+========================================================= */
+
+function renderGames(){
+
+  const box=
+    document.getElementById(
+      "gamesList"
+    );
+
+  if(!box) return;
+
+  const games=[
+
+    ["🧠","Word Match","Match Afrikaans to English.","startMatchGame()"],
+    ["⚡","Speed Round","Answer as quickly as possible.","startSpeedGame()"],
+    ["🔤","Word Scramble","Unscramble Afrikaans words.","startScrambleGame()"],
+    ["🕳️","Missing Word","Complete the sentence.","startMissingWord()"],
+    ["👑","Boss Battle","A harder mixed challenge.","startBossBattle()"],
+    ["🎧","Listening","Listen and choose the meaning.","startListening()"]
+
+  ];
+
+  box.innerHTML=`
+
+    <div class="game-grid">
+
+      ${
+        games.map(
+          g=>`
+
+          <button
+            class="game"
+            onclick="${g[3]}"
+          >
+
+            <div class="game-icon">
+              ${g[0]}
+            </div>
+
+            <div class="game-name">
+              ${g[1]}
+            </div>
+
+            <div class="game-desc">
+              ${g[2]}
+            </div>
+
+          </button>
+
+          `
+        ).join("")
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   WORD MATCH
+========================================================= */
+
+let matchWords=[];
+let matchSelected=null;
+let matchMatched=[];
+
+function startMatchGame(){
+
+  showScreen("games");
+
+  matchWords=
+    shuffle(VOCAB)
+      .slice(0,6);
+
+  matchSelected=null;
+
+  matchMatched=[];
+
+  renderMatch();
+
+}
+
+function renderMatch(){
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  const cards=[];
+
+  matchWords.forEach(
+    (w,i)=>{
+
+      cards.push({
+        id:i+"a",
+        pair:i,
+        text:w[0]
+      });
+
+      cards.push({
+        id:i+"e",
+        pair:i,
+        text:w[1]
+      });
+
+    }
+  );
+
+  const shuffled=
+    shuffle(cards);
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>🧠 Word Match</h2>
+
+      <p class="muted">
+        Match each Afrikaans word with its English meaning.
+      </p>
+
+      <div class="match-grid">
+
+        ${
+          shuffled.map(
+            c=>`
+
+            <button
+              class="match-card ${
+                matchMatched.includes(c.pair)
+                  ?"matched":""
+              }"
+              data-pair="${c.pair}"
+              onclick="selectMatch(this,${c.pair})"
+            >
+              ${escapeHTML(c.text)}
+            </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function selectMatch(button,pair){
+
+  if(matchMatched.includes(pair))
+    return;
+
+  haptic();
+
+  if(!matchSelected){
+
+    matchSelected={
+      button,
+      pair
+    };
+
+    button.classList.add("selected");
+
+    return;
+
+  }
+
+  if(matchSelected.pair===pair){
+
+    matchSelected.button.classList.add("matched");
+
+    button.classList.add("matched");
+
+    matchMatched.push(pair);
+
+    matchSelected=null;
+
+    addXP(8);
+
+    if(matchMatched.length===matchWords.length){
+
+      state.stats.games++;
+
+      save();
+
+      setTimeout(
+        ()=>gameComplete(
+          "🧠",
+          "Word Match Complete!",
+          "Excellent memory work."
+        ),
+        350
+      );
+
+    }
+
+  }else{
+
+    matchSelected.button.classList.remove(
+      "selected"
+    );
+
+    button.classList.add("wrong");
+
+    const old=
+      matchSelected.button;
+
+    matchSelected=null;
+
+    setTimeout(
+      ()=>button.classList.remove("wrong"),
+      400
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SPEED ROUND
+========================================================= */
+
+let speedQuestion;
+let speedScore=0;
+let speedCount=0;
+
+function startSpeedGame(){
+
+  showScreen("games");
+
+  speedScore=0;
+
+  speedCount=0;
+
+  nextSpeed();
+
+}
+
+function nextSpeed(){
+
+  if(speedCount>=10){
+
+    state.stats.games++;
+
+    save();
+
+    gameComplete(
+      "⚡",
+      "Speed Round Complete!",
+      `Score: ${speedScore}/10`
+    );
+
+    return;
+
+  }
+
+  speedQuestion=
+    shuffle(VOCAB)[0];
+
+  speedCount++;
+
+  renderSpeed();
+
+}
+
+function renderSpeed(){
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  const options=
+    shuffle([
+      speedQuestion[1],
+      ...shuffle(
+        VOCAB
+          .filter(x=>x[0]!==speedQuestion[0])
+          .map(x=>x[1])
+      ).slice(0,3)
+    ]);
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>⚡ Speed Round</h2>
+
+      <p class="muted">
+        Question ${speedCount}/10
+      </p>
+
+      <div class="question">
+        ${escapeHTML(speedQuestion[0])}
+      </div>
+
+      <div class="answers">
+
+        ${
+          options.map(
+            o=>`
+
+            <button
+              class="answer"
+              onclick="speedAnswer(this,${JSON.stringify(o)})"
+            >
+              ${escapeHTML(o)}
+            </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function speedAnswer(button,answer){
+
+  const correct=
+    answer===speedQuestion[1];
+
+  document
+    .querySelectorAll(
+      "#gameArea .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  button.classList.add(
+    correct?"correct":"wrong"
+  );
+
+  if(correct){
+
+    speedScore++;
+
+    addXP(7);
+
+  }
+
+  setTimeout(
+    nextSpeed,
+    350
+  );
+
+}
+
+
+/* =========================================================
+   SCRAMBLE
+========================================================= */
+
+let scrambleWordData;
+
+function startScrambleGame(){
+
+  showScreen("games");
+
+  scrambleWordData=
+    shuffle(VOCAB)[0];
+
+  renderScramble();
+
+}
+
+function renderScramble(){
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  const word=
+    scrambleWordData[0];
+
+  let scrambled=
+    shuffle(
+      [...word]
+    ).join("");
+
+  if(scrambled===word)
+    scrambled=
+      shuffle(
+        [...word]
+      ).join("");
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>🔤 Word Scramble</h2>
+
+      <p class="muted">
+        Unscramble the Afrikaans word.
+      </p>
+
+      <div class="question">
+        ${escapeHTML(scrambled)}
+      </div>
+
+      <input
+        id="scrambleInput"
+        class="input"
+        placeholder="Type the answer..."
+        autocomplete="off"
+      >
+
+      <button
+        class="btn btn-primary full"
+        style="margin-top:10px"
+        onclick="checkScramble()"
+      >
+        Check
+      </button>
+
+    </div>
+
+  `;
+
+  setTimeout(
+    ()=>{
+      document
+        .getElementById("scrambleInput")
+        ?.focus();
+    },
+    100
+  );
+
+}
+
+function checkScramble(){
+
+  const input=
+    document
+      .getElementById(
+        "scrambleInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+  const correct=
+    scrambleWordData[0].toLowerCase();
+
+  if(input===correct){
+
+    addXP(15);
+
+    gameComplete(
+      "🔤",
+      "Correct!",
+      `${scrambleWordData[0]} = ${scrambleWordData[1]}`
+    );
+
+  }else{
+
+    toast(
+      `Not quite — the answer is ${scrambleWordData[0]}`
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MISSING WORD
+========================================================= */
+
+const SENTENCES=[
+
+["Ek ___ Afrikaans.","leer",["leer","eet","drink","slaap"]],
+["Die ___ is laag.","druk",["druk","huis","vleis","geld"]],
+["Daar is 'n ___ in die slang.","lek",["lek","tafel","dag","vriend"]],
+["Ek ___ koffie.","drink",["drink","werk","koop","gaan"]],
+["Die ___ is warm.","laer",["laer","brood","winkel","pad"]],
+["Ons ___ saam.","werk",["werk","eet","koop","slaap"]],
+["Ek ___ nie.","verstaan",["verstaan","huis","vleis","pomp"]]
+
+];
+
+let missingData;
+
+function startMissingWord(){
+
+  showScreen("games");
+
+  missingData=
+    shuffle(SENTENCES)[0];
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  const sentence=
+    missingData[0]
+      .replace(
+        "___",
+        "______"
+      );
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>🕳️ Missing Word</h2>
+
+      <div class="question">
+        ${escapeHTML(sentence)}
+      </div>
+
+      <div class="answers">
+
+        ${
+          shuffle(missingData[2])
+            .map(
+              option=>`
+
+              <button
+                class="answer"
+                onclick="answerMissing(this,${JSON.stringify(option)})"
+              >
+                ${escapeHTML(option)}
+              </button>
+
+              `
+            ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerMissing(button,answer){
+
+  const correct=
+    answer===missingData[1];
+
+  document
+    .querySelectorAll(
+      "#gameArea .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  button.classList.add(
+    correct?"correct":"wrong"
+  );
+
+  if(correct)
+    addXP(12);
+
+  setTimeout(
+    ()=>gameComplete(
+      correct?"🎉":"📝",
+      correct?"Correct!":"Keep practising!",
+      correct
+        ?missingData[0].replace(
+          "___",
+          missingData[1]
+        )
+        :`Answer: ${missingData[1]}`
+    ),
+    500
+  );
+
+}
+
+
+/* =========================================================
+   BOSS BATTLE
+========================================================= */
+
+let bossQuestions=[];
+let bossIndex=0;
+let bossScore=0;
+
+function startBossBattle(){
+
+  showScreen("games");
+
+  bossQuestions=
+    shuffle(VOCAB)
+      .slice(0,10);
+
+  bossIndex=0;
+
+  bossScore=0;
+
+  renderBoss();
+
+}
+
+function renderBoss(){
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  if(bossIndex>=bossQuestions.length){
+
+    state.stats.games++;
+
+    save();
+
+    gameComplete(
+      "👑",
+      "Boss Battle Complete!",
+      `Score: ${bossScore}/10`
+    );
+
+    return;
+
+  }
+
+  const q=
+    bossQuestions[bossIndex];
+
+  const options=
+    shuffle([
+      q[1],
+      ...shuffle(
+        VOCAB
+          .filter(x=>x[0]!==q[0])
+          .map(x=>x[1])
+      ).slice(0,3)
+    ]);
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>👑 Boss Battle</h2>
+
+      <p class="muted">
+        ${bossIndex+1}/10
+      </p>
+
+      <div class="progress">
+        <div style="
+          width:${bossIndex/10*100}%
+        "></div>
+      </div>
+
+      <div class="question">
+        ${escapeHTML(q[0])}
+      </div>
+
+      <div class="answers">
+
+        ${
+          options.map(
+            o=>`
+
+              <button
+                class="answer"
+                onclick="answerBoss(this,${JSON.stringify(o)})"
+              >
+                ${escapeHTML(o)}
+              </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerBoss(button,answer){
+
+  const q=
+    bossQuestions[bossIndex];
+
+  const correct=
+    answer===q[1];
+
+  document
+    .querySelectorAll(
+      "#gameArea .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  button.classList.add(
+    correct?"correct":"wrong"
+  );
+
+  if(correct){
+
+    bossScore++;
+
+    addXP(15);
+
+  }
+
+  setTimeout(()=>{
+
+    bossIndex++;
+
+    renderBoss();
+
+  },450);
+
+}
+
+
+/* =========================================================
+   GAME COMPLETE
+========================================================= */
+
+function gameComplete(icon,title,text){
+
+  document.getElementById(
+    "gameArea"
+  ).innerHTML=`
+
+    <div class="card" style="text-align:center">
+
+      <div style="font-size:55px">
+        ${icon}
+      </div>
+
+      <h2>${escapeHTML(title)}</h2>
+
+      <p class="muted">
+        ${escapeHTML(text)}
+      </p>
+
+      <button
+        class="btn btn-primary"
+        onclick="showScreen('games')"
+      >
+        🎮 More Games
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   LISTENING
+========================================================= */
+
+let listeningQuestion;
+
+function startListening(){
+
+  showScreen("games");
+
+  listeningQuestion=
+    shuffle(VOCAB)[0];
+
+  renderListening();
+
+}
+
+function renderListening(){
+
+  const area=
+    document.getElementById(
+      "gameArea"
+    );
+
+  const q=
+    listeningQuestion;
+
+  const options=
+    shuffle([
+      q[1],
+      ...shuffle(
+        VOCAB
+          .filter(x=>x[0]!==q[0])
+          .map(x=>x[1])
+      ).slice(0,3)
+    ]);
+
+  area.innerHTML=`
+
+    <div class="card">
+
+      <h2>🎧 Listening</h2>
+
+      <p class="muted">
+        Listen to the Afrikaans word and choose its meaning.
+      </p>
+
+      <button
+        class="btn btn-primary full"
+        onclick="speak(${JSON.stringify(q[0])},.65)"
+      >
+        🔊 Play Afrikaans
+      </button>
+
+      <div class="answers" style="margin-top:15px">
+
+        ${
+          options.map(
+            o=>`
+
+            <button
+              class="answer"
+              onclick="answerListening(this,${JSON.stringify(o)})"
+            >
+              ${escapeHTML(o)}
+            </button>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerListening(button,answer){
+
+  const q=
+    listeningQuestion;
+
+  const correct=
+    answer===q[1];
+
+  document
+    .querySelectorAll(
+      "#gameArea .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  button.classList.add(
+    correct?"correct":"wrong"
+  );
+
+  state.stats.listeningTotal++;
+
+  if(correct){
+
+    state.stats.listeningCorrect++;
+
+    addXP(10);
+
+  }
+
+  save();
+
+  setTimeout(
+    ()=>gameComplete(
+      "🎧",
+      correct?"Correct!":"Keep listening!",
+      `${q[0]} = ${q[1]}`
+    ),
+    500
+  );
+
+}
+
+
+/* =========================================================
+   PRONUNCIATION
+========================================================= */
+
+function startPronunciation(){
+
+  const examples=[
+    "Goeie môre",
+    "Hoe gaan dit?",
+    "Ek leer Afrikaans.",
+    "Waar is die werkswinkel?",
+    "Die druk is laag.",
+    "Daar is 'n probleem met die pomp."
+  ];
+
+  const phrase=
+    examples[
+      Math.floor(
+        Math.random()*examples.length
+      )
+    ];
+
+  openModal(`
+
+    <h2>🗣️ Pronunciation Trainer</h2>
+
+    <div class="card"
+      style="text-align:center">
+
+      <div class="question"
+        style="font-size:25px">
+        ${escapeHTML(phrase)}
+      </div>
+
+      <button
+        class="btn btn-primary"
+        onclick="speak(${JSON.stringify(phrase)},.65)"
+      >
+        🔊 Slow
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="speak(${JSON.stringify(phrase)},.95)"
+      >
+        🔊 Normal
+      </button>
+
+    </div>
+
+    <p class="muted">
+      Say the phrase aloud several times. Focus on
+      rhythm and pronunciation rather than translating
+      every individual sound.
+    </p>
+
+    <button
+      class="btn btn-primary full"
+      onclick="
+        addXP(5,'Speaking practice!');
+        closeModal();
+      "
+    >
+      ✅ I Practised
+    </button>
+
+  `);
+
+}
+
+
+/* =========================================================
+   TRADE
+========================================================= */
+
+function renderTradeVocabulary(){
+
+  const box=
+    document.getElementById(
+      "tradeVocabulary"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    TRADE_VOCAB.map(
+      x=>`
+
+      <div class="card vocab-card">
+
+        <div>
+
+          <div class="afr">
+            ${escapeHTML(x[0])}
+          </div>
+
+          <div class="eng">
+            ${escapeHTML(x[1])}
+          </div>
+
+        </div>
+
+        <button
+          class="icon-btn"
+          onclick="speak(${JSON.stringify(x[0])})"
+        >
+          🔊
+        </button>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+function renderTradePhrases(){
+
+  const box=
+    document.getElementById(
+      "tradePhrases"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    TRADE_PHRASES.map(
+      x=>`
+
+      <div class="card">
+
+        <div class="row">
+
+          <strong>
+            ${escapeHTML(x[0])}
+          </strong>
+
+          <button
+            class="icon-btn"
+            onclick="speak(${JSON.stringify(x[0])})"
+          >
+            🔊
+          </button>
+
+        </div>
+
+        <div class="muted">
+          ${escapeHTML(x[1])}
+        </div>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   TRADE QUIZ
+========================================================= */
+
+let tradeQuestions=[];
+let tradeIndex=0;
+let tradeScore=0;
+
+function startTradeQuiz(){
+
+  showScreen("trade");
+
+  tradeQuestions=
+    shuffle(TRADE_VOCAB)
+      .slice(0,10);
+
+  tradeIndex=0;
+
+  tradeScore=0;
+
+  openModal(`
+    <h2>⚙️ Technical Quiz</h2>
+    <p>
+      Test your mechanical and hydraulic Afrikaans.
+    </p>
+    <button
+      class="btn btn-primary full"
+      onclick="closeModal();renderTradeQuiz()"
+    >
+      Start
+    </button>
+  `);
+
+}
+
+function renderTradeQuiz(){
+
+  const box=
+    document.getElementById(
+      "tradePhrases"
+    );
+
+  if(!box) return;
+
+  if(tradeIndex>=tradeQuestions.length){
+
+    state.stats.tradeTotal++;
+
+    save();
+
+    openModal(`
+
+      <h2>⚙️ Technical Quiz Complete</h2>
+
+      <div class="question">
+        ${tradeScore}/10
+      </div>
+
+      <p class="muted">
+        Keep building your technical vocabulary.
+      </p>
+
+      <button
+        class="btn btn-primary full"
+        onclick="closeModal()"
+      >
+        Done
+      </button>
+
+    `);
+
+    return;
+
+  }
+
+  const q=
+    tradeQuestions[tradeIndex];
+
+  const options=
+    shuffle([
+      q[1],
+      ...shuffle(
+        TRADE_VOCAB
+          .filter(x=>x[0]!==q[0])
+          .map(x=>x[1])
+      ).slice(0,3)
+    ]);
+
+  openModal(`
+
+    <h2>⚙️ Technical Quiz</h2>
+
+    <p class="muted">
+      ${tradeIndex+1}/10
+    </p>
+
+    <div class="question">
+      ${escapeHTML(q[0])}
+    </div>
+
+    <div class="answers">
+
+      ${
+        options.map(
+          o=>`
+
+            <button
+              class="answer"
+              onclick="answerTradeQuiz(this,${JSON.stringify(o)},${JSON.stringify(q[1])})"
+            >
+              ${escapeHTML(o)}
+            </button>
+
+          `
+        ).join("")
+      }
+
+    </div>
+
+  `);
+
+}
+
+function answerTradeQuiz(button,answer,correct){
+
+  document
+    .querySelectorAll(
+      ".modal .answer"
+    )
+    .forEach(
+      b=>b.disabled=true
+    );
+
+  const ok=
+    answer===correct;
+
+  button.classList.add(
+    ok?"correct":"wrong"
+  );
+
+  if(ok){
+
+    tradeScore++;
+
+    state.stats.tradeCorrect++;
+
+    addXP(12);
+
+  }
+
+  setTimeout(()=>{
+
+    tradeIndex++;
+
+    renderTradeQuiz();
+
+  },450);
+
+}
+
+
+/* =========================================================
+   PERSONAL VOCABULARY
+========================================================= */
+
+function renderPersonalVocabulary(){
+
+  const box=
+    document.getElementById(
+      "personalVocabulary"
+    );
+
+  if(!box) return;
+
+  if(!state.customWords.length){
+
+    box.innerHTML=
+      `<div class="empty">
+        You haven't added any personal words yet.
+      </div>`;
+
+    return;
+
+  }
+
+  box.innerHTML=
+    state.customWords.map(
+      (x,i)=>`
+
+      <div class="card vocab-card">
+
+        <div>
+
+          <div class="afr">
+            ${escapeHTML(x.afr)}
+          </div>
+
+          <div class="eng">
+            ${escapeHTML(x.eng)}
+          </div>
+
+        </div>
+
+        <div>
+
+          <button
+            class="icon-btn"
+            onclick="speak(${JSON.stringify(x.afr)})"
+          >
+            🔊
+          </button>
+
+          <button
+            class="icon-btn"
+            onclick="deletePersonalWord(${i})"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+function addPersonalWord(){
+
+  openModal(`
+
+    <h2>➕ Add Word</h2>
+
+    <label>
+      Afrikaans
+    </label>
+
+    <input
+      id="customAfr"
+      class="input"
+      placeholder="Afrikaans word"
+    >
+
+    <br><br>
+
+    <label>
+      English
+    </label>
+
+    <input
+      id="customEng"
+      class="input"
+      placeholder="English meaning"
+    >
+
+    <button
+      class="btn btn-primary full"
+      style="margin-top:15px"
+      onclick="savePersonalWord()"
+    >
+      Save Word
+    </button>
+
+  `);
+
+}
+
+function savePersonalWord(){
+
+  const afr=
+    document
+      .getElementById("customAfr")
+      .value
+      .trim();
+
+  const eng=
+    document
+      .getElementById("customEng")
+      .value
+      .trim();
+
+  if(!afr||!eng){
+
+    toast("Enter both fields.");
+
+    return;
+
+  }
+
+  state.customWords.push({
+    afr,
+    eng
+  });
+
+  save();
+
+  closeModal();
+
+  renderPersonalVocabulary();
+
+  toast("📚 Word added!");
+
+}
+
+function deletePersonalWord(index){
+
+  if(
+    !confirm(
+      "Delete this word?"
+    )
+  ) return;
+
+  state.customWords.splice(
+    index,
+    1
+  );
+
+  save();
+
+  renderPersonalVocabulary();
+
+}
+
+function renderFavourites(){
+
+  const box=
+    document.getElementById(
+      "favouritesList"
+    );
+
+  if(!box) return;
+
+  const words=
+    state.favourites
+      .map(
+        word=>
+          VOCAB.find(
+            x=>x[0]===word
+          )
+      )
+      .filter(Boolean);
+
+  if(!words.length){
+
+    box.innerHTML=
+      `<div class="empty">
+        No favourites yet.
+      </div>`;
+
+    return;
+
+  }
+
+  box.innerHTML=
+    words.map(
+      x=>`
+
+      <div class="card vocab-card">
+
+        <div>
+
+          <div class="afr">
+            ${escapeHTML(x[0])}
+          </div>
+
+          <div class="eng">
+            ${escapeHTML(x[1])}
+          </div>
+
+        </div>
+
+        <button
+          class="icon-btn"
+          onclick="speak(${JSON.stringify(x[0])})"
+        >
+          🔊
+        </button>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function renderProgress(){
+
+  const box=
+    document.getElementById(
+      "progressArea"
+    );
+
+  if(!box) return;
+
+  const level=
+    levelInfo();
+
+  const accuracy=
+    state.stats.quizTotal
+      ? Math.round(
+          state.stats.quizCorrect/
+          state.stats.quizTotal*
+          100
+        )
+      :0;
+
+  const listening=
+    state.stats.listeningTotal
+      ? Math.round(
+          state.stats.listeningCorrect/
+          state.stats.listeningTotal*
+          100
+        )
+      :0;
+
+  const grammar=
+    state.stats.grammarTotal
+      ? Math.round(
+          state.stats.grammarCorrect/
+          state.stats.grammarTotal*
+          100
+        )
+      :0;
+
+  box.innerHTML=`
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-number">
+          ${state.xp}
+        </div>
+        <div class="stat-label">Total XP</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-number">
+          ${level.level}
+        </div>
+        <div class="stat-label">Level</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-number">
+          ${state.lessons.length}
+        </div>
+        <div class="stat-label">Lessons</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-number">
+          ${state.learned.length}
+        </div>
+        <div class="stat-label">Words</div>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <strong>📝 Quiz Accuracy</strong>
+
+      <div class="progress"
+        style="margin-top:8px">
+
+        <div style="width:${accuracy}%"></div>
+
+      </div>
+
+      <p class="muted small">
+        ${accuracy}%
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <strong>🎧 Listening Accuracy</strong>
+
+      <div class="progress"
+        style="margin-top:8px">
+
+        <div style="width:${listening}%"></div>
+
+      </div>
+
+      <p class="muted small">
+        ${listening}%
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <strong>📐 Grammar Accuracy</strong>
+
+      <div class="progress"
+        style="margin-top:8px">
+
+        <div style="width:${grammar}%"></div>
+
+      </div>
+
+      <p class="muted small">
+        ${grammar}%
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+function renderDailyTarget(){
+
+  const box=
+    document.getElementById(
+      "dailyTarget"
+    );
+
+  if(!box) return;
+
+  const amount=
+    state.activity[today()]||0;
+
+  const target=
+    state.dailyTarget;
+
+  box.innerHTML=`
+
+    <div class="card">
+
+      <strong>
+        ${amount>=target?"🎉":"🎯"}
+        ${amount}/${target} XP
+      </strong>
+
+      <div class="progress"
+        style="margin-top:10px">
+
+        <div style="
+          width:${Math.min(
+            100,
+            amount/target*100
+          )}%
+        "></div>
+
+      </div>
+
+      <p class="muted small">
+
+        ${
+          amount>=target
+            ?"Daily target complete!"
+            :`${target-amount} XP remaining today.`
+        }
+
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+function renderSkills(){
+
+  const box=
+    document.getElementById(
+      "skillBreakdown"
+    );
+
+  if(!box) return;
+
+  const skills=[
+
+    [
+      "📚 Vocabulary",
+      state.learned.length,
+      VOCAB.length
+    ],
+
+    [
+      "📝 Quiz",
+      state.stats.quizCorrect,
+      Math.max(
+        1,
+        state.stats.quizTotal
+      )
+    ],
+
+    [
+      "🎧 Listening",
+      state.stats.listeningCorrect,
+      Math.max(
+        1,
+        state.stats.listeningTotal
+      )
+    ],
+
+    [
+      "📐 Grammar",
+      state.stats.grammarCorrect,
+      Math.max(
+        1,
+        state.stats.grammarTotal
+      )
+    ],
+
+    [
+      "🧠 Review",
+      state.stats.reviewCorrect,
+      Math.max(
+        1,
+        state.stats.reviewed
+      )
+    ]
+
+  ];
+
+  box.innerHTML=
+    skills.map(
+      s=>{
+
+        const percent=
+          Math.min(
+            100,
+            Math.round(
+              s[1]/s[2]*100
+            )
+          );
+
+        return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <strong>
+                ${s[0]}
+              </strong>
+
+              <span>
+                ${percent}%
+              </span>
+
+            </div>
+
+            <div class="progress"
+              style="margin-top:8px">
+
+              <div style="
+                width:${percent}%
+              "></div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+function renderWeekly(){
+
+  const box=
+    document.getElementById(
+      "weeklyActivity"
+    );
+
+  if(!box) return;
+
+  const days=[];
+
+  for(let i=6;i>=0;i--){
+
+    const d=
+      new Date();
+
+    d.setDate(
+      d.getDate()-i
+    );
+
+    const key=
+      d.toISOString().slice(0,10);
+
+    days.push({
+      key,
+      xp:state.activity[key]||0,
+      label:d.toLocaleDateString(
+        "en-AU",
+        {weekday:"short"}
+      )
+    });
+
+  }
+
+  const max=
+    Math.max(
+      20,
+      ...days.map(x=>x.xp)
+    );
+
+  box.innerHTML=`
+
+    <div class="card">
+
+      <div class="chart">
+
+        ${
+          days.map(
+            d=>`
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="
+                  height:${Math.max(
+                    5,
+                    d.xp/max*100
+                  )}px
+                "
+              ></div>
+
+              <div class="bar-label">
+                ${d.label}
+              </div>
+
+            </div>
+
+          `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+function checkAchievements(){
+
+  ACHIEVEMENTS.forEach(
+    achievement=>{
+
+      const id=
+        achievement[0];
+
+      const condition=
+        achievement[4](state);
+
+      if(
+        condition &&
+        !state.achievements.includes(id)
+      ){
+
+        state.achievements.push(id);
+
+        setTimeout(
+          ()=>toast(
+            `🏆 Achievement: ${achievement[2]}`
+          ),
+          100
+        );
+
+      }
+
+    }
+  );
+
+  save();
+
+}
+
+function renderAchievements(){
+
+  const box=
+    document.getElementById(
+      "achievementsList"
+    );
+
+  if(!box) return;
+
+  box.innerHTML=
+    ACHIEVEMENTS.map(
+      a=>{
+
+        const unlocked=
+          state.achievements.includes(
+            a[0]
+          );
+
+        return `
+
+        <div class="card achievement ${
+          unlocked?"":"locked"
+        }">
+
+          <div class="achievement-icon">
+            ${a[1]}
+          </div>
+
+          <div>
+
+            <strong>
+              ${escapeHTML(a[2])}
+            </strong>
+
+            <div class="muted small">
+              ${escapeHTML(a[3])}
+            </div>
+
+          </div>
+
+        </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
 
 function openSettings(){
+
   openModal(`
-    <h1>⚙️ Settings</h1>
 
-    <div class="card">
-      <h3>📦 Your data</h3>
-      <p>Your progress is stored locally on this device.</p>
-      <button class="btn full" onclick="exportData()">Export progress</button>
-      <button class="btn secondary full" style="margin-top:8px" onclick="document.getElementById('importFile').click()">Import progress</button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+    <h2>⚙️ Settings</h2>
+
+    <div class="setting">
+
+      <div>
+
+        <strong>🌙 Dark Mode</strong>
+
+        <div class="muted small">
+          Easier on the eyes at night.
+        </div>
+
+      </div>
+
+      <button
+        class="switch ${state.dark?"on":""}"
+        onclick="toggleDark();openSettings()"
+      ></button>
+
     </div>
 
-    <div class="card">
-      <h3>⚠️ Reset</h3>
-      <p>This permanently clears your local learning progress.</p>
-      <button class="btn danger full" onclick="resetProgress()">Reset all progress</button>
+
+    <div class="setting">
+
+      <div>
+
+        <strong>🌎 Immersion Mode</strong>
+
+        <div class="muted small">
+          Gradually reduce English.
+        </div>
+
+      </div>
+
+      <button
+        class="switch ${state.immersion?"on":""}"
+        onclick="toggleImmersion();openSettings()"
+      ></button>
+
     </div>
+
+
+    <div class="card">
+
+      <strong>🎯 Daily XP Target</strong>
+
+      <input
+        id="targetInput"
+        class="input"
+        type="number"
+        min="5"
+        max="500"
+        value="${state.dailyTarget}"
+        style="margin-top:9px"
+      >
+
+      <button
+        class="btn btn-primary full"
+        style="margin-top:9px"
+        onclick="saveTarget()"
+      >
+        Save Target
+      </button>
+
+    </div>
+
+
+    <button
+      class="btn btn-secondary full"
+      onclick="exportData()"
+    >
+      📤 Export Progress
+    </button>
+
+    <button
+      class="btn btn-secondary full"
+      style="margin-top:9px"
+      onclick="importData()"
+    >
+      📥 Import Progress
+    </button>
+
+    <button
+      class="btn btn-danger full"
+      style="margin-top:9px"
+      onclick="resetProgress()"
+    >
+      ⚠️ Reset Everything
+    </button>
+
   `);
+
+}
+
+function saveTarget(){
+
+  const value=
+    Number(
+      document.getElementById(
+        "targetInput"
+      ).value
+    );
+
+  state.dailyTarget=
+    Math.max(
+      5,
+      Math.min(
+        500,
+        value||20
+      )
+    );
+
+  save();
+
+  closeModal();
+
+  updateAll();
+
+  toast("🎯 Daily target updated.");
+
+}
+
+function toggleDark(){
+
+  state.dark=!state.dark;
+
+  document.body.classList.toggle(
+    "dark",
+    state.dark
+  );
+
+  save();
+
+}
+
+function toggleImmersion(){
+
+  state.immersion=
+    !state.immersion;
+
+  save();
+
+  toast(
+    state.immersion
+      ?"🌎 Immersion Mode ON"
+      :"🌎 Immersion Mode OFF"
+  );
+
 }
 
 function exportData(){
-  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
+
+  const blob=
+    new Blob(
+      [
+        JSON.stringify(
+          state,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+  const url=
+    URL.createObjectURL(blob);
+
+  const a=
+    document.createElement("a");
+
   a.href=url;
-  a.download="afrikaans-learning-progress.json";
+
+  a.download=
+    "afrikaans-progress-backup.json";
+
   a.click();
+
   URL.revokeObjectURL(url);
-  toast("Progress exported.");
+
+  toast("💾 Backup exported.");
+
 }
 
-function importData(event){
-  const file=event.target.files[0];
-  if(!file)return;
+function importData(){
 
-  const reader=new FileReader();
+  const input=
+    document.createElement("input");
 
-  reader.onload=e=>{
-    try{
-      const imported=JSON.parse(e.target.result);
+  input.type="file";
 
-      if(!imported || typeof imported!=="object")throw new Error();
+  input.accept=".json,application/json";
 
-      state={...state,...imported};
-      save();
-      closeModal();
-      updateAll();
-      toast("Progress imported!");
-    }catch{
-      toast("Invalid progress file.");
-    }
+  input.onchange=e=>{
+
+    const file=
+      e.target.files[0];
+
+    if(!file) return;
+
+    const reader=
+      new FileReader();
+
+    reader.onload=()=>{
+
+      try{
+
+        const imported=
+          JSON.parse(
+            reader.result
+          );
+
+        if(
+          !confirm(
+            "Replace your current progress with this backup?"
+          )
+        ) return;
+
+        state=
+          Object.assign(
+            defaultState(),
+            imported
+          );
+
+        save();
+
+        location.reload();
+
+      }catch(error){
+
+        toast(
+          "❌ Invalid backup file."
+        );
+
+      }
+
+    };
+
+    reader.readAsText(file);
+
   };
 
-  reader.readAsText(file);
+  input.click();
+
 }
 
 function resetProgress(){
-  if(confirm("Reset ALL Afrikaans learning progress?")){
-    localStorage.removeItem("afrikaansState");
-    location.reload();
-  }
+
+  if(
+    !confirm(
+      "This will permanently erase all your Afrikaans progress. Continue?"
+    )
+  ) return;
+
+  localStorage.removeItem(KEY);
+
+  location.reload();
+
 }
 
-/* ============================================================
-   ADD SETTINGS BUTTON TO HEADER
-   ============================================================ */
 
-document.querySelector(".header-row").insertAdjacentHTML(
-  "beforeend",
-  `<button class="icon-btn" onclick="openSettings()">⚙️</button>`
+/* =========================================================
+   SENTENCE LAB
+========================================================= */
+
+function sentenceLab(){
+
+  const subjects=[
+    ["Ek","I"],
+    ["Jy","You"],
+    ["Hy","He"],
+    ["Sy","She"],
+    ["Ons","We"]
+  ];
+
+  const verbs=[
+    ["werk","work"],
+    ["leer","learn"],
+    ["eet","eat"],
+    ["drink","drink"],
+    ["praat","speak"]
+  ];
+
+  const objects=[
+    ["vandag","today"],
+    ["Afrikaans","Afrikaans"],
+    ["saam","together"],
+    ["by die huis","at home"],
+    ["in die werkswinkel","in the workshop"]
+  ];
+
+  let current="";
+
+  function build(){
+
+    const s=
+      subjects[
+        document.getElementById("labSubject").value
+      ];
+
+    const v=
+      verbs[
+        document.getElementById("labVerb").value
+      ];
+
+    const o=
+      objects[
+        document.getElementById("labObject").value
+      ];
+
+    current=
+      `${s[0]} ${v[0]} ${o[0]}.`;
+
+    document.getElementById(
+      "labSentence"
+    ).textContent=current;
+
+  }
+
+  openModal(`
+
+    <h2>🧪 Sentence Lab</h2>
+
+    <p class="muted">
+      Build simple Afrikaans sentences.
+    </p>
+
+    <select id="labSubject" class="input">
+      ${
+        subjects.map(
+          (x,i)=>
+            `<option value="${i}">
+              ${x[0]} — ${x[1]}
+            </option>`
+        ).join("")
+      }
+    </select>
+
+    <br><br>
+
+    <select id="labVerb" class="input">
+      ${
+        verbs.map(
+          (x,i)=>
+            `<option value="${i}">
+              ${x[0]} — ${x[1]}
+            </option>`
+        ).join("")
+      }
+    </select>
+
+    <br><br>
+
+    <select id="labObject" class="input">
+      ${
+        objects.map(
+          (x,i)=>
+            `<option value="${i}">
+              ${x[0]} — ${x[1]}
+            </option>`
+        ).join("")
+      }
+    </select>
+
+    <div class="card"
+      style="text-align:center;margin-top:15px">
+
+      <div id="labSentence"
+        style="font-size:23px;font-weight:900">
+        Ek werk vandag.
+      </div>
+
+    </div>
+
+    <button
+      class="btn btn-primary full"
+      onclick="speak(document.getElementById('labSentence').textContent)"
+    >
+      🔊 Hear Sentence
+    </button>
+
+    <button
+      class="btn btn-secondary full"
+      style="margin-top:9px"
+      onclick="addXP(5,'Sentence practice!')"
+    >
+      ✅ Practised
+    </button>
+
+  `);
+
+  document
+    .getElementById("labSubject")
+    .onchange=build;
+
+  document
+    .getElementById("labVerb")
+    .onchange=build;
+
+  document
+    .getElementById("labObject")
+    .onchange=build;
+
+}
+
+
+/* =========================================================
+   TEACH ME
+========================================================= */
+
+function teachMe(){
+
+  const topics=[
+
+  [
+    "Word Order",
+    "Start with who is doing something, then the action.",
+    "Ek werk vandag."
+  ],
+
+  [
+    "Negation",
+    "Afrikaans commonly uses nie twice in a negative sentence.",
+    "Ek werk nie vandag nie."
+  ],
+
+  [
+    "Questions",
+    "Use words like wat, waar, wie, wanneer, hoekom and hoe.",
+    "Waar is die masjien?"
+  ],
+
+  [
+    "Future",
+    "Use sal to talk about the future.",
+    "Ek sal môre werk."
+  ]
+
+  ];
+
+  const t=
+    topics[
+      Math.floor(
+        Math.random()*topics.length
+      )
+    ];
+
+  openModal(`
+
+    <h2>👨‍🏫 Teach Me</h2>
+
+    <div class="card">
+
+      <h3>
+        ${escapeHTML(t[0])}
+      </h3>
+
+      <p>
+        ${escapeHTML(t[1])}
+      </p>
+
+      <div class="card">
+
+        <strong>
+          ${escapeHTML(t[2])}
+        </strong>
+
+        <button
+          class="icon-btn"
+          onclick="speak(${JSON.stringify(t[2])})"
+        >
+          🔊
+        </button>
+
+      </div>
+
+    </div>
+
+    <button
+      class="btn btn-primary full"
+      onclick="addXP(8,'Learning!');closeModal()"
+    >
+      ✅ I Understand
+    </button>
+
+  `);
+
+}
+
+
+/* =========================================================
+   LEARNING TOOLS
+========================================================= */
+
+function learningTools(){
+
+  openModal(`
+
+    <h2>🧰 Learning Tools</h2>
+
+    <div class="quick-grid">
+
+      <button
+        class="quick"
+        onclick="closeModal();teachMe()"
+      >
+        <div class="quick-icon">👨‍🏫</div>
+        <div class="quick-title">Teach Me</div>
+        <div class="quick-sub">Learn a concept</div>
+      </button>
+
+      <button
+        class="quick"
+        onclick="closeModal();sentenceLab()"
+      >
+        <div class="quick-icon">🧪</div>
+        <div class="quick-title">Sentence Lab</div>
+        <div class="quick-sub">Build sentences</div>
+      </button>
+
+      <button
+        class="quick"
+        onclick="closeModal();startPronunciation()"
+      >
+        <div class="quick-icon">🗣️</div>
+        <div class="quick-title">Pronunciation</div>
+        <div class="quick-sub">Speak Afrikaans</div>
+      </button>
+
+      <button
+        class="quick"
+        onclick="closeModal();startListening()"
+      >
+        <div class="quick-icon">🎧</div>
+        <div class="quick-title">Listening</div>
+        <div class="quick-sub">Train your ear</div>
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+
+/* =========================================================
+   UPDATE EVERYTHING
+========================================================= */
+
+function updateAll(){
+
+  updateHome();
+
+  if(
+    document
+      .getElementById("progress")
+      ?.classList.contains("active")
+  ){
+
+    renderProgress();
+
+    renderDailyTarget();
+
+    renderSkills();
+
+    renderWeekly();
+
+    renderAchievements();
+
+  }
+
+}
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+load();
+
+document.body.classList.toggle(
+  "dark",
+  state.dark
 );
 
-/* ============================================================
-   STARTUP
-   ============================================================ */
-
-document.body.classList.toggle("dark",state.dark);
-
-updateHome();
 renderLessons();
-renderVocab();
-renderGrammar();
-renderConversations();
-renderStories();
-renderProgress();
 
-/* Keyboard shortcut */
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape")closeModal();
-});
+renderVocab();
+
+renderGrammar();
+
+renderConversations();
+
+renderStories();
+
+renderGames();
+
+renderTradeVocabulary();
+
+renderTradePhrases();
+
+renderPersonalVocabulary();
+
+renderFavourites();
+
+updateAll();
+
+checkAchievements();
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape")
+      closeModal();
+
+    if(
+      e.key==="Enter" &&
+      document.activeElement?.id===
+      "scrambleInput"
+    ){
+
+      checkScramble();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   HAPTICS
+========================================================= */
+
+document.addEventListener(
+  "click",
+  e=>{
+
+    if(
+      e.target.closest("button")
+    ){
+
+      haptic();
+
+    }
+
+  },
+  {passive:true}
+);
 
 </script>
 
 </body>
 </html>
-```

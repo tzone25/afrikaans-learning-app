@@ -1,0 +1,1821 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#167c80">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Leer Afrikaans">
+<meta name="description" content="A complete interactive Afrikaans learning app.">
+<title>Leer Afrikaans 🇿🇦</title>
+
+<style>
+:root{
+  --bg:#f4f7f7;
+  --card:#ffffff;
+  --text:#172326;
+  --muted:#6c7b7e;
+  --primary:#167c80;
+  --primary2:#0f5e62;
+  --accent:#f1b84b;
+  --danger:#d9534f;
+  --success:#31966b;
+  --border:#dfe7e8;
+  --shadow:0 8px 24px rgba(20,50,55,.08);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{
+  max-width:900px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:white;
+  padding:22px 18px 28px;
+  border-radius:0 0 28px 28px;
+}
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+.header-small{
+  opacity:.82;
+  font-size:13px;
+  margin-top:3px;
+}
+.icon-btn{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.16);
+  color:white;
+  font-size:20px;
+}
+.container{padding:18px}
+.screen{display:none}
+.screen.active{display:block}
+
+.hero{
+  margin-top:18px;
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.hero h1{
+  margin:0 0 5px;
+  font-size:25px;
+}
+.hero p{margin:0;color:var(--muted)}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px 8px;
+  text-align:center;
+}
+.stat strong{
+  display:block;
+  font-size:21px;
+}
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+}
+.card h2,.card h3{margin-top:0}
+
+.progress{
+  height:10px;
+  background:#e6eeee;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress > div{
+  height:100%;
+  background:var(--primary);
+  border-radius:20px;
+  transition:width .3s;
+}
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:13px 17px;
+  font-weight:700;
+  background:var(--primary);
+  color:white;
+  min-height:46px;
+}
+.btn.secondary{
+  background:#e8f0f0;
+  color:var(--primary2);
+}
+.btn.warning{
+  background:var(--accent);
+  color:#382a08;
+}
+.btn.danger{
+  background:#fbe9e8;
+  color:var(--danger);
+}
+.btn.full{width:100%}
+.btn:active{transform:scale(.98)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.menu-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:17px;
+  padding:17px;
+  text-align:left;
+  box-shadow:var(--shadow);
+}
+.menu-card .emoji{font-size:28px}
+.menu-card strong{display:block;margin-top:8px}
+.menu-card small{color:var(--muted)}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(900px,100%);
+  background:rgba(255,255,255,.96);
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.nav-btn{
+  border:0;
+  background:none;
+  color:var(--muted);
+  padding:7px 2px;
+  font-size:11px;
+}
+.nav-btn span{
+  display:block;
+  font-size:21px;
+  margin-bottom:2px;
+}
+.nav-btn.active{color:var(--primary);font-weight:800}
+
+.list-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+.list-item:last-child{border-bottom:0}
+
+.lesson{
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  margin-bottom:12px;
+  background:var(--card);
+}
+.lesson-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.lesson-number{
+  min-width:43px;
+  height:43px;
+  border-radius:50%;
+  background:#e7f2f2;
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+.lesson.locked{opacity:.55}
+.lesson.completed .lesson-number{
+  background:var(--success);
+  color:white;
+}
+
+.tag{
+  display:inline-block;
+  padding:5px 9px;
+  background:#e9f3f3;
+  color:var(--primary2);
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.flashcard{
+  min-height:290px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.flash-word{
+  font-size:42px;
+  font-weight:800;
+  margin:12px 0;
+}
+.flash-meaning{
+  font-size:21px;
+  color:var(--muted);
+}
+.example{
+  margin-top:20px;
+  padding:13px;
+  background:#f2f7f7;
+  border-radius:13px;
+  width:100%;
+}
+.example strong{color:var(--primary)}
+
+.answers{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+.answer{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:14px;
+  padding:15px;
+  text-align:left;
+}
+.answer.correct{
+  border-color:var(--success);
+  background:#eaf7f0;
+}
+.answer.wrong{
+  border-color:var(--danger);
+  background:#fff0ef;
+}
+
+.search{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  background:var(--card);
+  margin-bottom:13px;
+}
+
+textarea,input[type=text]{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  background:var(--card);
+  color:var(--text);
+}
+
+.category-tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:8px;
+}
+.category-tabs button{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:9px 13px;
+  border-radius:20px;
+}
+.category-tabs button.active{
+  background:var(--primary);
+  color:white;
+}
+
+.toast{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%) translateY(-120px);
+  background:#172326;
+  color:white;
+  padding:12px 18px;
+  border-radius:30px;
+  z-index:100;
+  transition:.3s;
+  box-shadow:var(--shadow);
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:50;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(900px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  border-radius:25px 25px 0 0;
+  padding:22px;
+}
+
+.dark{
+  --bg:#101719;
+  --card:#192326;
+  --text:#f2f7f7;
+  --muted:#aab9bb;
+  --border:#2b393c;
+}
+.dark .bottom-nav{
+  background:rgba(25,35,38,.96);
+}
+.dark .secondary{
+  background:#263638;
+}
+.dark .example{
+  background:#213033;
+}
+.dark .progress{background:#2c3b3e}
+
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .flash-word{font-size:35px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="header-row">
+    <div>
+      <div class="logo">🇿🇦 Leer Afrikaans</div>
+      <div class="header-small">Learn • Practise • Speak • Master</div>
+    </div>
+    <button class="icon-btn" onclick="toggleDark()">🌙</button>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+  <div class="hero">
+    <h1 id="greeting">Goeie dag!</h1>
+    <p>Welcome back. Let's learn some Afrikaans.</p>
+
+    <div style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+        <strong>Overall progress</strong>
+        <span id="overallPercent">0%</span>
+      </div>
+      <div class="progress"><div id="overallBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong id="xpStat">0</strong><span>XP</span></div>
+    <div class="stat"><strong id="levelStat">1</strong><span>Level</span></div>
+    <div class="stat"><strong id="streakStat">0</strong><span>Day streak</span></div>
+    <div class="stat"><strong id="wordsStat">0</strong><span>Words learned</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Today's challenge</h2>
+    <p id="dailyChallengeText">Complete a vocabulary session.</p>
+    <button class="btn full" onclick="startDailyChallenge()">Start challenge</button>
+  </div>
+
+  <h2>Continue learning</h2>
+
+  <div class="card">
+    <span class="tag">NEXT LESSON</span>
+    <h2 id="nextLessonTitle">Greetings & Introductions</h2>
+    <p id="nextLessonDesc">Learn your first everyday Afrikaans phrases.</p>
+    <button class="btn full" onclick="openNextLesson()">Continue →</button>
+  </div>
+
+  <h2>Quick practice</h2>
+
+  <div class="grid">
+    <button class="menu-card" onclick="showScreen('vocab')">
+      <div class="emoji">🧠</div>
+      <strong>Vocabulary</strong>
+      <small>Learn new words</small>
+    </button>
+
+    <button class="menu-card" onclick="startQuiz()">
+      <div class="emoji">🎯</div>
+      <strong>Quick Quiz</strong>
+      <small>Test yourself</small>
+    </button>
+
+    <button class="menu-card" onclick="showScreen('grammar')">
+      <div class="emoji">📖</div>
+      <strong>Grammar</strong>
+      <small>Understand the rules</small>
+    </button>
+
+    <button class="menu-card" onclick="showScreen('conversation')">
+      <div class="emoji">🗣️</div>
+      <strong>Conversation</strong>
+      <small>Practise speaking</small>
+    </button>
+  </div>
+
+</section>
+
+<!-- LESSONS -->
+<section id="lessons" class="screen">
+  <h1>📚 Learning Path</h1>
+  <p style="color:var(--muted)">Work through Afrikaans from complete beginner to advanced.</p>
+
+  <div class="card">
+    <strong id="courseProgressText">0 of 30 lessons completed</strong>
+    <div class="progress" style="margin-top:10px">
+      <div id="courseProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div id="lessonList"></div>
+</section>
+
+<!-- VOCAB -->
+<section id="vocab" class="screen">
+  <h1>🧠 Vocabulary</h1>
+  <p style="color:var(--muted)">Build your Afrikaans vocabulary.</p>
+
+  <input class="search" id="vocabSearch" placeholder="Search Afrikaans or English..." oninput="renderVocab()">
+
+  <div class="category-tabs" id="vocabTabs"></div>
+
+  <div id="vocabList"></div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" class="screen">
+  <div id="quizContent"></div>
+</section>
+
+<!-- GRAMMAR -->
+<section id="grammar" class="screen">
+  <h1>📖 Grammar Academy</h1>
+  <p style="color:var(--muted)">Learn how Afrikaans sentences actually work.</p>
+  <div id="grammarList"></div>
+</section>
+
+<!-- CONVERSATION -->
+<section id="conversation" class="screen">
+  <h1>🗣️ Conversation</h1>
+  <p style="color:var(--muted)">Practise useful real-life situations.</p>
+  <div id="conversationList"></div>
+</section>
+
+<!-- GAMES -->
+<section id="games" class="screen">
+  <h1>🎮 Games</h1>
+  <p style="color:var(--muted)">Learn while having fun.</p>
+
+  <div class="grid">
+    <button class="menu-card" onclick="startMatchGame()">
+      <div class="emoji">🔗</div>
+      <strong>Word Match</strong>
+      <small>Match Afrikaans with English</small>
+    </button>
+
+    <button class="menu-card" onclick="startSpeedGame()">
+      <div class="emoji">⚡</div>
+      <strong>Speed Round</strong>
+      <small>60 seconds</small>
+    </button>
+
+    <button class="menu-card" onclick="startScramble()">
+      <div class="emoji">🧩</div>
+      <strong>Word Scramble</strong>
+      <small>Build the word</small>
+    </button>
+
+    <button class="menu-card" onclick="startMissingWord()">
+      <div class="emoji">✍️</div>
+      <strong>Missing Word</strong>
+      <small>Complete sentences</small>
+    </button>
+  </div>
+
+  <div id="gameArea"></div>
+</section>
+
+<!-- STORIES -->
+<section id="stories" class="screen">
+  <h1>📚 Afrikaans Stories</h1>
+  <p style="color:var(--muted)">Read short stories and learn vocabulary in context.</p>
+  <div id="storyList"></div>
+</section>
+
+<!-- PROGRESS -->
+<section id="progress" class="screen">
+  <h1>📊 Your Progress</h1>
+
+  <div class="stats">
+    <div class="stat"><strong id="pXP">0</strong><span>Total XP</span></div>
+    <div class="stat"><strong id="pWords">0</strong><span>Words</span></div>
+    <div class="stat"><strong id="pLessons">0</strong><span>Lessons</span></div>
+    <div class="stat"><strong id="pQuiz">0%</strong><span>Quiz accuracy</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Level</h2>
+    <h1 id="levelName">Beginner</h1>
+    <div class="progress">
+      <div id="levelBar" style="width:0%"></div>
+    </div>
+    <p id="levelProgress"></p>
+  </div>
+
+  <div class="card">
+    <h2>🔥 Streak</h2>
+    <p id="streakMessage">Start learning today!</p>
+    <div id="streakCalendar"></div>
+  </div>
+
+  <h2>🏅 Achievements</h2>
+  <div id="achievements"></div>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-screen="home" onclick="showScreen('home')"><span>🏠</span>Home</button>
+  <button class="nav-btn" data-screen="lessons" onclick="showScreen('lessons')"><span>📚</span>Learn</button>
+  <button class="nav-btn" data-screen="vocab" onclick="showScreen('vocab')"><span>🧠</span>Words</button>
+  <button class="nav-btn" data-screen="games" onclick="showScreen('games')"><span>🎮</span>Games</button>
+  <button class="nav-btn" data-screen="progress" onclick="showScreen('progress')"><span>📊</span>Progress</button>
+</nav>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div id="modal" class="modal" onclick="closeModal(event)">
+  <div class="modal-box" id="modalContent"></div>
+</div>
+
+<script>
+/* ============================================================
+   LEER AFRIKAANS
+   Complete self-contained learning application
+   ============================================================ */
+
+const vocab = [
+
+{a:"hallo",e:"hello",cat:"Basics",ex:"Hallo! Hoe gaan dit?"},
+{a:"goeie môre",e:"good morning",cat:"Basics",ex:"Goeie môre!"},
+{a:"goeie middag",e:"good afternoon",cat:"Basics",ex:"Goeie middag."},
+{a:"goeie aand",e:"good evening",cat:"Basics",ex:"Goeie aand."},
+{a:"totsiens",e:"goodbye",cat:"Basics",ex:"Totsiens, sien jou môre."},
+{a:"asseblief",e:"please",cat:"Basics",ex:"Gee my asseblief water."},
+{a:"dankie",e:"thank you",cat:"Basics",ex:"Baie dankie."},
+{a:"ja",e:"yes",cat:"Basics",ex:"Ja, ek verstaan."},
+{a:"nee",e:"no",cat:"Basics",ex:"Nee, dankie."},
+{a:"verskoon my",e:"excuse me",cat:"Basics",ex:"Verskoon my, waar is die toilet?"},
+{a:"jammer",e:"sorry",cat:"Basics",ex:"Jammer, ek is laat."},
+{a:"welkom",e:"welcome",cat:"Basics",ex:"Welkom by ons huis."},
+{a:"hoe gaan dit?",e:"how are you?",cat:"Conversation",ex:"Hallo! Hoe gaan dit?"},
+{a:"dit gaan goed",e:"I am well",cat:"Conversation",ex:"Dankie, dit gaan goed."},
+{a:"wat is jou naam?",e:"what is your name?",cat:"Conversation",ex:"Wat is jou naam?"},
+{a:"my naam is",e:"my name is",cat:"Conversation",ex:"My naam is Johan."},
+{a:"aangename kennis",e:"nice to meet you",cat:"Conversation",ex:"Aangename kennis!"},
+{a:"ek verstaan",e:"I understand",cat:"Conversation",ex:"Ja, ek verstaan."},
+{a:"ek verstaan nie",e:"I don't understand",cat:"Conversation",ex:"Jammer, ek verstaan nie."},
+{a:"praat stadiger",e:"speak slower",cat:"Conversation",ex:"Kan jy asseblief stadiger praat?"},
+{a:"kan jy my help?",e:"can you help me?",cat:"Conversation",ex:"Kan jy my help?"},
+{a:"wat beteken dit?",e:"what does that mean?",cat:"Conversation",ex:"Wat beteken dit?"},
+{a:"familie",e:"family",cat:"Family",ex:"My familie woon naby."},
+{a:"ma",e:"mother",cat:"Family",ex:"My ma is by die huis."},
+{a:"pa",e:"father",cat:"Family",ex:"My pa werk vandag."},
+{a:"broer",e:"brother",cat:"Family",ex:"My broer is jonger."},
+{a:"suster",e:"sister",cat:"Family",ex:"My suster studeer."},
+{a:"kind",e:"child",cat:"Family",ex:"Die kind slaap."},
+{a:"baba",e:"baby",cat:"Family",ex:"Die baba slaap rustig."},
+{a:"huis",e:"house/home",cat:"Home",ex:"Ek gaan huis toe."},
+{a:"kamer",e:"room",cat:"Home",ex:"Die kamer is groot."},
+{a:"kombuis",e:"kitchen",cat:"Home",ex:"Ek is in die kombuis."},
+{a:"deur",e:"door",cat:"Home",ex:"Maak die deur toe."},
+{a:"venster",e:"window",cat:"Home",ex:"Maak die venster oop."},
+{a:"tafel",e:"table",cat:"Home",ex:"Die boek is op die tafel."},
+{a:"stoel",e:"chair",cat:"Home",ex:"Sit op die stoel."},
+{a:"bed",e:"bed",cat:"Home",ex:"Die baba is in die bed."},
+{a:"water",e:"water",cat:"Food",ex:"Ek wil graag water hê."},
+{a:"brood",e:"bread",cat:"Food",ex:"Ek koop brood."},
+{a:"melk",e:"milk",cat:"Food",ex:"Die baba drink melk."},
+{a:"vleis",e:"meat",cat:"Food",ex:"Die vleis is gaar."},
+{a:"hoender",e:"chicken",cat:"Food",ex:"Ek eet hoender."},
+{a:"koffie",e:"coffee",cat:"Food",ex:"Ek drink koffie."},
+{a:"tee",e:"tea",cat:"Food",ex:"Wil jy tee hê?"},
+{a:"ontbyt",e:"breakfast",cat:"Food",ex:"Ek eet ontbyt."},
+{a:"middagete",e:"lunch",cat:"Food",ex:"Middagete is om eenuur."},
+{a:"aandete",e:"dinner",cat:"Food",ex:"Aandete is gereed."},
+{a:"winkel",e:"shop/store",cat:"Shopping",ex:"Ek gaan winkel toe."},
+{a:"geld",e:"money",cat:"Shopping",ex:"Ek het nie genoeg geld nie."},
+{a:"duur",e:"expensive",cat:"Shopping",ex:"Dit is te duur."},
+{a:"goedkoop",e:"cheap",cat:"Shopping",ex:"Hierdie een is goedkoop."},
+{a:"hoeveel kos dit?",e:"how much does it cost?",cat:"Shopping",ex:"Hoeveel kos dit?"},
+{a:"ek wil hê",e:"I want",cat:"Shopping",ex:"Ek wil hierdie een hê."},
+{a:"rekening",e:"bill/account",cat:"Shopping",ex:"Kan ek asseblief die rekening kry?"},
+{a:"werk",e:"work",cat:"Work",ex:"Ek gaan werk toe."},
+{a:"kollega",e:"colleague",cat:"Work",ex:"My kollega help my."},
+{a:"baas",e:"boss",cat:"Work",ex:"Die baas is in 'n vergadering."},
+{a:"vergadering",e:"meeting",cat:"Work",ex:"Die vergadering begin om nege."},
+{a:"gereed",e:"ready",cat:"Work",ex:"Die masjien is gereed."},
+{a:"veiligheid",e:"safety",cat:"Work",ex:"Veiligheid is belangrik."},
+{a:"onderhoud",e:"maintenance",cat:"Engineering",ex:"Die masjien benodig onderhoud."},
+{a:"masjien",e:"machine",cat:"Engineering",ex:"Die masjien werk nie."},
+{a:"pomp",e:"pump",cat:"Engineering",ex:"Die pomp verloor druk."},
+{a:"klep",e:"valve",cat:"Engineering",ex:"Die klep is toe."},
+{a:"druk",e:"pressure",cat:"Engineering",ex:"Die druk is te laag."},
+{a:"vloei",e:"flow",cat:"Engineering",ex:"Die vloei is laag."},
+{a:"hidroulies",e:"hydraulic",cat:"Engineering",ex:"Dit is 'n hidrouliese stelsel."},
+{a:"laer",e:"bearing",cat:"Engineering",ex:"Die laer word warm."},
+{a:"as",e:"shaft",cat:"Engineering",ex:"Die as draai."},
+{a:"gereedskap",e:"tools",cat:"Engineering",ex:"Ek benodig my gereedskap."},
+{a:"herstel",e:"repair",cat:"Engineering",ex:"Die masjien benodig 'n herstel."},
+{a:"fout",e:"fault",cat:"Engineering",ex:"Daar is 'n fout in die stelsel."},
+{a:"motor",e:"motor/engine",cat:"Engineering",ex:"Die motor loop glad."},
+{a:"pyp",e:"pipe",cat:"Engineering",ex:"Die pyp lek."},
+{a:"lek",e:"leak",cat:"Engineering",ex:"Daar is 'n lek."},
+{a:"skroef",e:"screw",cat:"Engineering",ex:"Draai die skroef vas."},
+{a:"moer",e:"nut",cat:"Engineering",ex:"Die moer is los."},
+{a:"vas",e:"tight",cat:"Engineering",ex:"Maak dit vas."},
+{a:"los",e:"loose",cat:"Engineering",ex:"Die moer is los."},
+{a:"rooi",e:"red",cat:"Colours",ex:"Die motor is rooi."},
+{a:"blou",e:"blue",cat:"Colours",ex:"Die lug is blou."},
+{a:"groen",e:"green",cat:"Colours",ex:"Die lig is groen."},
+{a:"wit",e:"white",cat:"Colours",ex:"Die muur is wit."},
+{a:"swart",e:"black",cat:"Colours",ex:"Die motor is swart."},
+{a:"een",e:"one",cat:"Numbers",ex:"Een, twee, drie."},
+{a:"twee",e:"two",cat:"Numbers",ex:"Ek het twee broers."},
+{a:"drie",e:"three",cat:"Numbers",ex:"Drie mense."},
+{a:"vier",e:"four",cat:"Numbers",ex:"Vier dae."},
+{a:"vyf",e:"five",cat:"Numbers",ex:"Vyf minute."},
+{a:"tien",e:"ten",cat:"Numbers",ex:"Tien rand."},
+{a:"honderd",e:"one hundred",cat:"Numbers",ex:"Honderd rand."},
+{a:"vandag",e:"today",cat:"Time",ex:"Ek werk vandag."},
+{a:"môre",e:"tomorrow",cat:"Time",ex:"Ek werk môre."},
+{a:"gister",e:"yesterday",cat:"Time",ex:"Ek was gister by die huis."},
+{a:"nou",e:"now",cat:"Time",ex:"Ek is nou besig."},
+{a:"later",e:"later",cat:"Time",ex:"Ek sien jou later."},
+{a:"vroeg",e:"early",cat:"Time",ex:"Ek staan vroeg op."},
+{a:"laat",e:"late",cat:"Time",ex:"Ek is laat."},
+{a:"oggend",e:"morning",cat:"Time",ex:"Ek werk in die oggend."},
+{a:"aand",e:"evening/night",cat:"Time",ex:"Goeie aand."},
+{a:"dag",e:"day",cat:"Time",ex:"Dit is 'n mooi dag."},
+{a:"week",e:"week",cat:"Time",ex:"Volgende week."},
+{a:"maandag",e:"Monday",cat:"Time",ex:"Ek werk Maandag."},
+{a:"Saterdag",e:"Saturday",cat:"Time",ex:"Ons rus Saterdag."},
+{a:"Sondag",e:"Sunday",cat:"Time",ex:"Ons kuier Sondag."},
+{a:"motor",e:"car",cat:"Travel",ex:"Waar is my motor?"},
+{a:"pad",e:"road",cat:"Travel",ex:"Die pad is lank."},
+{a:"links",e:"left",cat:"Travel",ex:"Draai links."},
+{a:"regs",e:"right",cat:"Travel",ex:"Draai regs."},
+{a:"reguit",e:"straight",cat:"Travel",ex:"Ry reguit."},
+{a:"hier",e:"here",cat:"Travel",ex:"Kom hier."},
+{a:"daar",e:"there",cat:"Travel",ex:"Dit is daar."},
+{a:"hospitaal",e:"hospital",cat:"Emergency",ex:"Waar is die hospitaal?"},
+{a:"dokter",e:"doctor",cat:"Emergency",ex:"Ek benodig 'n dokter."},
+{a:"polisie",e:"police",cat:"Emergency",ex:"Bel die polisie."},
+{a:"ambulans",e:"ambulance",cat:"Emergency",ex:"Bel 'n ambulans."},
+{a:"help",e:"help",cat:"Emergency",ex:"Help my asseblief."},
+{a:"gevaar",e:"danger",cat:"Emergency",ex:"Daar is gevaar."},
+{a:"noodgeval",e:"emergency",cat:"Emergency",ex:"Dit is 'n noodgeval."},
+{a:"liefde",e:"love",cat:"Relationships",ex:"Liefde is belangrik."},
+{a:"lief",e:"dear/loved",cat:"Relationships",ex:"My lief."},
+{a:"gelukkig",e:"happy",cat:"Relationships",ex:"Ek is gelukkig."},
+{a:"lief vir jou",e:"love you",cat:"Relationships",ex:"Ek is lief vir jou."},
+{a:"mis jou",e:"miss you",cat:"Relationships",ex:"Ek mis jou."},
+{a:"mooi",e:"beautiful/nice",cat:"Relationships",ex:"Jy lyk mooi."},
+{a:"geluk",e:"luck/congratulations",cat:"Relationships",ex:"Baie geluk!"},
+{a:"ek",e:"I/me",cat:"Grammar",ex:"Ek is hier."},
+{a:"jy",e:"you",cat:"Grammar",ex:"Jy is vriendelik."},
+{a:"hy",e:"he",cat:"Grammar",ex:"Hy werk vandag."},
+{a:"sy",e:"she",cat:"Grammar",ex:"Sy is by die huis."},
+{a:"ons",e:"we/us",cat:"Grammar",ex:"Ons gaan winkel toe."},
+{a:"hulle",e:"they/them",cat:"Grammar",ex:"Hulle werk saam."},
+{a:"is",e:"is/am/are",cat:"Grammar",ex:"Ek is gereed."},
+{a:"het",e:"have/has",cat:"Grammar",ex:"Ek het tyd."},
+{a:"wil",e:"want",cat:"Grammar",ex:"Ek wil koffie hê."},
+{a:"kan",e:"can",cat:"Grammar",ex:"Ek kan help."},
+{a:"moet",e:"must/have to",cat:"Grammar",ex:"Ek moet werk."},
+{a:"gaan",e:"go",cat:"Grammar",ex:"Ek gaan huis toe."},
+{a:"doen",e:"do",cat:"Grammar",ex:"Wat doen jy?"},
+{a:"weet",e:"know",cat:"Grammar",ex:"Ek weet nie."},
+{a:"sien",e:"see",cat:"Grammar",ex:"Ek sien jou."},
+{a:"praat",e:"speak/talk",cat:"Grammar",ex:"Ek praat Afrikaans."},
+{a:"eet",e:"eat",cat:"Grammar",ex:"Ek eet nou."},
+{a:"drink",e:"drink",cat:"Grammar",ex:"Ek drink water."},
+{a:"slaap",e:"sleep",cat:"Grammar",ex:"Die baba slaap."}
+];
+
+const lessons = [
+["Greetings & Introductions","Learn your first everyday Afrikaans phrases.","Basics"],
+["People & Family","Talk about yourself and your family.","Family"],
+["Numbers & Time","Numbers, days and useful time expressions.","Numbers"],
+["Food & Drinks","Order food and talk about what you like.","Food"],
+["Around the Home","Learn everyday household vocabulary.","Home"],
+["Shopping","Ask prices, buy things and handle money.","Shopping"],
+["Getting Around","Directions, cars and travel vocabulary.","Travel"],
+["At Work","Useful workplace conversations.","Work"],
+["Mechanical Workshop","Practical engineering and trade vocabulary.","Engineering"],
+["Hydraulics","Pressure, flow, pumps, valves and faults.","Engineering"],
+["Safety","Important safety language.","Work"],
+["Feelings & Relationships","Talk naturally about feelings and people.","Relationships"],
+["Questions","Build useful questions.","Grammar"],
+["Negation","Learn how Afrikaans uses 'nie'.","Grammar"],
+["Present Tense","Talk about what is happening now.","Grammar"],
+["Past Tense","Talk about what happened.","Grammar"],
+["Future Tense","Talk about future plans.","Grammar"],
+["Word Order","Build natural Afrikaans sentences.","Grammar"],
+["Adjectives","Describe people and things.","Grammar"],
+["Everyday Verbs","Master common action words.","Grammar"],
+["Conversation Basics","Hold a simple conversation.","Conversation"],
+["Restaurant Roleplay","Practise ordering food.","Conversation"],
+["Shopping Roleplay","Practise a real shop conversation.","Conversation"],
+["Work Roleplay","Talk to a colleague.","Conversation"],
+["South African Expressions","Learn common everyday expressions.","Conversation"],
+["Emergency Situations","Know what to say when you need help.","Emergency"],
+["Story Time","Read and understand short Afrikaans stories.","Stories"],
+["Intermediate Conversation","Move beyond basic sentences.","Conversation"],
+["Advanced Vocabulary","Expand your vocabulary.","Advanced"],
+["Afrikaans Mastery","Final review and mastery challenge.","Advanced"]
+];
+
+const grammar = [
+["Basic Word Order",
+"Simple Afrikaans sentences commonly follow subject + verb + other information.",
+"Ek werk vandag.\nI work today.\n\nJy drink koffie.\nYou drink coffee."],
+["Negation",
+"Afrikaans commonly uses 'nie' twice when negating a complete sentence.",
+"Ek verstaan nie.\nI don't understand.\n\nEk werk nie vandag nie.\nI am not working today."],
+["Present Tense",
+"The present tense is generally straightforward. The verb form often stays the same.",
+"Ek werk.\nJy werk.\nHy werk.\nOns werk.\nHulle werk."],
+["Past Tense",
+"A common past construction uses 'het' with 'ge-' on the main verb.",
+"Ek het gewerk.\nI worked.\n\nSy het geëet.\nShe ate."],
+["Future Tense",
+"'Sal' is commonly used for future actions.",
+"Ek sal môre werk.\nI will work tomorrow."],
+["Questions",
+"Question words include wat (what), waar (where), wanneer (when), wie (who), hoekom (why), hoe (how).",
+"Waar woon jy?\nWhere do you live?\n\nWat doen jy?\nWhat are you doing?"],
+["Wanting",
+"'Wil' expresses wanting or intention.",
+"Ek wil koffie hê.\nI want coffee.\n\nOns wil huis toe gaan.\nWe want to go home."],
+["Ability",
+"'Kan' expresses ability or possibility.",
+"Ek kan Afrikaans praat.\nI can speak Afrikaans."],
+["Must / Have To",
+"'Moet' expresses obligation.",
+"Ek moet werk.\nI have to work."],
+["To Be",
+"'Is' is used for am/is/are.",
+"Ek is gereed.\nI am ready.\n\nOns is gelukkig.\nWe are happy."]
+];
+
+const conversations = [
+["👋 Meeting Someone",
+[
+["Person A","Hallo! Hoe gaan dit?"],
+["Person B","Dit gaan goed, dankie. Hoe gaan dit met jou?"],
+["Person A","Baie goed. Wat is jou naam?"],
+["Person B","My naam is Johan. Wat is jou naam?"],
+["Person A","My naam is Sarah. Aangename kennis!"],
+["Person B","Aangename kennis!"]
+]],
+["🍔 Restaurant",
+[
+["Waiter","Goeie aand. Wat wil jy hê?"],
+["You","Ek wil asseblief hoender hê."],
+["Waiter","Wil jy iets drink?"],
+["You","Ja, ek wil graag water hê."],
+["Waiter","Enigiets anders?"],
+["You","Nee, dankie."]
+]],
+["🛒 Shopping",
+[
+["Worker","Goeie middag. Kan ek help?"],
+["You","Ja, hoeveel kos dit?"],
+["Worker","Dit kos honderd rand."],
+["You","Dit is te duur."],
+["Worker","Hierdie een is goedkoper."],
+["You","Goed, ek sal hierdie een neem."]
+]],
+["🧑‍🔧 Workshop",
+[
+["Colleague","Wat is fout met die masjien?"],
+["You","Die pomp verloor druk."],
+["Colleague","Het jy die klep nagegaan?"],
+["You","Ja, die klep is toe."],
+["Colleague","En die hidrouliese olie?"],
+["You","Ek gaan dit nou nagaan."]
+]],
+["🆘 Emergency",
+[
+["Person","Kan ek jou help?"],
+["You","Ja, dit is 'n noodgeval."],
+["Person","Wat het gebeur?"],
+["You","Ek benodig 'n dokter."],
+["Person","Ek sal 'n ambulans bel."],
+["You","Baie dankie."]
+]]
+];
+
+const stories = [
+["🌱 Beginner","My Dag",
+"Ek staan vroeg op. Ek drink koffie en eet ontbyt. Daarna gaan ek werk toe. Ek werk saam met my kollegas. In die aand gaan ek huis toe."],
+["🌿 Beginner","By Die Winkel",
+"Ek gaan winkel toe. Ek benodig brood, melk en vleis. Ek vra: Hoeveel kos dit? Die brood is goedkoop, maar die vleis is duur. Ek betaal en gaan huis toe."],
+["🌳 Intermediate","Die Masjien",
+"Die masjien werk nie reg nie. Die pomp verloor druk en daar is 'n klein lek by die pyp. Ek stop die masjien en begin die probleem ondersoek. Veiligheid is belangrik."],
+["🔥 Intermediate","Die Naweek",
+"Saterdagoggend staan ons laat op. Ons drink koffie en maak ontbyt. Daarna gaan ons winkel toe. In die middag kuier ons by familie. Sondag rus ons by die huis."]
+];
+
+const achievements = [
+["🌱 Eerste Stap","Complete your first lesson",()=>state.lessons.length>=1],
+["📚 Student","Complete 5 lessons",()=>state.lessons.length>=5],
+["🎓 Learner","Complete 10 lessons",()=>state.lessons.length>=10],
+["🏆 Scholar","Complete 20 lessons",()=>state.lessons.length>=20],
+["🧠 25 Woorde","Learn 25 words",()=>state.learned.length>=25],
+["📖 100 Woorde","Learn 100 words",()=>state.learned.length>=100],
+["🔥 7 Dae","Reach a 7-day streak",()=>state.streak>=7],
+["🔥 30 Dae","Reach a 30-day streak",()=>state.streak>=30],
+["🎯 Quiz Master","Get 90%+ in a quiz",()=>state.bestQuiz>=90],
+["🧑‍🔧 Workshop","Learn 10 engineering words",()=>state.learned.filter(i=>vocab[i]?.cat==="Engineering").length>=10],
+["🇿🇦 Afrikaans","Learn 200 words",()=>state.learned.length>=200]
+];
+
+let state = JSON.parse(localStorage.getItem("afrikaansState") || "null") || {
+  xp:0,
+  learned:[],
+  lessons:[],
+  streak:0,
+  lastStudy:"",
+  quizCorrect:0,
+  quizTotal:0,
+  bestQuiz:0,
+  dailyDone:"",
+  favourites:[],
+  customWords:[],
+  mistakes:[],
+  dark:false
+};
+
+let currentCategory="All";
+let quizIndex=0;
+let quizScore=0;
+let quizQuestions=[];
+let speedTimer=null;
+let speedEnd=0;
+let speedScore=0;
+
+function save(){
+  localStorage.setItem("afrikaansState",JSON.stringify(state));
+}
+
+function toast(msg){
+  const el=document.getElementById("toast");
+  el.textContent=msg;
+  el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"),2200);
+}
+
+function today(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function updateStreak(){
+  const t=today();
+  if(state.lastStudy===t) return;
+
+  if(state.lastStudy){
+    const last=new Date(state.lastStudy);
+    const now=new Date(t);
+    const diff=Math.round((now-last)/86400000);
+    if(diff===1) state.streak++;
+    else if(diff>1) state.streak=1;
+  }else{
+    state.streak=1;
+  }
+
+  state.lastStudy=t;
+  save();
+}
+
+function addXP(amount){
+  state.xp+=amount;
+  updateStreak();
+  save();
+  updateAll();
+  toast("+"+amount+" XP ⭐");
+}
+
+function levelInfo(){
+  const levels=[
+    ["Beginner",0],
+    ["Explorer",100],
+    ["Starter",250],
+    ["Learner",500],
+    ["Speaker",900],
+    ["Intermediate",1400],
+    ["Conversational",2200],
+    ["Advanced",3500],
+    ["Fluent",5000],
+    ["Afrikaans Master",7500]
+  ];
+
+  let current=levels[0];
+  let next=levels[1];
+
+  for(let i=0;i<levels.length;i++){
+    if(state.xp>=levels[i][1]) current=levels[i];
+    if(state.xp<levels[i][1]){
+      next=levels[i];
+      break;
+    }
+    next=null;
+  }
+
+  return {current,next};
+}
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.screen===id);
+  });
+
+  if(id==="lessons") renderLessons();
+  if(id==="vocab") renderVocab();
+  if(id==="grammar") renderGrammar();
+  if(id==="conversation") renderConversations();
+  if(id==="stories") renderStories();
+  if(id==="progress") renderProgress();
+  if(id==="home") updateHome();
+
+  window.scrollTo(0,0);
+}
+
+function updateAll(){
+  updateHome();
+  renderLessons();
+  renderProgress();
+}
+
+function updateHome(){
+  const info=levelInfo();
+  const percent=Math.min(100,Math.round(state.xp/75));
+
+  document.getElementById("xpStat").textContent=state.xp;
+  document.getElementById("levelStat").textContent=
+    Math.max(1,Math.floor(state.xp/100)+1);
+  document.getElementById("streakStat").textContent=state.streak;
+  document.getElementById("wordsStat").textContent=state.learned.length;
+
+  document.getElementById("overallPercent").textContent=percent+"%";
+  document.getElementById("overallBar").style.width=percent+"%";
+
+  document.getElementById("greeting").textContent=
+    new Date().getHours()<12 ? "Goeie môre!" :
+    new Date().getHours()<18 ? "Goeie middag!" : "Goeie aand!";
+
+  const nextIndex=state.lessons.length;
+  if(nextIndex<lessons.length){
+    document.getElementById("nextLessonTitle").textContent=lessons[nextIndex][0];
+    document.getElementById("nextLessonDesc").textContent=lessons[nextIndex][1];
+  }else{
+    document.getElementById("nextLessonTitle").textContent="Afrikaans Mastery";
+    document.getElementById("nextLessonDesc").textContent="You completed the full learning path!";
+  }
+
+  const challenges=[
+    "Learn 5 new vocabulary words.",
+    "Complete a quiz.",
+    "Complete your next lesson.",
+    "Practise a conversation.",
+    "Learn 5 engineering words.",
+    "Read an Afrikaans story."
+  ];
+
+  document.getElementById("dailyChallengeText").textContent=
+    state.dailyDone===today()
+    ? "Today's challenge is complete! 🎉"
+    : challenges[new Date().getDate()%challenges.length];
+}
+
+function renderLessons(){
+  const list=document.getElementById("lessonList");
+  if(!list)return;
+
+  list.innerHTML=lessons.map((l,i)=>{
+    const completed=state.lessons.includes(i);
+    const unlocked=i<=state.lessons.length;
+
+    return `
+      <div class="lesson ${completed?"completed":""} ${!unlocked?"locked":""}">
+        <div class="lesson-row">
+          <div class="lesson-number">${completed?"✓":i+1}</div>
+          <div style="flex:1">
+            <strong>${l[0]}</strong>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px">${l[1]}</div>
+            <span class="tag" style="margin-top:8px">${l[2]}</span>
+          </div>
+          <button class="btn ${!unlocked?"secondary":""}" onclick="openLesson(${i})">
+            ${completed?"Review":"Start"}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  const done=state.lessons.length;
+  document.getElementById("courseProgressText").textContent=
+    `${done} of ${lessons.length} lessons completed`;
+  document.getElementById("courseProgressBar").style.width=
+    (done/lessons.length*100)+"%";
+}
+
+function openNextLesson(){
+  openLesson(Math.min(state.lessons.length,lessons.length-1));
+}
+
+function openLesson(index){
+  if(index>state.lessons.length){
+    toast("Complete the previous lesson first.");
+    return;
+  }
+
+  const l=lessons[index];
+  const related=vocab.filter(v=>v.cat===l[2]).slice(0,10);
+
+  let html=`
+    <span class="tag">LESSON ${index+1}</span>
+    <h1>${l[0]}</h1>
+    <p>${l[1]}</p>
+    <hr style="border:0;border-top:1px solid var(--border);margin:20px 0">
+    <h3>Key vocabulary</h3>
+  `;
+
+  if(related.length){
+    html+=related.map(v=>`
+      <div class="list-item">
+        <div>
+          <strong>${v.a}</strong>
+          <div style="color:var(--muted)">${v.e}</div>
+        </div>
+        <button class="btn secondary" onclick='speak(${JSON.stringify(v.a)})'>🔊</button>
+      </div>
+    `).join("");
+  }else{
+    html+=`<p>Focus on sentence construction and understanding the lesson topic.</p>`;
+  }
+
+  html+=`
+    <div class="card" style="margin-top:18px;background:#f0f7f7">
+      <h3>💡 Practice</h3>
+      <p>Say the following aloud:</p>
+      <strong>${lessonSentence(l[2])}</strong>
+      <button class="btn secondary" style="margin-top:12px" onclick='speak(${JSON.stringify(lessonSentence(l[2]))})'>🔊 Listen</button>
+    </div>
+    <button class="btn full" onclick="completeLesson(${index})">
+      ${state.lessons.includes(index)?"Lesson already completed":"Complete lesson +50 XP"}
+    </button>
+  `;
+
+  openModal(html);
+}
+
+function lessonSentence(cat){
+  const examples={
+    Basics:"Hallo! Hoe gaan dit?",
+    Family:"My familie is by die huis.",
+    Numbers:"Ek het twee broers.",
+    Food:"Ek wil asseblief water hê.",
+    Home:"Ek gaan huis toe.",
+    Shopping:"Hoeveel kos dit?",
+    Travel:"Draai regs en ry reguit.",
+    Work:"Ek gaan werk toe.",
+    Engineering:"Die pomp verloor druk.",
+    Grammar:"Ek praat Afrikaans.",
+    Conversation:"Kan jy my help?",
+    Emergency:"Ek benodig 'n dokter.",
+    Stories:"Ek gaan huis toe.",
+    Advanced:"Ek verstaan Afrikaans."
+  };
+  return examples[cat]||"Ek leer Afrikaans.";
+}
+
+function completeLesson(index){
+  if(!state.lessons.includes(index)){
+    state.lessons.push(index);
+    addXP(50);
+    save();
+    closeModal();
+    toast("Les voltooi! +50 XP 🎉");
+    updateAll();
+  }else{
+    closeModal();
+  }
+}
+
+function renderVocab(){
+  const search=(document.getElementById("vocabSearch")?.value||"").toLowerCase();
+  const cats=["All",...new Set(vocab.map(v=>v.cat))];
+
+  document.getElementById("vocabTabs").innerHTML=cats.map(c=>`
+    <button class="${currentCategory===c?"active":""}" onclick="setVocabCategory('${c}')">${c}</button>
+  `).join("");
+
+  let items=vocab.filter(v=>{
+    const matchCat=currentCategory==="All"||v.cat===currentCategory;
+    const matchSearch=!search||v.a.toLowerCase().includes(search)||v.e.toLowerCase().includes(search);
+    return matchCat&&matchSearch;
+  });
+
+  items=items.slice(0,100);
+
+  document.getElementById("vocabList").innerHTML=items.length
+    ?items.map((v)=>{
+      const index=vocab.indexOf(v);
+      const learned=state.learned.includes(index);
+      const fav=state.favourites.includes(index);
+
+      return `
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;gap:10px">
+            <div>
+              <span class="tag">${v.cat}</span>
+              <h2 style="margin:9px 0 2px">${v.a}</h2>
+              <div style="color:var(--muted)">${v.e}</div>
+            </div>
+            <div>
+              <button class="btn secondary" onclick='speak(${JSON.stringify(v.a)})'>🔊</button>
+              <button class="btn secondary" onclick="toggleFavourite(${index})">${fav?"⭐":"☆"}</button>
+            </div>
+          </div>
+          <div class="example"><strong>Example:</strong> ${v.ex}</div>
+          <button class="btn ${learned?"secondary":""} full" style="margin-top:10px" onclick="markLearned(${index})">
+            ${learned?"✓ Learned":"Mark as learned +5 XP"}
+          </button>
+        </div>
+      `;
+    }).join("")
+    :`<div class="card"><p>No vocabulary found.</p></div>`;
+}
+
+function setVocabCategory(cat){
+  currentCategory=cat;
+  renderVocab();
+}
+
+function markLearned(index){
+  if(!state.learned.includes(index)){
+    state.learned.push(index);
+    addXP(5);
+    save();
+  }else{
+    toast("Already learned ✓");
+  }
+  renderVocab();
+}
+
+function toggleFavourite(index){
+  if(state.favourites.includes(index)){
+    state.favourites=state.favourites.filter(i=>i!==index);
+  }else{
+    state.favourites.push(index);
+  }
+  save();
+  renderVocab();
+}
+
+function speak(text){
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="af-ZA";
+    u.rate=.82;
+    speechSynthesis.speak(u);
+  }else{
+    toast("Speech is not supported on this device.");
+  }
+}
+
+function startQuiz(){
+  quizQuestions=shuffle([...vocab]).slice(0,10);
+  quizIndex=0;
+  quizScore=0;
+  showScreen("quiz");
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  if(quizIndex>=quizQuestions.length){
+    finishQuiz();
+    return;
+  }
+
+  const q=quizQuestions[quizIndex];
+  const choices=shuffle([
+    q.e,
+    ...shuffle(vocab.filter(v=>v!==q)).slice(0,3).map(v=>v.e)
+  ]);
+
+  document.getElementById("quizContent").innerHTML=`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between">
+        <span class="tag">QUESTION ${quizIndex+1}/10</span>
+        <strong>${quizScore} correct</strong>
+      </div>
+
+      <div class="flashcard" style="min-height:250px">
+        <div style="color:var(--muted)">What does this mean?</div>
+        <div class="flash-word">${q.a}</div>
+        <button class="btn secondary" onclick='speak(${JSON.stringify(q.a)})'>🔊 Hear it</button>
+      </div>
+
+      <div class="answers">
+        ${choices.map(c=>`
+          <button class="answer" onclick='answerQuiz(${JSON.stringify(c)},${JSON.stringify(q.e)})'>${c}</button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function answerQuiz(answer,correct){
+  document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+
+  if(answer===correct){
+    quizScore++;
+    state.quizCorrect++;
+    addXP(10);
+    toast("Correct! ✓");
+  }else{
+    state.mistakes.push(correct);
+    toast("Correct answer: "+correct);
+  }
+
+  state.quizTotal++;
+  save();
+
+  setTimeout(()=>{
+    quizIndex++;
+    renderQuizQuestion();
+  },700);
+}
+
+function finishQuiz(){
+  const percent=Math.round(quizScore/quizQuestions.length*100);
+  state.bestQuiz=Math.max(state.bestQuiz,percent);
+  save();
+
+  document.getElementById("quizContent").innerHTML=`
+    <div class="card" style="text-align:center">
+      <div style="font-size:55px">${percent>=80?"🏆":"🎯"}</div>
+      <h1>Quiz complete!</h1>
+      <h2>${quizScore}/10</h2>
+      <p>${percent}% correct</p>
+      <div class="progress">
+        <div style="width:${percent}%"></div>
+      </div>
+      <div style="margin-top:20px">
+        <button class="btn" onclick="startQuiz()">Try again</button>
+        <button class="btn secondary" onclick="showScreen('home')">Home</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderGrammar(){
+  document.getElementById("grammarList").innerHTML=grammar.map((g,i)=>`
+    <div class="card">
+      <div style="display:flex;gap:12px">
+        <div class="lesson-number">${i+1}</div>
+        <div style="flex:1">
+          <h2>${g[0]}</h2>
+          <p>${g[1]}</p>
+          <div class="example">
+            ${g[2].replace(/\n/g,"<br>")}
+          </div>
+          <button class="btn secondary" style="margin-top:10px" onclick='speak(${JSON.stringify(g[2].split("\n")[0])})'>🔊 Hear example</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderConversations(){
+  document.getElementById("conversationList").innerHTML=conversations.map((c,i)=>`
+    <div class="card">
+      <h2>${c[0]}</h2>
+      <button class="btn full" onclick="openConversation(${i})">Practise conversation</button>
+    </div>
+  `).join("");
+}
+
+function openConversation(index){
+  const c=conversations[index];
+
+  let html=`<h1>${c[0]}</h1><p>Read the conversation aloud and practise both sides.</p>`;
+
+  html+=c[1].map(line=>`
+    <div class="list-item">
+      <div style="flex:1">
+        <strong>${line[0]}</strong>
+        <div style="margin-top:5px">${line[1]}</div>
+      </div>
+      <button class="btn secondary" onclick='speak(${JSON.stringify(line[1])})'>🔊</button>
+    </div>
+  `).join("");
+
+  html+=`
+    <button class="btn full" style="margin-top:18px" onclick="addXP(25);closeModal();toast('Conversation practised! +25 XP')">
+      Complete practice +25 XP
+    </button>
+  `;
+
+  openModal(html);
+}
+
+function renderStories(){
+  document.getElementById("storyList").innerHTML=stories.map((s,i)=>`
+    <div class="card">
+      <span class="tag">${s[0]}</span>
+      <h2>${s[1]}</h2>
+      <p>${s[2]}</p>
+      <button class="btn secondary" onclick='speak(${JSON.stringify(s[2])})'>🔊 Listen</button>
+      <button class="btn" onclick="openStory(${i})">Study story</button>
+    </div>
+  `).join("");
+}
+
+function openStory(index){
+  const s=stories[index];
+
+  openModal(`
+    <span class="tag">${s[0]}</span>
+    <h1>${s[1]}</h1>
+    <div class="card">
+      <p style="line-height:1.8">${s[2]}</p>
+    </div>
+    <button class="btn secondary" onclick='speak(${JSON.stringify(s[2])})'>🔊 Listen</button>
+    <button class="btn full" style="margin-top:12px" onclick="addXP(30);closeModal();toast('Story completed! +30 XP')">
+      Complete story +30 XP
+    </button>
+  `);
+}
+
+function startDailyChallenge(){
+  if(state.dailyDone===today()){
+    toast("Today's challenge is already complete 🎉");
+    return;
+  }
+
+  const type=new Date().getDate()%4;
+
+  if(type===0){
+    startQuiz();
+  }else if(type===1){
+    currentCategory="Basics";
+    showScreen("vocab");
+  }else if(type===2){
+    showScreen("conversation");
+  }else{
+    openNextLesson();
+  }
+
+  state.dailyDone=today();
+  save();
+}
+
+function startMatchGame(){
+  const set=shuffle(vocab).slice(0,5);
+  let html=`
+    <div class="card">
+      <h2>🔗 Word Match</h2>
+      <p>Match each Afrikaans word with the correct English meaning.</p>
+      <div id="matchArea"></div>
+    </div>
+  `;
+
+  document.getElementById("gameArea").innerHTML=html;
+
+  let remaining=set.map((v,i)=>({v,i}));
+  let selected=null;
+
+  function render(){
+    const area=document.getElementById("matchArea");
+
+    if(!remaining.length){
+      area.innerHTML=`
+        <div style="text-align:center;padding:25px">
+          <div style="font-size:50px">🎉</div>
+          <h2>Excellent!</h2>
+          <button class="btn" onclick="startMatchGame()">Play again</button>
+        </div>
+      `;
+      addXP(50);
+      return;
+    }
+
+    area.innerHTML=remaining.map((x,i)=>`
+      <button class="answer" onclick="matchSelect(${i})">
+        <strong>${x.v.a}</strong> — ${x.v.e}
+      </button>
+    `).join("");
+  }
+
+  window.matchSelect=function(i){
+    const x=remaining[i];
+
+    if(!selected){
+      selected=i;
+      toast("Now choose the meaning.");
+      return;
+    }
+
+    if(selected===i){
+      toast("You need to choose another card.");
+      return;
+    }
+
+    const y=remaining[selected];
+
+    if(y.v.e===x.v.e || y.v.a===x.v.a){
+      remaining.splice(Math.max(selected,i),1);
+      remaining.splice(Math.min(selected,i),1);
+      selected=null;
+      addXP(10);
+      render();
+    }else{
+      selected=null;
+      toast("Not a match — try again.");
+    }
+  };
+
+  render();
+}
+
+function startSpeedGame(){
+  speedScore=0;
+  speedEnd=Date.now()+60000;
+
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <h2>⚡ Speed Round</h2>
+      <div style="font-size:35px;text-align:center;margin:20px" id="speedTime">60</div>
+      <div id="speedQuestion"></div>
+    </div>
+  `;
+
+  speedNext();
+
+  clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    const left=Math.max(0,Math.ceil((speedEnd-Date.now())/1000));
+    document.getElementById("speedTime").textContent=left;
+
+    if(left<=0){
+      clearInterval(speedTimer);
+      document.getElementById("speedQuestion").innerHTML=`
+        <div style="text-align:center">
+          <h2>Time!</h2>
+          <h1>${speedScore} correct</h1>
+          <button class="btn" onclick="startSpeedGame()">Again</button>
+        </div>
+      `;
+      addXP(speedScore*5);
+    }
+  },250);
+}
+
+function speedNext(){
+  if(Date.now()>=speedEnd)return;
+
+  const q=vocab[Math.floor(Math.random()*vocab.length)];
+  const choices=shuffle([
+    q.e,
+    ...shuffle(vocab.filter(v=>v!==q)).slice(0,2).map(v=>v.e)
+  ]);
+
+  document.getElementById("speedQuestion").innerHTML=`
+    <h2 style="text-align:center">${q.a}</h2>
+    <div class="answers">
+      ${choices.map(c=>`
+        <button class="answer" onclick="speedAnswer(this,${JSON.stringify(c)},${JSON.stringify(q.e)})">${c}</button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function speedAnswer(btn,answer,correct){
+  if(answer===correct){
+    speedScore++;
+    btn.classList.add("correct");
+  }else{
+    btn.classList.add("wrong");
+  }
+  setTimeout(speedNext,150);
+}
+
+function startScramble(){
+  const q=shuffle(vocab).find(v=>v.a.length>=4);
+  const letters=shuffle(q.a.replace(/\s/g,"").split(""));
+
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <h2>🧩 Word Scramble</h2>
+      <p>Meaning: <strong>${q.e}</strong></p>
+      <h1 style="text-align:center;letter-spacing:5px">${letters.join(" ")}</h1>
+      <input id="scrambleInput" placeholder="Type the Afrikaans word">
+      <button class="btn full" style="margin-top:10px" onclick="checkScramble(${JSON.stringify(q.a)})">Check</button>
+    </div>
+  `;
+}
+
+function checkScramble(correct){
+  const input=document.getElementById("scrambleInput").value.trim().toLowerCase();
+
+  if(input===correct.toLowerCase()){
+    addXP(20);
+    toast("Correct! 🎉");
+    setTimeout(startScramble,500);
+  }else{
+    toast("Not quite. Correct: "+correct);
+  }
+}
+
+function startMissingWord(){
+  const examples=[
+    ["Ek ___ Afrikaans.","praat",["praat","eet","drink"]],
+    ["Die pomp verloor ___.","druk",["druk","water","werk"]],
+    ["Ek gaan ___ toe.","huis",["huis","rooi","gister"]],
+    ["Kan jy my ___?","help",["help","eet","sien"]],
+    ["Ek ___ koffie hê.","wil",["wil","is","het"]]
+  ];
+
+  const q=examples[Math.floor(Math.random()*examples.length)];
+
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <h2>✍️ Missing Word</h2>
+      <h1 style="text-align:center">${q[0]}</h1>
+      <div class="answers">
+        ${q[2].map(c=>`
+          <button class="answer" onclick="missingAnswer(${JSON.stringify(c)},${JSON.stringify(q[1])})">${c}</button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function missingAnswer(answer,correct){
+  if(answer===correct){
+    addXP(15);
+    toast("Correct! ✓");
+    setTimeout(startMissingWord,600);
+  }else{
+    toast("Try again.");
+  }
+}
+
+function renderProgress(){
+  const info=levelInfo();
+
+  document.getElementById("pXP").textContent=state.xp;
+  document.getElementById("pWords").textContent=state.learned.length;
+  document.getElementById("pLessons").textContent=state.lessons.length;
+
+  const accuracy=state.quizTotal
+    ?Math.round(state.quizCorrect/state.quizTotal*100)
+    :0;
+
+  document.getElementById("pQuiz").textContent=accuracy+"%";
+
+  document.getElementById("levelName").textContent=info.current[0];
+
+  if(info.next){
+    const currentXP=info.current[1];
+    const nextXP=info.next[1];
+    const p=Math.min(100,((state.xp-currentXP)/(nextXP-currentXP))*100);
+
+    document.getElementById("levelBar").style.width=p+"%";
+    document.getElementById("levelProgress").textContent=
+      `${state.xp-currentXP} / ${nextXP-currentXP} XP to ${info.next[0]}`;
+  }else{
+    document.getElementById("levelBar").style.width="100%";
+    document.getElementById("levelProgress").textContent="Maximum level reached!";
+  }
+
+  document.getElementById("streakMessage").textContent=
+    state.streak
+    ?`You're on a ${state.streak}-day learning streak! 🔥`
+    :"Complete a lesson today to start your streak.";
+
+  document.getElementById("achievements").innerHTML=achievements.map(a=>{
+    const unlocked=a[2]();
+    return `
+      <div class="card" style="opacity:${unlocked?1:.45}">
+        <div style="display:flex;gap:13px;align-items:center">
+          <div style="font-size:30px">${a[0].split(" ")[0]}</div>
+          <div>
+            <strong>${a[0].substring(a[0].indexOf(" ")+1)}</strong>
+            <div style="color:var(--muted);font-size:13px">${a[1]}</div>
+          </div>
+          <div style="margin-left:auto">${unlocked?"🏆":"🔒"}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function openModal(html){
+  document.getElementById("modalContent").innerHTML=html;
+  document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(event){
+  if(!event || event.target===document.getElementById("modal")){
+    document.getElementById("modal").classList.remove("show");
+  }
+}
+
+function toggleDark(){
+  state.dark=!state.dark;
+  document.body.classList.toggle("dark",state.dark);
+  save();
+}
+
+function shuffle(arr){
+  return [...arr].sort(()=>Math.random()-.5);
+}
+
+/* ============================================================
+   SETTINGS / EXPORT / IMPORT
+   ============================================================ */
+
+function openSettings(){
+  openModal(`
+    <h1>⚙️ Settings</h1>
+
+    <div class="card">
+      <h3>📦 Your data</h3>
+      <p>Your progress is stored locally on this device.</p>
+      <button class="btn full" onclick="exportData()">Export progress</button>
+      <button class="btn secondary full" style="margin-top:8px" onclick="document.getElementById('importFile').click()">Import progress</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+    </div>
+
+    <div class="card">
+      <h3>⚠️ Reset</h3>
+      <p>This permanently clears your local learning progress.</p>
+      <button class="btn danger full" onclick="resetProgress()">Reset all progress</button>
+    </div>
+  `);
+}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="afrikaans-learning-progress.json";
+  a.click();
+  URL.revokeObjectURL(url);
+  toast("Progress exported.");
+}
+
+function importData(event){
+  const file=event.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=e=>{
+    try{
+      const imported=JSON.parse(e.target.result);
+
+      if(!imported || typeof imported!=="object")throw new Error();
+
+      state={...state,...imported};
+      save();
+      closeModal();
+      updateAll();
+      toast("Progress imported!");
+    }catch{
+      toast("Invalid progress file.");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function resetProgress(){
+  if(confirm("Reset ALL Afrikaans learning progress?")){
+    localStorage.removeItem("afrikaansState");
+    location.reload();
+  }
+}
+
+/* ============================================================
+   ADD SETTINGS BUTTON TO HEADER
+   ============================================================ */
+
+document.querySelector(".header-row").insertAdjacentHTML(
+  "beforeend",
+  `<button class="icon-btn" onclick="openSettings()">⚙️</button>`
+);
+
+/* ============================================================
+   STARTUP
+   ============================================================ */
+
+document.body.classList.toggle("dark",state.dark);
+
+updateHome();
+renderLessons();
+renderVocab();
+renderGrammar();
+renderConversations();
+renderStories();
+renderProgress();
+
+/* Keyboard shortcut */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeModal();
+});
+
+</script>
+
+</body>
+</html>
+```

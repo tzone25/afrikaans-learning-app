@@ -1,202 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0b0b">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Afrikaans — Speak Afrikaans</title>
-<style>
-:root{--bg:#080808;--panel:#121212;--panel2:#181818;--line:#2a2a2a;--text:#f7f7f7;--muted:#9c9c9c;--orange:#ff7900;--green:#36c275;--red:#e05252;--blue:#5fa8ff}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{min-height:100vh}
-button,input{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:92px}
-header{position:sticky;top:0;z-index:20;padding:16px 16px 12px;background:rgba(8,8,8,.94);backdrop-filter:blur(15px);border-bottom:1px solid #181818}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.logo{font-size:23px;font-weight:900}.stats{display:flex;gap:7px}.stat{background:#151515;border:1px solid var(--line);padding:7px 10px;border-radius:999px;font-size:13px}
-main{padding:14px 15px}.hero{background:linear-gradient(145deg,#1b1b1b,#101010);border:1px solid var(--line);border-radius:24px;padding:21px;margin-bottom:18px}.hero h1{margin:0 0 7px;font-size:29px}.hero p{margin:0 0 17px;color:#bbb;line-height:1.45}
-h2{font-size:19px;margin:24px 0 11px}h3{margin:0 0 7px}.progress{height:9px;background:#282828;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--orange);border-radius:99px;transition:.3s}
-.btn{border:0;border-radius:15px;padding:14px 17px;font-weight:800}.primary{background:var(--orange);color:#111;width:100%}.secondary{background:#202020;color:white;border:1px solid #343434}.small{padding:9px 12px;font-size:13px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.grid{display:grid;gap:10px}
-.unit{width:100%;display:flex;align-items:center;text-align:left;gap:13px;background:var(--panel);border:1px solid var(--line);color:white;border-radius:19px;padding:14px}.unit.done{border-color:#285a3d}.unit.lock{opacity:.48}.unitIcon{width:50px;height:50px;border-radius:16px;background:#232323;display:grid;place-items:center;font-size:23px;flex:none}.grow{flex:1}.unit b{display:block;margin-bottom:4px}.unit small{color:var(--muted);line-height:1.3}.xp{color:#ff9a43;font-size:12px;font-weight:700}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:21px;padding:19px;margin:11px 0}.center{text-align:center}.muted{color:var(--muted)}.orange{color:#ff9a43}.big{font-size:47px;font-weight:900}.phrase{font-size:31px;font-weight:900;line-height:1.2;margin:12px 0}.meaning{font-size:18px;color:#ddd}.example{font-size:17px;line-height:1.45;color:#ddd}.speaker{display:inline-flex;align-items:center;gap:8px;margin:12px 0}
-.choice{width:100%;text-align:left;padding:15px;border-radius:15px;border:2px solid #303030;background:#181818;color:white}.choice.correct{border-color:var(--green);background:#10351e}.choice.wrong{border-color:var(--red);background:#321414}.choice.disabled{pointer-events:none}
-.feedback{padding:14px;border-radius:15px;margin:12px 0}.good{background:#10351e;color:#baf0cf}.bad{background:#321414;color:#ffc5c5}
-.answer{display:flex;gap:8px}.answer input{flex:1;background:#0d0d0d;border:1px solid #3a3a3a;color:white;border-radius:14px;padding:14px;outline:none}.answer input:focus{border-color:var(--orange)}
-.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:58px;padding:12px;background:#0d0d0d;border-radius:15px;border:1px dashed #333}.tile{background:#242424;color:#fff;border:1px solid #3a3a3a;padding:10px 12px;border-radius:12px}.tile.used{opacity:.25}.letter{font-size:21px;font-weight:800}
-.nav{position:fixed;z-index:30;bottom:0;left:0;right:0;background:rgba(11,11,11,.97);border-top:1px solid #292929}.navin{max-width:760px;margin:auto;display:flex;justify-content:space-around}.nav button{background:none;border:0;color:#777;padding:10px 5px 9px;min-width:70px;font-size:11px}.nav button.active{color:var(--orange)}.nav i{font-style:normal;font-size:22px;display:block}
-.lessonHead{margin-bottom:12px}.dots{display:flex;gap:4px;margin-top:9px}.dot{height:5px;flex:1;border-radius:99px;background:#303030}.dot.on{background:var(--orange)}
-.listItem{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #292929}.listItem:last-child{border-bottom:0}.wordGrow{flex:1}.wordGrow b{display:block}.wordGrow span{color:#aaa;font-size:13px}
-.search{width:100%;background:#111;border:1px solid #333;border-radius:14px;color:#fff;padding:13px;margin-bottom:8px}
-.badge{display:inline-block;padding:5px 8px;border-radius:8px;background:#242424;color:#ff9a43;font-size:11px;font-weight:800}.achievement{display:flex;gap:13px;align-items:center}.achievement .medal{font-size:29px}.achievement small{color:#999}
-.hidden{display:none!important}.hr{height:1px;background:#292929;margin:18px 0}.toast{position:fixed;z-index:100;left:50%;top:75px;transform:translateX(-50%);background:#242424;border:1px solid #444;padding:10px 15px;border-radius:999px;box-shadow:0 8px 30px #000}
-select{background:#181818;color:white;border:1px solid #333;border-radius:12px;padding:10px}
-.statline{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.statbox{background:#181818;border:1px solid #2a2a2a;border-radius:15px;padding:13px;text-align:center}.statbox b{display:block;font-size:23px}.statbox small{color:#999}
-@media(min-width:600px){main{padding:20px}.unit{padding:16px}.hero{padding:26px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TaalTrek - Learn Afrikaans</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- This links the app to the download manifest -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-<div class="app">
-<header><div class="top"><div><div class="logo">Afrikaans 🇿🇦</div><div class="muted" style="font-size:12px">Speak it. Understand it. Use it.</div></div><div class="stats"><span class="stat">🔥 <b id="streak">0</b></span><span class="stat">⭐ <b id="xp">0</b></span></div></div></header>
-<main id="main"></main>
-</div>
-<nav class="nav"><div class="navin">
-<button data-page="learn" class="active"><i>🏠</i>Learn</button>
-<button data-page="practice"><i>🎯</i>Practice</button>
-<button data-page="words"><i>📖</i>Words</button>
-<button data-page="progress"><i>📈</i>Progress</button>
-</div></nav>
+    <div class="app-container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <h1>🇿🇦 TaalTrek</h1>
+            <p>Master Afrikaans, one step at a time.</p>
+            <button id="start-btn" class="primary-btn">Start Lesson 1: Basics</button>
+        </div>
 
-<script>
-const course=[
-{title:"Basics",icon:"👋",desc:"Greetings and essential phrases",units:[
-["Hello & greetings",[["Hallo","Hello","Hallo! Hoe gaan dit?","Hello! How are you?"],["Goeie môre","Good morning","Goeie môre!","Good morning!"],["Goeie middag","Good afternoon","Goeie middag!","Good afternoon!"],["Goeie naand","Good evening","Goeie naand!","Good evening!"],["Totsiens","Goodbye","Totsiens!","Goodbye!"],["Sien jou later","See you later","Sien jou later.","See you later."]]],
-["Please & thanks",[["Dankie","Thank you","Baie dankie.","Thank you very much."],["Baie dankie","Thank you very much","Baie dankie vir jou hulp.","Thank you very much for your help."],["Asseblief","Please","Een koffie, asseblief.","One coffee, please."],["Ja","Yes","Ja, ek verstaan.","Yes, I understand."],["Nee","No","Nee, dankie.","No, thank you."],["Jammer","Sorry","Jammer, ek is laat.","Sorry, I am late."]]],
-["How are you?",[["Hoe gaan dit?","How are you?","Hoe gaan dit met jou?","How are you?"],["Dit gaan goed.","I am doing well.","Dit gaan goed, dankie.","I am doing well, thank you."],["Dit gaan baie goed.","I am doing very well.","Dit gaan baie goed vandag.","I am doing very well today."],["Dit gaan nie goed nie.","I am not doing well.","Dit gaan nie goed nie.","I am not doing well."],["En met jou?","And you?","Dit gaan goed. En met jou?","I'm well. And you?"]]]
-]},
-{title:"Me & You",icon:"🙋",desc:"Introduce yourself and ask questions",units:[
-["Introduce yourself",[["My naam is...","My name is...","My naam is Trav.","My name is Trav."],["Wat is jou naam?","What is your name?","Wat is jou naam?","What is your name?"],["Ek is van Australië.","I am from Australia.","Ek is van Australië.","I am from Australia."],["Waar is jy van?","Where are you from?","Waar is jy van?","Where are you from?"],["Ek is 'n ...","I am a ...","Ek is 'n werktuigkundige.","I am a tradesperson."]]],
-["People",[["ek","I","Ek werk.","I work."],["jy","you","Jy werk.","You work."],["hy","he","Hy werk.","He works."],["sy","she","Sy werk.","She works."],["ons","we","Ons werk saam.","We work together."],["hulle","they","Hulle werk daar.","They work there."]]],
-["Questions",[["wat","what","Wat doen jy?","What are you doing?"],["waar","where","Waar is dit?","Where is it?"],["wie","who","Wie is hy?","Who is he?"],["wanneer","when","Wanneer gaan jy?","When are you going?"],["hoekom","why","Hoekom is jy laat?","Why are you late?"],["hoe","how","Hoe doen ek dit?","How do I do it?"]]]
-]},
-{title:"Everyday Life",icon:"🏠",desc:"Useful phrases you can use every day",units:[
-["Daily actions",[["Ek werk.","I work.","Ek werk vandag.","I work today."],["Ek eet.","I eat.","Ek eet nou.","I am eating now."],["Ek drink.","I drink.","Ek drink water.","I drink water."],["Ek slaap.","I sleep.","Ek slaap vroeg.","I sleep early."],["Ek gaan.","I go.","Ek gaan nou.","I am going now."],["Ek kom.","I come.","Ek kom later.","I am coming later."]]],
-["Feelings",[["Ek is moeg.","I am tired.","Ek is baie moeg.","I am very tired."],["Ek is honger.","I am hungry.","Ek is honger.","I am hungry."],["Ek is dors.","I am thirsty.","Ek is dors.","I am thirsty."],["Ek is gelukkig.","I am happy.","Ek is baie gelukkig.","I am very happy."],["Ek is bekommerd.","I am worried.","Ek is bekommerd.","I am worried."],["Ek is besig.","I am busy.","Ek is vandag besig.","I am busy today."]]],
-["Around the house",[["huis","house","My huis is hier.","My house is here."],["deur","door","Maak die deur toe.","Close the door."],["venster","window","Maak die venster oop.","Open the window."],["tafel","table","Die boek is op die tafel.","The book is on the table."],["stoel","chair","Sit op die stoel.","Sit on the chair."]]]
-]},
-{title:"Food & Shopping",icon:"☕",desc:"Order, buy and ask prices",units:[
-["Café & restaurant",[["Ek wil graag...","I would like...","Ek wil graag koffie hê.","I would like coffee."],["koffie","coffee","Een koffie, asseblief.","One coffee, please."],["water","water","Kan ek water kry?","Can I get water?"],["melk","milk","Koffie met melk, asseblief.","Coffee with milk, please."],["Die rekening, asseblief.","The bill, please.","Die rekening, asseblief.","The bill, please."],["Dit is lekker.","It is tasty.","Die kos is lekker.","The food is tasty."]]],
-["Shopping",[["Wat kos dit?","How much does it cost?","Wat kos dit?","How much does it cost?"],["Dit is te duur.","It is too expensive.","Dit is te duur vir my.","It is too expensive for me."],["goedkoop","cheap","Dit is goedkoop.","It is cheap."],["duur","expensive","Dit is baie duur.","It is very expensive."],["Ek wil dit hê.","I want this.","Ek wil dit hê.","I want this."],["Kan ek betaal?","Can I pay?","Kan ek met kaart betaal?","Can I pay by card?"]]]
-]},
-{title:"Numbers & Time",icon:"🔢",desc:"Count and talk about time",units:[
-["Numbers 1–10",[["een","one","Een koffie.","One coffee."],["twee","two","Twee minute.","Two minutes."],["drie","three","Drie mense.","Three people."],["vier","four","Vier dae.","Four days."],["vyf","five","Vyf minute.","Five minutes."],["ses","six","Ses uur.","Six o'clock."],["sewe","seven","Sewe dae.","Seven days."],["agt","eight","Agt uur.","Eight o'clock."],["nege","nine","Nege mense.","Nine people."],["tien","ten","Tien minute.","Ten minutes."]]],
-["11–20",[["elf","eleven","Elf uur.","Eleven o'clock."],["twaalf","twelve","Twaalf minute.","Twelve minutes."],["dertien","thirteen","Dertien mense.","Thirteen people."],["veertien","fourteen","Veertien dae.","Fourteen days."],["vyftien","fifteen","Vyftien minute.","Fifteen minutes."],["sestien","sixteen","Sestien uur.","Sixteen o'clock."],["sewentien","seventeen","Sewentien mense.","Seventeen people."],["agtien","eighteen","Agtien dae.","Eighteen days."],["negentien","nineteen","Negentien rand.","Nineteen rand."],["twintig","twenty","Twintig minute.","Twenty minutes."]]],
-["Time words",[["vandag","today","Vandag is Maandag.","Today is Monday."],["môre","tomorrow","Sien jou môre.","See you tomorrow."],["gister","yesterday","Ek was daar gister.","I was there yesterday."],["nou","now","Ek gaan nou.","I am going now."],["later","later","Sien jou later.","See you later."],["vroeg","early","Ek staan vroeg op.","I get up early."]]]
-]},
-{title:"Sentence Builder",icon:"🧩",desc:"Build real Afrikaans sentences",units:[
-["Want, can, must",[["wil","want","Ek wil leer.","I want to learn."],["kan","can","Ek kan dit doen.","I can do it."],["moet","must / have to","Ek moet gaan.","I must go."],["mag","may / be allowed to","Mag ek inkom?","May I come in?"],["hou van","like","Ek hou van koffie.","I like coffee."]]],
-["Negatives",[["nie","not","Ek weet nie.","I don't know."],["Ek verstaan nie.","I don't understand.","Ek verstaan nie.","I don't understand."],["Ek kan nie... nie.","I cannot...","Ek kan nie vandag kom nie.","I cannot come today."],["Ek wil nie... nie.","I don't want to...","Ek wil nie gaan nie.","I don't want to go."]]],
-["Useful connectors",[["en","and","Ek eet en drink.","I eat and drink."],["maar","but","Ek wil, maar ek kan nie.","I want to, but I can't."],["want","because","Ek bly hier want dit is lekker.","I stay here because it is nice."],["ook","also","Ek wil ook gaan.","I also want to go."],["baie","very / many","Baie dankie.","Thank you very much."]]]
-]},
-{title:"Past & Future",icon:"⏳",desc:"Talk about what happened and what will happen",units:[
-["Past",[["Ek het gewerk.","I worked / have worked.","Ek het gister gewerk.","I worked yesterday."],["Ek het geëet.","I ate / have eaten.","Ek het reeds geëet.","I have already eaten."],["Ek het gegaan.","I went / have gone.","Ek het winkel toe gegaan.","I went to the shop."],["Ek was daar.","I was there.","Ek was daar gister.","I was there yesterday."]]],
-["Future",[["Ek sal gaan.","I will go.","Ek sal môre gaan.","I will go tomorrow."],["Ek sal werk.","I will work.","Ek sal later werk.","I will work later."],["Ek gaan werk.","I am going to work.","Ek gaan nou werk.","I am going to work now."],["Ons sal sien.","We will see.","Ons sal môre sien.","We will see tomorrow."]]]
-]},
-{title:"Real Conversations",icon:"🗣️",desc:"Put everything together and start speaking",units:[
-["At work",[["Wat doen jy?","What are you doing?","Wat doen jy vandag?","What are you doing today?"],["Ek werk aan die masjien.","I am working on the machine.","Ek werk aan die masjien.","I am working on the machine."],["Kan jy help?","Can you help?","Kan jy my help, asseblief?","Can you help me, please?"],["Ja, ek kom nou.","Yes, I am coming now.","Ja, ek kom nou.","Yes, I am coming now."],["Die masjien werk nie.","The machine isn't working.","Die masjien werk nie.","The machine isn't working."]]],
-["Social conversation",[["Wat gaan aan?","What's going on?","Hallo! Wat gaan aan?","Hello! What's going on?"],["Alles is goed.","Everything is good.","Alles is goed, dankie.","Everything is good, thank you."],["Wat maak jy die naweek?","What are you doing this weekend?","Wat maak jy die naweek?","What are you doing this weekend?"],["Kom ons gaan.","Let's go.","Kom ons gaan nou.","Let's go now."],["Sien jou môre.","See you tomorrow.","Sien jou môre!","See you tomorrow!"]]],
-["Survival conversation",[["Ek verstaan nie.","I don't understand.","Ek verstaan nie wat jy sê nie.","I don't understand what you are saying."],["Praat stadig, asseblief.","Speak slowly, please.","Praat stadig, asseblief.","Speak slowly, please."],["Kan jy dit herhaal?","Can you repeat that?","Kan jy dit asseblief herhaal?","Can you please repeat that?"],["Wat beteken dit?","What does that mean?","Wat beteken hierdie woord?","What does this word mean?"],["Ek leer Afrikaans.","I am learning Afrikaans.","Ek leer Afrikaans omdat ek wil praat.","I am learning Afrikaans because I want to speak."]]]
-]},
-{title:"Fluency Builder",icon:"🏆",desc:"Longer phrases and speaking confidence",units:[
-["High-frequency phrases",[["Ek dink...","I think...","Ek dink dit is goed.","I think it is good."],["Ek weet...","I know...","Ek weet waar dit is.","I know where it is."],["Ek dink nie... nie.","I don't think...","Ek dink nie dit is reg nie.","I don't think it is right."],["Miskien","Maybe","Miskien gaan ons môre.","Maybe we will go tomorrow."],["Natuurlik","Of course","Natuurlik kan jy kom.","Of course you can come."]]],
-["Speak in sentences",[["Ek wil Afrikaans leer.","I want to learn Afrikaans.","Ek wil Afrikaans leer sodat ek met mense kan praat.","I want to learn Afrikaans so I can speak with people."],["Ek probeer.","I am trying.","Ek probeer elke dag Afrikaans praat.","I try to speak Afrikaans every day."],["Ek maak foute.","I make mistakes.","Ek maak foute, maar ek leer.","I make mistakes, but I learn."],["Ek begin verstaan.","I am starting to understand.","Ek begin al hoe meer verstaan.","I am starting to understand more and more."]]]
-]}
-];
+        <!-- Lesson Screen -->
+        <div id="lesson-screen" class="screen">
+            <div class="progress-bar"><div id="progress-fill"></div></div>
+            <h2 id="question-text">Question</h2>
+            <div id="options-container">
+                <!-- Buttons will be injected here by JavaScript -->
+            </div>
+            <div id="feedback-area" class="hidden">
+                <h3 id="feedback-text"></h3>
+                <button id="next-btn" class="primary-btn">Next</button>
+            </div>
+        </div>
 
-let flatUnits=[];
-course.forEach((section,si)=>section.units.forEach((u,ui)=>flatUnits.push({si,ui,title:u[0],items:u[1],icon:section.icon,desc:section.desc})));
-
-const defaults={xp:0,streak:0,lastDay:"",done:[],mastery:{},seen:{},settings:{rate:.78},achievements:[]};
-let state=JSON.parse(localStorage.getItem("afrikaans_complete")||"null")||structuredClone(defaults);
-let page="learn",lessonIndex=0,questionIndex=0,lessonScore=0,lessonCorrect=0,answerLocked=false,practiceItem=null;
-
-function save(){localStorage.setItem("afrikaans_complete",JSON.stringify(state));updateStats()}
-function updateStats(){document.getElementById("xp").textContent=state.xp;document.getElementById("streak").textContent=state.streak}
-function speak(text){
- if(!("speechSynthesis"in window)){toast("Your browser does not support speech audio.");return}
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);u.lang="af-ZA";u.rate=Number(state.settings.rate)||.78;u.pitch=1;
- speechSynthesis.speak(u);
-}
-function toast(t){const x=document.createElement("div");x.className="toast";x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),1600)}
-function setStreak(){
- const today=new Date().toISOString().slice(0,10);
- if(state.lastDay===today)return;
- const yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
- state.streak=state.lastDay===yesterday?state.streak+1:1;state.lastDay=today;
-}
-function esc(s){return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;")}
-function render(){
- updateStats();
- document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- if(page==="learn")renderLearn();else if(page==="practice")renderPractice();else if(page==="words")renderWords();else renderProgress();
-}
-function renderLearn(){
- const completed=state.done.length,total=flatUnits.length,pct=Math.round(completed/total*100);
- document.getElementById("main").innerHTML=`<div class="hero"><h1>Learn to speak Afrikaans.</h1><p>A complete speaking-first course: vocabulary, listening, translation, sentence building and real conversations.</p><div class="row"><b>${completed}/${total} lessons</b><span class="orange">${pct}%</span></div><div class="progress" style="margin-top:9px"><div class="fill" style="width:${pct}%"></div></div></div>
- ${course.map((s,si)=>`<h2>${s.icon} ${s.title}</h2>${s.units.map((u,ui)=>{let idx=flatUnits.findIndex(x=>x.si===si&&x.ui===ui),done=state.done.includes(idx),locked=idx>0&&!state.done.includes(idx-1);return `<button class="unit ${done?"done":""} ${locked?"lock":""}" onclick="${locked?`toast('Finish the previous lesson first.')`:`startLesson(${idx})`}"><div class="unitIcon">${done?"✅":locked?"🔒":s.icon}</div><div class="grow"><b>${idx+1}. ${u[0]}</b><small>${s.desc}</small></div><div class="xp">${done?"MASTERED":"+"+(15+Math.min(25,u[1].length*2))+" XP"}</div></button>`}).join("")}`).join("")}`;
-}
-function startLesson(i){lessonIndex=i;questionIndex=0;lessonScore=0;lessonCorrect=0;answerLocked=false;page="lesson";renderLesson()}
-function dots(n,i){return `<div class="dots">${Array.from({length:n},(_,x)=>`<div class="dot ${x<=i?"on":""}"></div>`).join("")}</div>`}
-function renderLesson(){
- const l=flatUnits[lessonIndex],it=l.items[questionIndex];
- document.getElementById("main").innerHTML=`<div class="lessonHead"><div class="row"><button class="btn secondary small" onclick="page='learn';render()">← Exit</button><b>${questionIndex+1}/${l.items.length}</b><span class="orange">⭐ ${15+Math.min(25,l.items.length*2)}</span></div>${dots(l.items.length,questionIndex)}</div>
- <div class="card center"><span class="badge">LISTEN & LEARN</span><div class="phrase">${it[0]}</div><button class="btn secondary speaker" onclick="speak(${JSON.stringify(it[0])})">🔊 Hear Afrikaans</button><div class="meaning">${it[1]}</div><div class="hr"></div><div class="example">${it[2]}</div><div class="muted" style="margin-top:5px">${it[3]}</div></div>
- <div class="card"><div class="muted">What does <b class="orange">${it[0]}</b> mean?</div><div class="grid" style="margin-top:12px">${makeChoices(it[1]).map(x=>`<button class="choice" onclick="chooseMeaning(this,${JSON.stringify(x)},${JSON.stringify(it[1])})">${esc(x)}</button>`).join("")}</div></div>`;
- speak(it[0]);
-}
-function makeChoices(correct){
- const pool=[...new Set(flatUnits.flatMap(u=>u.items.map(x=>x[1])))].filter(x=>x!==correct);
- let arr=[correct];while(arr.length<4&&pool.length){let i=Math.floor(Math.random()*pool.length);arr.push(pool.splice(i,1)[0])}return arr.sort(()=>Math.random()-.5);
-}
-function chooseMeaning(btn,value,correct){
- if(answerLocked)return;answerLocked=true;
- const ok=value===correct;btn.classList.add(ok?"correct":"wrong");
- document.querySelectorAll(".choice").forEach(b=>b.classList.add("disabled"));
- if(ok){lessonCorrect++;lessonScore+=5;state.xp+=5;btn.insertAdjacentHTML("afterend",`<div class="feedback good">✓ Correct! +5 XP</div>`)}else{btn.insertAdjacentHTML("afterend",`<div class="feedback bad">✗ The answer is <b>${esc(correct)}</b></div>`)}
- const key=flatUnits[lessonIndex].items[questionIndex][0];state.mastery[key]=Math.min(5,(state.mastery[key]||0)+(ok?1:0));state.seen[key]=(state.seen[key]||0)+1;save();
- setTimeout(nextQuestion,850);
-}
-function nextQuestion(){questionIndex++;answerLocked=false;if(questionIndex<flatUnits[lessonIndex].items.length)renderLesson();else finishLesson()}
-function finishLesson(){
- const l=flatUnits[lessonIndex];if(!state.done.includes(lessonIndex))state.done.push(lessonIndex);
- const bonus=15+Math.min(25,l.items.length*2);state.xp+=bonus;setStreak();
- if(state.streak>=3&&!state.achievements.includes("3day"))state.achievements.push("3day");
- if(state.done.length>=5&&!state.achievements.includes("5lessons"))state.achievements.push("5lessons");
- if(state.done.length===flatUnits.length&&!state.achievements.includes("all"))state.achievements.push("all");
- save();
- document.getElementById("main").innerHTML=`<div class="card center"><div class="big">🎉</div><h1>Lesson complete!</h1><p>You got <b>${lessonCorrect}/${l.items.length}</b> correct.</p><p>Lesson bonus: <span class="orange">+${bonus} XP</span></p><p class="muted">Keep speaking the phrases aloud. That is where the learning sticks.</p><button class="btn primary" onclick="page='learn';render()">Continue</button></div>`;
-}
-function renderPractice(){
- const pool=flatUnits.flatMap(u=>u.items).filter(x=>state.seen[x[0]]||state.done.length===0);
- practiceItem=pool[Math.floor(Math.random()*pool.length)];
- const it=practiceItem;
- document.getElementById("main").innerHTML=`<div class="hero"><h1>Practice</h1><p>Random recall practice. Don't look at the meaning until you've tried.</p></div>
- <div class="card center"><span class="badge">QUICK PRACTICE</span><div class="phrase">${it[0]}</div><button class="btn secondary speaker" onclick="speak(${JSON.stringify(it[0])})">🔊 Listen</button><details><summary>Show meaning</summary><p class="meaning" style="margin-top:14px">${it[1]}</p></details><div class="hr"></div><div class="example">${it[2]}</div><div class="muted">${it[3]}</div></div>
- <button class="btn primary" onclick="practiceQuiz()">Test me →</button>`;
-}
-function practiceQuiz(){
- const it=practiceItem||flatUnits[0].items[0];
- document.getElementById("main").innerHTML=`<div class="card"><div class="muted">Translate this into Afrikaans:</div><div class="phrase">${it[1]}</div><div class="answer"><input id="typed" autocomplete="off" placeholder="Type your answer..."><button class="btn primary" style="width:auto" onclick="checkTyped()">Check</button></div><div id="result"></div></div><button class="btn secondary" style="width:100%;margin-top:8px" onclick="renderPractice()">Skip / another</button>`;
- document.getElementById("typed").focus();
- document.getElementById("typed").addEventListener("keydown",e=>{if(e.key==="Enter")checkTyped()});
-}
-function normalize(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[.,!?']/g,"").replace(/\s+/g," ").trim()}
-function checkTyped(){
- const input=document.getElementById("typed"),res=document.getElementById("result");if(!input||input.dataset.done)return;
- input.dataset.done="1";const expected=normalize(practiceItem[0]),got=normalize(input.value),ok=got===expected||got.includes(expected)||expected.includes(got)&&got.length>3;
- if(ok){state.xp+=10;res.innerHTML=`<div class="feedback good">✓ Correct! <b>${esc(practiceItem[0])}</b><br>+10 XP</div>`}else res.innerHTML=`<div class="feedback bad">Not quite.<br>Correct answer: <b>${esc(practiceItem[0])}</b></div>`;
- state.seen[practiceItem[0]]=(state.seen[practiceItem[0]]||0)+1;save();
-}
-function renderWords(){
- const all=[...new Map(flatUnits.flatMap(u=>u.items).map(x=>[x[0],x])).values()];
- document.getElementById("main").innerHTML=`<div class="hero"><h1>My words</h1><p>Every phrase you encounter is saved here. Use the speaker to practise pronunciation.</p><input class="search" id="wordSearch" placeholder="Search Afrikaans or English..." oninput="filterWords()"><div id="wordList"></div></div>`;
- window.wordData=all;filterWords();
-}
-function filterWords(){
- const q=(document.getElementById("wordSearch")?.value||"").toLowerCase();
- const list=window.wordData.filter(x=>(x[0]+" "+x[1]).toLowerCase().includes(q));
- document.getElementById("wordList").innerHTML=list.map(x=>`<div class="listItem"><div class="wordGrow"><b>${esc(x[0])}</b><span>${esc(x[1])} · practised ${state.seen[x[0]]||0}×</span></div><button class="btn secondary small" onclick="speak(${JSON.stringify(x[0])})">🔊</button></div>`).join("")||`<p class="muted">No matching words.</p>`;
-}
-function renderProgress(){
- const total=flatUnits.length,done=state.done.length,pct=Math.round(done/total*100),words=Object.keys(state.seen).length;
- const achievements=[["🔥","3 Day Streak","3day"],["🏅","5 Lessons","5lessons"],["🏆","Course Complete","all"]];
- document.getElementById("main").innerHTML=`<div class="hero"><h1>Your progress</h1><p>Consistency beats cramming. Aim for 15 minutes every day.</p><div class="statline"><div class="statbox"><b>${state.xp}</b><small>XP</small></div><div class="statbox"><b>${state.streak}</b><small>day streak</small></div><div class="statbox"><b>${words}</b><small>phrases</small></div></div></div>
- <div class="card"><h3>Course</h3><div class="row"><span>${done}/${total} lessons</span><b class="orange">${pct}%</b></div><div class="progress" style="margin-top:10px"><div class="fill" style="width:${pct}%"></div></div></div>
- <div class="card"><h3>Achievements</h3>${achievements.map(a=>`<div class="listItem achievement"><div class="medal">${a[0]}</div><div class="wordGrow"><b>${a[1]}</b><small>${state.achievements.includes(a[2])?"Unlocked":"Keep learning to unlock"}</small></div><span>${state.achievements.includes(a[2])?"✅":"🔒"}</span></div>`).join("")}</div>
- <div class="card"><h3>Pronunciation speed</h3><p class="muted">Slower is better while you're starting.</p><select onchange="state.settings.rate=Number(this.value);save()"><option value=".65" ${state.settings.rate==.65?"selected":""}>Very slow</option><option value=".78" ${state.settings.rate==.78?"selected":""}>Slow — recommended</option><option value=".9" ${state.settings.rate==.9?"selected":""}>Normal</option><option value="1.05" ${state.settings.rate==1.05?"selected":""}>Fast</option></select></div>
- <div class="card"><h3>Reset progress</h3><button class="btn secondary" onclick="if(confirm('Reset all learning progress?')){localStorage.removeItem('afrikaans_complete');location.reload()}">Reset everything</button></div>`;
-}
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{page=b.dataset.page;render()});
-render();
-</script>
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen">
+            <h2>Lesson Complete! 🎉</h2>
+            <p>You scored <span id="score-text">0</span>/5</p>
+            <button id="home-btn" class="primary-btn">Back to Menu</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
